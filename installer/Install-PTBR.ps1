@@ -213,6 +213,7 @@ function Apply-DescriptionPatch {
 
 function Install-Translation {
     param([string]$GameRoot, [bool]$BackupEnabled)
+    $BackupEnabled = $true
     $packageRoot = Get-PackageRoot
     $manifestPath = Join-Path $packageRoot "manifest.json"
     $patchPath = Join-Path $packageRoot "payload\patches\text_patches.json"
@@ -221,9 +222,7 @@ function Install-Translation {
 
     $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
     $backupRoot = Join-Path $GameRoot "PTBR_BACKUPS\ptbr_$timestamp"
-    if ($BackupEnabled) {
-        New-Item -ItemType Directory -Force -Path $backupRoot | Out-Null
-    }
+    New-Item -ItemType Directory -Force -Path $backupRoot | Out-Null
 
     $copied = 0
     $dexChanged = 0
@@ -264,7 +263,7 @@ Files copied: $copied
 Pokedex entries patched: $dexChanged
 Base dex entries patched: $baseDexChanged
 Outfit descriptions patched: $descriptionChanged
-Backup: $(if ($BackupEnabled) { $backupRoot } else { "disabled" })
+Backup: $backupRoot
 "@
     Show-Info $summary
     Show-Message $summary
@@ -323,7 +322,7 @@ try {
         exit 0
     }
 
-    $backupEnabled = -not $NoBackup
+    $backupEnabled = $true
     Confirm-Install $GameDir $backupEnabled
     Install-Translation $GameDir $backupEnabled
 } catch {

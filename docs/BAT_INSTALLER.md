@@ -2,9 +2,9 @@
 
 ## English
 
-The recommended download is the graphical `.exe` package. The `.bat` method is provided separately for people who prefer transparent scripts or want to inspect every command.
+The recommended download is the single-file graphical `.exe`. The `.bat` method is provided separately for people who prefer transparent scripts or want to inspect every command.
 
-The BAT package does not include the graphical `.exe` installer. The `.exe` package does not include `.bat` files.
+The BAT package does not include the graphical `.exe` installer. The main `.exe` download does not include `.bat` files.
 
 Download the BAT package from the Releases page:
 
@@ -17,7 +17,7 @@ Download the BAT package from the Releases page:
 3. Open the extracted folder.
 4. Run `installer/Install-PTBR.bat`.
 5. Select your Pokemon Infinite Fusion game folder.
-6. Keep backup enabled.
+6. The script creates a required backup inside the selected game folder.
 7. Wait for the install to finish.
 8. Open the game and select `Português`.
 
@@ -31,15 +31,15 @@ Advanced users can open PowerShell inside the game folder and run:
 powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/ExtremestoneGG/infinite-fusion-ptbr/main/scripts/install-from-github.ps1 | iex"
 ```
 
-This downloads the BAT/PowerShell package from this GitHub release, installs it into the current folder, and creates a backup by default. It does not download the game.
+This downloads the BAT/PowerShell package from this GitHub release, installs it into the current folder, and creates a required backup. It does not download the game.
 
 Only run this command if the current folder is your Pokemon Infinite Fusion folder. The folder should contain `Game.exe` and `Data`.
 
 ## Português
 
-O download recomendado é o pacote com instalador gráfico `.exe`. O método `.bat` é oferecido separado para quem prefere scripts transparentes ou quer inspecionar cada comando.
+O download recomendado é o instalador gráfico `.exe` em arquivo único. O método `.bat` é oferecido separado para quem prefere scripts transparentes ou quer inspecionar cada comando.
 
-O pacote BAT não inclui o instalador gráfico `.exe`. O pacote `.exe` não inclui arquivos `.bat`.
+O pacote BAT não inclui o instalador gráfico `.exe`. O download principal `.exe` não inclui arquivos `.bat`.
 
 Baixe o pacote BAT pela página de Releases:
 
@@ -52,7 +52,7 @@ Baixe o pacote BAT pela página de Releases:
 3. Abra a pasta extraída.
 4. Execute `installer/Install-PTBR.bat`.
 5. Selecione a pasta do Pokemon Infinite Fusion.
-6. Mantenha o backup ativado.
+6. O script cria um backup obrigatório dentro da pasta escolhida do jogo.
 7. Aguarde a instalação terminar.
 8. Abra o jogo e selecione `Português`.
 
@@ -66,6 +66,6 @@ Usuários avançados podem abrir o PowerShell dentro da pasta do jogo e rodar:
 powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/ExtremestoneGG/infinite-fusion-ptbr/main/scripts/install-from-github.ps1 | iex"
 ```
 
-Isso baixa o pacote BAT/PowerShell desta release no GitHub, instala na pasta atual e cria backup por padrão. Ele não baixa o jogo.
+Isso baixa o pacote BAT/PowerShell desta release no GitHub, instala na pasta atual e cria backup obrigatório. Ele não baixa o jogo.
 
 Rode esse comando somente se a pasta atual for a pasta do Pokemon Infinite Fusion. A pasta deve conter `Game.exe` e `Data`.

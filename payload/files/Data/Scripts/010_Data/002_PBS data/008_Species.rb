@@ -210,6 +210,8 @@ module GameData
 
     # @return [String] the translated Pokédex entry of this species
     def pokedex_entry
+      translated_entry = pbGetMessage(MessageTypes::Entries, @id_number) rescue nil
+      return translated_entry if translated_entry && translated_entry != "" && translated_entry != @real_pokedex_entry
       return _INTL(@real_pokedex_entry)
       #return pbGetMessage(MessageTypes::Entries, @id_number)
     end

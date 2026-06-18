@@ -1,6 +1,5 @@
 param(
     [string]$GameDir = (Get-Location).Path,
-    [switch]$NoBackup,
     [string]$Version = "v1.0.0"
 )
 
@@ -56,9 +55,6 @@ try {
     }
 
     $args = @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $installer, "-GameDir", $gameRoot, "-Quiet")
-    if ($NoBackup) {
-        $args += "-NoBackup"
-    }
 
     Write-Host "Installing PT-BR translation..."
     $process = Start-Process -FilePath "powershell.exe" -ArgumentList $args -Wait -PassThru -NoNewWindow
@@ -66,7 +62,7 @@ try {
         throw "Installer failed with exit code $($process.ExitCode)."
     }
     Write-Host ""
-    Write-Host "Done. Backup was created unless -NoBackup was used."
+    Write-Host "Done. Backup was created in the game folder."
 } finally {
     if (Test-Path -LiteralPath $workRoot) {
         Remove-Item -LiteralPath $workRoot -Recurse -Force -ErrorAction SilentlyContinue

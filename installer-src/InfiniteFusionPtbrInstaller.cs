@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -53,7 +55,8 @@ namespace InfiniteFusionPtbrInstaller
             StartPosition = FormStartPosition.CenterScreen;
             MinimumSize = new Size(760, 560);
             Size = new Size(840, 620);
-            Font = new Font("Segoe UI", 9F);
+            Font = new Font("Segoe UI", 9.25F);
+            BackColor = Color.FromArgb(246, 248, 250);
 
             var root = new TableLayoutPanel();
             root.Dock = DockStyle.Fill;
@@ -68,18 +71,45 @@ namespace InfiniteFusionPtbrInstaller
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             Controls.Add(root);
 
+            var header = new TableLayoutPanel();
+            header.Dock = DockStyle.Top;
+            header.Height = 108;
+            header.ColumnCount = 1;
+            header.RowCount = 3;
+            header.Padding = new Padding(18, 14, 18, 12);
+            header.BackColor = Color.FromArgb(13, 17, 23);
+            header.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            header.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            header.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            root.Controls.Add(header);
+
             var title = new Label();
-            title.Text = "Pokemon Infinite Fusion PT-BR Fan Translation";
-            title.Font = new Font(Font.FontFamily, 15F, FontStyle.Bold);
+            title.Text = "Infinite Fusion PT-BR Mod";
+            title.Font = new Font(Font.FontFamily, 18F, FontStyle.Bold);
+            title.ForeColor = Color.White;
             title.AutoSize = true;
-            root.Controls.Add(title);
+            header.Controls.Add(title);
+
+            var subtitle = new Label();
+            subtitle.Text = "Fan-made Brazilian Portuguese translation installer";
+            subtitle.ForeColor = Color.FromArgb(201, 209, 217);
+            subtitle.AutoSize = true;
+            header.Controls.Add(subtitle);
+
+            var badgePanel = new FlowLayoutPanel();
+            badgePanel.AutoSize = true;
+            badgePanel.Margin = new Padding(0, 10, 0, 0);
+            badgePanel.Controls.Add(CreateBadge("v1.0.0", Color.FromArgb(9, 105, 218), Color.White));
+            badgePanel.Controls.Add(CreateBadge("Backup required", Color.FromArgb(191, 135, 0), Color.White));
+            badgePanel.Controls.Add(CreateBadge("Unofficial fan mod", Color.FromArgb(130, 80, 223), Color.White));
+            header.Controls.Add(badgePanel);
 
             var warning = new Label();
-            warning.Text = "Unofficial fan-made translation. This tool does not include or download the game. Download Pokemon Infinite Fusion only from the official Pokemon Infinite Fusion Discord.";
+            warning.Text = "This tool does not include or download the game. Download Pokemon Infinite Fusion only from the official Pokemon Infinite Fusion Discord.";
             warning.AutoSize = false;
-            warning.Height = 48;
+            warning.Height = 40;
             warning.Dock = DockStyle.Fill;
-            warning.ForeColor = Color.DarkRed;
+            warning.ForeColor = Color.FromArgb(130, 80, 0);
             root.Controls.Add(warning);
 
             var folderPanel = new TableLayoutPanel();
@@ -115,8 +145,9 @@ namespace InfiniteFusionPtbrInstaller
             folderPanel.Controls.Add(validateButton, 2, 1);
 
             backupCheckBox = new CheckBox();
-            backupCheckBox.Text = "Create backup before installing (recommended)";
+            backupCheckBox.Text = "Backup is required and will be saved in PTBR_BACKUPS inside the selected game folder";
             backupCheckBox.Checked = true;
+            backupCheckBox.Enabled = false;
             backupCheckBox.AutoSize = true;
             backupCheckBox.Margin = new Padding(0, 12, 0, 8);
             root.Controls.Add(backupCheckBox);
@@ -131,6 +162,10 @@ namespace InfiniteFusionPtbrInstaller
             installButton.Text = "Install PT-BR Translation";
             installButton.AutoSize = true;
             installButton.Padding = new Padding(8, 4, 8, 4);
+            installButton.BackColor = Color.FromArgb(35, 134, 54);
+            installButton.ForeColor = Color.White;
+            installButton.FlatStyle = FlatStyle.Flat;
+            installButton.FlatAppearance.BorderSize = 0;
             installButton.Click += delegate { RunInstall(); };
             buttonPanel.Controls.Add(installButton);
 
@@ -138,6 +173,10 @@ namespace InfiniteFusionPtbrInstaller
             restoreButton.Text = "Restore Latest Backup";
             restoreButton.AutoSize = true;
             restoreButton.Padding = new Padding(8, 4, 8, 4);
+            restoreButton.BackColor = Color.FromArgb(87, 96, 106);
+            restoreButton.ForeColor = Color.White;
+            restoreButton.FlatStyle = FlatStyle.Flat;
+            restoreButton.FlatAppearance.BorderSize = 0;
             restoreButton.Click += delegate { RunRestore(); };
             buttonPanel.Controls.Add(restoreButton);
 
@@ -147,6 +186,8 @@ namespace InfiniteFusionPtbrInstaller
             logBox.ReadOnly = true;
             logBox.ScrollBars = ScrollBars.Vertical;
             logBox.Font = new Font("Consolas", 9F);
+            logBox.BackColor = Color.FromArgb(13, 17, 23);
+            logBox.ForeColor = Color.FromArgb(201, 209, 217);
             root.Controls.Add(logBox);
 
             var statusPanel = new TableLayoutPanel();
@@ -168,10 +209,24 @@ namespace InfiniteFusionPtbrInstaller
             statusPanel.Controls.Add(progressBar);
 
             actionControls.AddRange(new Control[] {
-                browseButton, validateButton, installButton, restoreButton, gameDirBox, backupCheckBox
+                browseButton, validateButton, installButton, restoreButton, gameDirBox
             });
 
             Log("Ready. Select your Pokemon Infinite Fusion folder to begin.");
+        }
+
+        private static Label CreateBadge(string text, Color backColor, Color foreColor)
+        {
+            return new Label
+            {
+                Text = text,
+                AutoSize = true,
+                BackColor = backColor,
+                ForeColor = foreColor,
+                Font = new Font("Segoe UI", 8.25F, FontStyle.Bold),
+                Padding = new Padding(8, 3, 8, 3),
+                Margin = new Padding(0, 0, 8, 0)
+            };
         }
 
         private void BrowseGameFolder()
@@ -215,9 +270,9 @@ namespace InfiniteFusionPtbrInstaller
                 return;
             }
 
-            var backupEnabled = backupCheckBox.Checked;
+            var backupEnabled = true;
             var confirmation = "Install the PT-BR translation into:\n\n" + folder +
-                               "\n\nBackup: " + (backupEnabled ? "enabled" : "disabled") +
+                               "\n\nBackup: required and saved in PTBR_BACKUPS" +
                                "\n\nThis is an unofficial fan-made patch. It does not download anything and does not include the game.\n\nContinue?";
             if (MessageBox.Show(this, confirmation, "Install PT-BR Translation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             {
@@ -386,7 +441,8 @@ namespace InfiniteFusionPtbrInstaller
 
         public static string Install(string gameRoot, bool backupEnabled, Action<string> log, Action<int> progress)
         {
-            var packageRoot = GetPackageRoot();
+            backupEnabled = true;
+            var packageRoot = GetPackageRoot(gameRoot);
             var manifestPath = Path.Combine(packageRoot, "manifest.json");
             var patchPath = Path.Combine(packageRoot, "payload", "patches", "text_patches.json");
             if (!File.Exists(manifestPath)) throw new FileNotFoundException("Missing manifest.json", manifestPath);
@@ -395,7 +451,7 @@ namespace InfiniteFusionPtbrInstaller
             var backupEntries = new List<BackupEntry>();
             var backedUp = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             var backupRoot = Path.Combine(gameRoot, "PTBR_BACKUPS", "ptbr_gui_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"));
-            if (backupEnabled) Directory.CreateDirectory(backupRoot);
+            Directory.CreateDirectory(backupRoot);
 
             log("Copying translated files...");
             var copied = CopyDirectFiles(packageRoot, gameRoot, backupRoot, backupEnabled, backupEntries, backedUp);
@@ -437,12 +493,14 @@ namespace InfiniteFusionPtbrInstaller
             }
             progress(100);
 
+            CleanupEmbeddedPackage(gameRoot, packageRoot);
+
             return "PT-BR translation installed.\n\n" +
                    "Files copied: " + copied + "\n" +
                    "Pokedex entries patched: " + dexChanged + "\n" +
                    "Base dex entries patched: " + baseDexChanged + "\n" +
                    "Outfit descriptions patched: " + descriptionChanged + "\n" +
-                   "Backup: " + (backupEnabled ? backupRoot : "disabled");
+                   "Backup: " + backupRoot;
         }
 
         public static string RestoreLatest(string gameRoot, Action<string> log, Action<int> progress)
@@ -614,10 +672,60 @@ namespace InfiniteFusionPtbrInstaller
             return rows;
         }
 
-        private static string GetPackageRoot()
+        private static string GetPackageRoot(string gameRoot)
         {
             var exeDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-            return Directory.GetParent(exeDir).FullName;
+            var candidates = new List<string>();
+            candidates.Add(exeDir);
+            var parent = Directory.GetParent(exeDir);
+            if (parent != null) candidates.Add(parent.FullName);
+
+            foreach (var candidate in candidates)
+            {
+                if (File.Exists(Path.Combine(candidate, "manifest.json")) &&
+                    Directory.Exists(Path.Combine(candidate, "payload", "files")) &&
+                    File.Exists(Path.Combine(candidate, "payload", "patches", "text_patches.json")))
+                {
+                    return candidate;
+                }
+            }
+
+            return ExtractEmbeddedPackage(gameRoot);
+        }
+
+        private static string ExtractEmbeddedPackage(string gameRoot)
+        {
+            var tempRoot = Path.Combine(gameRoot, "PTBR_INSTALLER_TEMP");
+            var packageRoot = Path.Combine(tempRoot, "package");
+            if (Directory.Exists(tempRoot)) Directory.Delete(tempRoot, true);
+            Directory.CreateDirectory(packageRoot);
+
+            var assembly = Assembly.GetExecutingAssembly();
+            using (var stream = assembly.GetManifestResourceStream("ptbr_payload.zip"))
+            {
+                if (stream == null)
+                {
+                    throw new FileNotFoundException("Missing embedded PT-BR package. Download the full installer package again.");
+                }
+                var zipPath = Path.Combine(tempRoot, "payload.zip");
+                using (var output = File.Create(zipPath))
+                {
+                    stream.CopyTo(output);
+                }
+                ZipFile.ExtractToDirectory(zipPath, packageRoot);
+            }
+            return packageRoot;
+        }
+
+        private static void CleanupEmbeddedPackage(string gameRoot, string packageRoot)
+        {
+            var tempRoot = Path.Combine(gameRoot, "PTBR_INSTALLER_TEMP");
+            var fullTemp = Path.GetFullPath(tempRoot).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            var fullPackage = Path.GetFullPath(packageRoot).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            if (fullPackage.StartsWith(fullTemp, StringComparison.OrdinalIgnoreCase) && Directory.Exists(fullTemp))
+            {
+                Directory.Delete(fullTemp, true);
+            }
         }
 
         private static string JoinUnderRoot(string root, string relative)

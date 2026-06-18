@@ -40,8 +40,9 @@
     }
   },
   "package_counts": {
-    "direct_files": 54,
+    "direct_files": 55,
     "script_files": 53,
+    "base_pokedex_all_entries_translated": 475,
     "entry_translation_mappings": 61726,
     "outfit_description_mappings": 314,
     "base_translation_entries": 20577,
@@ -76,11 +77,15 @@
   },
   "graphical_installer": {
     "path": "installer/InfiniteFusionPTBRInstaller.exe",
+    "release_asset": "InfiniteFusionPTBRInstaller-v1.0.0.exe",
     "source": "installer-src/InfiniteFusionPtbrInstaller.cs",
     "compiled_with": "Microsoft .NET Framework C# compiler 4.8",
     "unsigned_fan_tool": true,
     "network_access": "none",
     "requires_admin": false,
+    "backup_required": true,
+    "embedded_payload": true,
+    "exe_bytes": 10143232,
     "sandbox_core_test": {
       "install": "passed",
       "backup": "passed",
@@ -90,10 +95,11 @@
     }
   },
   "release_assets": {
-    "recommended_exe_zip": {
-      "name": "PTBR-Translation-v1.0.0.zip",
+    "recommended_exe": {
+      "name": "InfiniteFusionPTBRInstaller-v1.0.0.exe",
       "bat_files_included": false,
-      "installer": "installer/InfiniteFusionPTBRInstaller.exe"
+      "embedded_payload": true,
+      "backup_required": true
     },
     "bat_powershell_zip": {
       "name": "PTBR-Translation-BAT-v1.0.0.zip",
@@ -104,6 +110,7 @@
   },
   "readme_art": {
     "path": "assets/infinite-fusion-ptbr-mod-logo-github-bg.png",
+    "dark_mode_path": "assets/infinite-fusion-ptbr-mod-logo-github-dark-bg.png",
     "source": "edited from user-provided logo image",
     "label": "PT-BR MOD"
   }

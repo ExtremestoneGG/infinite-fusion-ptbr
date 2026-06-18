@@ -8,6 +8,7 @@
   "official_game_download_notice": "Download Pokemon Infinite Fusion only from the official Pokemon Infinite Fusion Discord maintained by the game developers. This package does not include the game.",
   "direct_files": [
     "Data/portuguese.dat",
+    "Data/pokedex/all_entries.json",
     "Data/Scripts/001_Settings.rb",
     "Data/Scripts/010_Data/001_Hardcoded data/009_Nature.rb",
     "Data/Scripts/010_Data/002_PBS data/008_Species.rb",
@@ -71,7 +72,7 @@
     "Data/outfits/hairstyles_data.json"
   ],
   "counts": {
-    "direct_files": 54,
+    "direct_files": 55,
     "script_files": 53,
     "entry_translation_mappings": 61726,
     "outfit_description_mappings": 314,
@@ -80,8 +81,9 @@
     "base_translation_sections": 11,
     "fusion_pokedex_cache_entries": 61827,
     "fusion_pokedex_errors": 0,
-    "graphical_installer_exe_bytes": 22528,
-    "readme_logo_bytes": 1050144
+    "graphical_installer_exe_bytes": 10143232,
+    "readme_logo_bytes": 1050144,
+    "readme_dark_logo_bytes": 1051024
   },
   "translation_policy": {
     "translated": [
@@ -108,17 +110,14 @@
   },
   "json_patch_schema": 2,
   "release_assets": {
-    "recommended_exe_zip": "PTBR-Translation-v1.0.0.zip",
+    "recommended_exe": "InfiniteFusionPTBRInstaller-v1.0.0.exe",
     "bat_powershell_zip": "PTBR-Translation-BAT-v1.0.0.zip"
   },
-  "recommended_installer": "installer/InfiniteFusionPTBRInstaller.exe",
+  "recommended_installer": "InfiniteFusionPTBRInstaller-v1.0.0.exe",
+  "repository_installer_path": "installer/InfiniteFusionPTBRInstaller.exe",
   "installer_source": "installer-src/InfiniteFusionPtbrInstaller.cs",
   "github_bootstrap_script": "scripts/install-from-github.ps1",
-  "recommended_zip_excludes": [
-    "installer/Install-PTBR.bat",
-    "installer/Install-PTBR.ps1",
-    "installer/Restore-Latest-Backup.bat"
-  ],
+  "recommended_exe_excludes_bat_files": true,
   "fallback_installers": [
     "installer/Install-PTBR.bat",
     "installer/Install-PTBR.ps1",
