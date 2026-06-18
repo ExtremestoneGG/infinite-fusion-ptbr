@@ -1,7 +1,6 @@
 # Pokemon Infinite Fusion PT-BR Fan Translation
 
-<!-- Banner placeholder: add your project image here later, for example: -->
-![Pokemon Infinite Fusion PT-BR Mod](assets/infinite-fusion-ptbr-mod-logo.png)
+![Pokemon Infinite Fusion PT-BR Mod](assets/infinite-fusion-ptbr-mod-logo-github-bg.png)
 
 **Version:** 1.0.0  
 **Language:** Brazilian Portuguese  
@@ -47,7 +46,8 @@ This release contains:
 - `Data/portuguese.dat`, a new Brazilian Portuguese language data file.
 - 53 script files with translated gameplay UI strings and language support adjustments.
 - A text patch for Pokedex entries and outfit descriptions that changes only text fields.
-- A small PowerShell installer with backup and restore support.
+- A graphical Windows `.exe` installer with folder selection, backup, install, validation, and restore options.
+- A separate BAT/PowerShell package for users who prefer transparent scripts.
 - Validation reports documenting what was checked before release.
 
 This release does **not** include:
@@ -64,7 +64,7 @@ This release does **not** include:
 
 1. Download and install Pokemon Infinite Fusion from the **official Pokemon Infinite Fusion Discord only**.
 2. Open the [Releases page](https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases).
-3. Download `PTBR-Translation-v1.0.0.zip`. Do not use this project as a game download.
+3. Download `PTBR-Translation-v1.0.0.zip`, the recommended package with the graphical `.exe` installer. Do not use this project as a game download.
 4. Extract the ZIP into any folder you trust, for example your Downloads folder or a folder on your desktop.
 5. Open the extracted folder.
 6. Run `installer/InfiniteFusionPTBRInstaller.exe`.
@@ -76,13 +76,15 @@ This release does **not** include:
 
 To undo the patch, open `installer/InfiniteFusionPTBRInstaller.exe` again and click `Restore Latest Backup`.
 
-If Windows SmartScreen warns about the file, it is because this is a small unsigned fan tool. The installer source code is included in `installer-src/InfiniteFusionPtbrInstaller.cs`, and the older `.bat`/PowerShell installer remains available as a transparent fallback.
+If Windows SmartScreen warns about the file, it is because this is a small unsigned fan tool. The installer source code is included in `installer-src/InfiniteFusionPtbrInstaller.cs`.
+
+If you prefer the script-based method, download the separate `PTBR-Translation-BAT-v1.0.0.zip` package and follow [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
 
 ### How The Installer Works
 
-The recommended installer is `installer/InfiniteFusionPTBRInstaller.exe`. It is a small Windows Forms app that uses the files inside this extracted translation package.
+The recommended installer is `installer/InfiniteFusionPTBRInstaller.exe`. It is a small Windows Forms app that uses the files inside the extracted `PTBR-Translation-v1.0.0.zip` package.
 
-The fallback installer is `installer/Install-PTBR.bat`, which launches the readable PowerShell script at `installer/Install-PTBR.ps1`.
+The `.bat` installer is not included inside the recommended `.exe` ZIP. It is shipped separately as `PTBR-Translation-BAT-v1.0.0.zip`, which includes `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1`, and `installer/Restore-Latest-Backup.bat`.
 
 The installer:
 
@@ -100,7 +102,7 @@ The installer:
 4. The installer restores the newest backup from `PTBR_BACKUPS`.
 5. Files created by the translation installer are removed, and overwritten files are restored.
 
-Fallback option: run `installer/Restore-Latest-Backup.bat` and select the same game folder.
+Fallback option: if you installed through the BAT package, run `installer/Restore-Latest-Backup.bat` and select the same game folder.
 
 If you want to be extra careful, copy your save folder before testing any mod or fan patch.
 
@@ -108,15 +110,26 @@ If you want to be extra careful, copy your save folder before testing any mod or
 
 The installer is intentionally simple and transparent:
 
-- It is a plain PowerShell script, not a compiled executable.
+- The recommended package uses a small unsigned `.exe`, and its source code is included.
+- The separate BAT package uses readable PowerShell scripts.
 - It does not need administrator access.
-- It does not connect to the internet.
+- The downloaded installer packages do not connect to the internet.
 - It does not download the game.
 - It validates that the selected folder looks like a Pokemon Infinite Fusion installation.
 - It creates a timestamped backup in `PTBR_BACKUPS` before changing files.
 - It can restore the latest backup.
 
-See [docs/INSTALLER.md](docs/INSTALLER.md) for details.
+See [docs/INSTALLER.md](docs/INSTALLER.md) for the `.exe` method and [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md) for the BAT/PowerShell method.
+
+### One-Line PowerShell Method
+
+Advanced users can also open PowerShell inside the Pokemon Infinite Fusion folder and run this command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/ExtremestoneGG/infinite-fusion-ptbr/main/scripts/install-from-github.ps1 | iex"
+```
+
+That command downloads the script package from this GitHub release, creates a backup by default, installs the PT-BR files, and cleans up its temporary installer folder. Only run it from the folder that contains `Game.exe` and `Data`.
 
 ## Validation Summary
 
@@ -200,7 +213,8 @@ Esta release contém:
 - `Data/portuguese.dat`, um novo arquivo de idioma em Português do Brasil.
 - 53 arquivos de script com textos de interface traduzidos e ajustes de suporte ao idioma.
 - Um patch de texto para entradas da Pokédex e descrições de roupas, alterando apenas campos de texto.
-- Um instalador simples em PowerShell com backup e restauração.
+- Um instalador gráfico `.exe` para Windows com seleção de pasta, backup, instalação, validação e restauração.
+- Um pacote separado em BAT/PowerShell para quem prefere scripts transparentes.
 - Relatórios de validação documentando o que foi checado antes da release.
 
 Esta release **não** contém:
@@ -217,7 +231,7 @@ Esta release **não** contém:
 
 1. Baixe e instale Pokemon Infinite Fusion **somente pelo Discord oficial de Pokemon Infinite Fusion**.
 2. Abra a [página de Releases](https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases).
-3. Baixe `PTBR-Translation-v1.0.0.zip`. Não use este projeto como download do jogo.
+3. Baixe `PTBR-Translation-v1.0.0.zip`, o pacote recomendado com instalador gráfico `.exe`. Não use este projeto como download do jogo.
 4. Extraia o ZIP em uma pasta confiável, como Downloads ou uma pasta na área de trabalho.
 5. Abra a pasta extraída.
 6. Execute `installer/InfiniteFusionPTBRInstaller.exe`.
@@ -229,13 +243,15 @@ Esta release **não** contém:
 
 Para desfazer a instalação, abra `installer/InfiniteFusionPTBRInstaller.exe` de novo e clique em `Restore Latest Backup`.
 
-Se o Windows SmartScreen avisar sobre o arquivo, é porque ele é uma ferramenta pequena de fã e não possui assinatura digital. O código-fonte do instalador está incluído em `installer-src/InfiniteFusionPtbrInstaller.cs`, e o instalador antigo em `.bat`/PowerShell continua disponível como alternativa transparente.
+Se o Windows SmartScreen avisar sobre o arquivo, é porque ele é uma ferramenta pequena de fã e não possui assinatura digital. O código-fonte do instalador está incluído em `installer-src/InfiniteFusionPtbrInstaller.cs`.
+
+Se você preferir o método por script, baixe o pacote separado `PTBR-Translation-BAT-v1.0.0.zip` e siga [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
 
 ### Como O Instalador Funciona
 
-O instalador recomendado é `installer/InfiniteFusionPTBRInstaller.exe`. Ele é um pequeno app Windows Forms que usa os arquivos dentro deste pacote de tradução extraído.
+O instalador recomendado é `installer/InfiniteFusionPTBRInstaller.exe`. Ele é um pequeno app Windows Forms que usa os arquivos extraídos do pacote `PTBR-Translation-v1.0.0.zip`.
 
-O instalador alternativo é `installer/Install-PTBR.bat`, que abre o script PowerShell legível em `installer/Install-PTBR.ps1`.
+O instalador `.bat` não fica dentro do ZIP recomendado com `.exe`. Ele é distribuído separadamente como `PTBR-Translation-BAT-v1.0.0.zip`, que inclui `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1` e `installer/Restore-Latest-Backup.bat`.
 
 O instalador:
 
@@ -253,7 +269,7 @@ O instalador:
 4. O instalador restaura o backup mais recente dentro de `PTBR_BACKUPS`.
 5. Arquivos criados pelo instalador da tradução são removidos, e arquivos sobrescritos são restaurados.
 
-Alternativa: execute `installer/Restore-Latest-Backup.bat` e selecione a mesma pasta do jogo.
+Alternativa: se você instalou pelo pacote BAT, execute `installer/Restore-Latest-Backup.bat` e selecione a mesma pasta do jogo.
 
 Se quiser ter cuidado extra, copie sua pasta de saves antes de testar qualquer mod ou patch fanmade.
 
@@ -261,15 +277,26 @@ Se quiser ter cuidado extra, copie sua pasta de saves antes de testar qualquer m
 
 O instalador foi feito para ser simples e transparente:
 
-- É um script PowerShell aberto, não um `.exe` compilado.
+- O pacote recomendado usa um `.exe` pequeno e sem assinatura digital, com código-fonte incluído.
+- O pacote BAT separado usa scripts PowerShell legíveis.
 - Não precisa de administrador.
-- Não acessa a internet.
+- Os pacotes baixados não acessam a internet.
 - Não baixa o jogo.
 - Verifica se a pasta selecionada parece uma instalação do Pokemon Infinite Fusion.
 - Cria um backup com data e hora em `PTBR_BACKUPS` antes de alterar arquivos.
 - Consegue restaurar o backup mais recente.
 
-Veja [docs/INSTALLER.md](docs/INSTALLER.md) para detalhes.
+Veja [docs/INSTALLER.md](docs/INSTALLER.md) para o método `.exe` e [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md) para o método BAT/PowerShell.
+
+### Método PowerShell Em Uma Linha
+
+Usuários avançados também podem abrir o PowerShell dentro da pasta do Pokemon Infinite Fusion e rodar:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/ExtremestoneGG/infinite-fusion-ptbr/main/scripts/install-from-github.ps1 | iex"
+```
+
+Esse comando baixa o pacote de scripts desta release no GitHub, cria backup por padrão, instala os arquivos PT-BR e limpa a pasta temporária do instalador. Rode somente dentro da pasta que contém `Game.exe` e `Data`.
 
 ## Resumo Da Validação
 

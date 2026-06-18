@@ -8,8 +8,8 @@
 - Added Portuguese as a selectable language.
 - Translated story, quest, dialogue, gameplay UI, shop/service text, descriptions, Pokedex entries, and outfit descriptions within the agreed scope.
 - Preserved Pokemon, move, item, ability, NPC, location, organization, and type names.
-- Added a transparent PowerShell installer with backup and restore support.
 - Added a graphical Windows `.exe` installer with folder selection, install, backup, validation, and restore options.
+- Added a separate BAT/PowerShell installer package with backup, restore, and one-line PowerShell install support.
 - Added a PT-BR Mod README logo/banner.
 - Added documentation for process, scope, validation, and installation.
 - Added a final validation report.
@@ -20,8 +20,8 @@
 - Adicionado Português como idioma selecionável.
 - Traduzidos textos de história, quests, diálogos, interface, lojas/serviços, descrições, entradas da Pokédex e descrições de roupas dentro do escopo combinado.
 - Preservados nomes de Pokemon, golpes, itens, habilidades, NPCs, locais, organizações e tipos.
-- Adicionado instalador transparente em PowerShell com backup e restauração.
 - Adicionado instalador gráfico `.exe` para Windows com seleção de pasta, instalação, backup, validação e restauração.
+- Adicionado pacote separado de instalação BAT/PowerShell com backup, restauração e suporte a instalação por uma linha no PowerShell.
 - Adicionada logo/banner PT-BR Mod no README.
 - Adicionada documentação de processo, escopo, validação e instalação.
 - Adicionado relatório final de validação.

@@ -89,9 +89,22 @@
       "created_files_removed_on_restore": true
     }
   },
+  "release_assets": {
+    "recommended_exe_zip": {
+      "name": "PTBR-Translation-v1.0.0.zip",
+      "bat_files_included": false,
+      "installer": "installer/InfiniteFusionPTBRInstaller.exe"
+    },
+    "bat_powershell_zip": {
+      "name": "PTBR-Translation-BAT-v1.0.0.zip",
+      "bat_files_included": true,
+      "installer": "installer/Install-PTBR.bat",
+      "github_bootstrap_script": "scripts/install-from-github.ps1"
+    }
+  },
   "readme_art": {
-    "path": "assets/infinite-fusion-ptbr-mod-logo.png",
+    "path": "assets/infinite-fusion-ptbr-mod-logo-github-bg.png",
     "source": "edited from user-provided logo image",
-    "label": "PT-BR MOD / Portugu?s Brasil"
+    "label": "PT-BR MOD"
   }
 }
