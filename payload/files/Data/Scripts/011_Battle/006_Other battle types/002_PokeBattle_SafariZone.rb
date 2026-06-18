@@ -428,7 +428,7 @@ class PokeBattle_SafariZone
       pkmn = @party2[0]
       self.pbPlayer.pokedex.register(pkmn)
       @scene.pbStartBattle(self)
-      pbDisplayPaused(_INTL("Wild {1} appeared!",pkmn.name))
+      pbDisplayPaused(_INTL("Um {1} selvagem apareceu!",pkmn.name))
       @scene.pbSafariStart
       weather_data = GameData::BattleWeather.try_get(@weather)
       @scene.pbCommonAnimation(weather_data.animation) if weather_data

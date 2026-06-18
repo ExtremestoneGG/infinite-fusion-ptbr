@@ -2,16 +2,16 @@
 
 ## English
 
-The recommended PT-BR installer is a small graphical Windows `.exe`. It asks for the Pokemon Infinite Fusion folder, creates a required backup inside the selected game folder, installs the translated files, and can restore the latest backup if the player runs it again.
+The recommended PT-BR installer is a small graphical Windows `.exe`. It lets the player choose `Game.exe` directly or scan for likely Pokemon Infinite Fusion folders, creates a required backup inside the selected game folder, installs or updates the translated files, and can restore the latest backup if the player runs it again.
 
 The main `.exe` release asset is a single file with the PT-BR payload embedded inside it. It does not include `.bat` files. A separate BAT/PowerShell package is available for users who prefer readable scripts or want a one-line PowerShell install.
 
 ## Installation Tutorial
 
 1. Download the game only from the official Pokemon Infinite Fusion Discord.
-2. Download `InfiniteFusionPTBRInstaller-v1.0.0.exe` from this repository's Releases page.
-3. Run `InfiniteFusionPTBRInstaller-v1.0.0.exe`.
-4. Select the main Pokemon Infinite Fusion folder.
+2. Download `InfiniteFusionPTBRInstaller-v1.1.0.exe` from this repository's Releases page.
+3. Run `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
+4. Click `Choose Game.exe` and select the game's `Game.exe`, or use `Scan` to search common folders automatically.
 5. Confirm the install prompt.
 6. Wait for the copy and patch steps to finish.
 7. Open the game and select `Português` in the language menu.
@@ -27,19 +27,20 @@ It performs four actions:
 
 The `.exe` installer does not download files, does not contact the internet, does not include the game, and does not require administrator permissions.
 
-The BAT/PowerShell method is shipped separately as `PTBR-Translation-BAT-v1.0.0.zip`. See [BAT_INSTALLER.md](BAT_INSTALLER.md) for that tutorial.
+The BAT/PowerShell method is shipped separately as `PTBR-Translation-BAT-v1.1.0.zip`. See [BAT_INSTALLER.md](BAT_INSTALLER.md) for that tutorial.
 
 ### Files
 
-- `InfiniteFusionPTBRInstaller-v1.0.0.exe`: recommended single-file graphical installer.
+- `InfiniteFusionPTBRInstaller-v1.1.0.exe`: recommended single-file graphical installer.
 - `installer/InfiniteFusionPTBRInstaller.exe`: same graphical installer inside the repository source tree.
-- `installer-src/InfiniteFusionPtbrInstaller.cs`: source code for the graphical installer.
+- `installer-src/ModernInstaller.cs`: source code for the modern WPF graphical installer.
+- `installer-src/InfiniteFusionPtbrInstaller.cs`: shared installer core and legacy WinForms UI source.
 - `payload/files`: translated language data and script-level UI files.
 - `payload/patches/text_patches.json`: Pokedex and outfit description text mappings.
 
 ## Restore Tutorial
 
-1. Open `InfiniteFusionPTBRInstaller-v1.0.0.exe`.
+1. Open `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
 2. Select the same game folder.
 3. Click `Restore Latest Backup`.
 4. The newest backup in `PTBR_BACKUPS` is restored.
@@ -50,16 +51,16 @@ Use this if the game update overwrites files, if you want to test another versio
 
 ## Português
 
-O instalador PT-BR recomendado é um pequeno `.exe` gráfico para Windows. Ele pede a pasta do Pokemon Infinite Fusion, cria backup obrigatório dentro da pasta escolhida do jogo, instala os arquivos traduzidos e consegue restaurar o backup mais recente se a pessoa executar de novo.
+O instalador PT-BR recomendado é um pequeno `.exe` gráfico para Windows. Ele permite escolher o `Game.exe` diretamente ou escanear possíveis pastas do Pokemon Infinite Fusion, cria backup obrigatório dentro da pasta escolhida do jogo, instala ou atualiza os arquivos traduzidos e consegue restaurar o backup mais recente se a pessoa executar de novo.
 
 O arquivo principal `.exe` da release é um arquivo único com o pacote PT-BR embutido dentro dele. Ele não inclui arquivos `.bat`. Um pacote separado em BAT/PowerShell está disponível para quem prefere scripts legíveis ou quer instalar por uma linha no PowerShell.
 
 ## Tutorial De Instalação
 
 1. Baixe o jogo somente pelo Discord oficial de Pokemon Infinite Fusion.
-2. Baixe `InfiniteFusionPTBRInstaller-v1.0.0.exe` pela página de Releases deste repositório.
-3. Execute `InfiniteFusionPTBRInstaller-v1.0.0.exe`.
-4. Selecione a pasta principal do Pokemon Infinite Fusion.
+2. Baixe `InfiniteFusionPTBRInstaller-v1.1.0.exe` pela página de Releases deste repositório.
+3. Execute `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
+4. Clique em `Escolher Game.exe` e selecione o `Game.exe` do jogo, ou use `Escanear` para procurar pastas comuns automaticamente.
 5. Confirme a janela de instalação.
 6. Aguarde a cópia e os patches terminarem.
 7. Abra o jogo e selecione `Português` no menu de idioma.
@@ -75,19 +76,20 @@ Ele faz quatro coisas:
 
 O instalador `.exe` não baixa arquivos, não acessa a internet, não inclui o jogo e não precisa de permissões de administrador.
 
-O método BAT/PowerShell é distribuído separadamente como `PTBR-Translation-BAT-v1.0.0.zip`. Veja [BAT_INSTALLER.md](BAT_INSTALLER.md) para esse tutorial.
+O método BAT/PowerShell é distribuído separadamente como `PTBR-Translation-BAT-v1.1.0.zip`. Veja [BAT_INSTALLER.md](BAT_INSTALLER.md) para esse tutorial.
 
 ### Arquivos
 
-- `InfiniteFusionPTBRInstaller-v1.0.0.exe`: instalador gráfico recomendado em arquivo único.
+- `InfiniteFusionPTBRInstaller-v1.1.0.exe`: instalador gráfico recomendado em arquivo único.
 - `installer/InfiniteFusionPTBRInstaller.exe`: o mesmo instalador gráfico dentro da árvore de código do repositório.
-- `installer-src/InfiniteFusionPtbrInstaller.cs`: código-fonte do instalador gráfico.
+- `installer-src/ModernInstaller.cs`: código-fonte do instalador gráfico WPF moderno.
+- `installer-src/InfiniteFusionPtbrInstaller.cs`: núcleo compartilhado do instalador e código da interface WinForms legada.
 - `payload/files`: dados de idioma e scripts de interface traduzidos.
 - `payload/patches/text_patches.json`: mapeamentos de texto da Pokédex e descrições de roupas.
 
 ## Tutorial De Restauração
 
-1. Abra `InfiniteFusionPTBRInstaller-v1.0.0.exe`.
+1. Abra `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
 2. Selecione a mesma pasta do jogo.
 3. Clique em `Restore Latest Backup`.
 4. O backup mais recente dentro de `PTBR_BACKUPS` será restaurado.

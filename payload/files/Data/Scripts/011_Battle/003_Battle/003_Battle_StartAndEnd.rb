@@ -164,23 +164,23 @@ class PokeBattle_Battle
       foeParty = pbParty(1)
       case foeParty.length
       when 1
-        pbDisplayPaused(_INTL("Oh! A wild {1} appeared!",foeParty[0].name))
+        pbDisplayPaused(_INTL("Oh! Um {1} selvagem apareceu!",foeParty[0].name))
       when 2
-        pbDisplayPaused(_INTL("Oh! A wild {1} and {2} appeared!",foeParty[0].name,
+        pbDisplayPaused(_INTL("Oh! {1} e {2} selvagens apareceram!",foeParty[0].name,
            foeParty[1].name))
       when 3
-        pbDisplayPaused(_INTL("Oh! A wild {1}, {2} and {3} appeared!",foeParty[0].name,
+        pbDisplayPaused(_INTL("Oh! {1}, {2} e {3} selvagens apareceram!",foeParty[0].name,
            foeParty[1].name,foeParty[2].name))
       end
     else   # Trainer battle
       case @opponent.length
       when 1
-        pbDisplayPaused(_INTL("You are challenged by {1}!",@opponent[0].full_name))
+        pbDisplayPaused(_INTL("{1} desafiou você!",@opponent[0].full_name))
       when 2
-        pbDisplayPaused(_INTL("You are challenged by {1} and {2}!",@opponent[0].full_name,
+        pbDisplayPaused(_INTL("{1} e {2} desafiaram você!",@opponent[0].full_name,
            @opponent[1].full_name))
       when 3
-        pbDisplayPaused(_INTL("You are challenged by {1}, {2} and {3}!",
+        pbDisplayPaused(_INTL("{1}, {2} e {3} desafiaram você!",
            @opponent[0].full_name,@opponent[1].full_name,@opponent[2].full_name))
       end
     end
@@ -197,19 +197,19 @@ class PokeBattle_Battle
         sent = sendOuts[side][i]
         case sent.length
         when 1
-          msg += _INTL("{1} sent out {2}!",t.full_name,@battlers[sent[0]].name)
+          msg += _INTL("{1} enviou {2}!",t.full_name,@battlers[sent[0]].name)
         when 2
-          msg += _INTL("{1} sent out {2} and {3}!",t.full_name,
+          msg += _INTL("{1} enviou {2} e {3}!",t.full_name,
              @battlers[sent[0]].name,@battlers[sent[1]].name)
         when 3
           if $game_switches[SWITCH_TRIPLE_BOSS_BATTLE]
             if $game_switches[SWITCH_SILVERBOSS_BATTLE]
-              msg += _INTL("A wild Paldiatina appeared!",t.full_name)
+              msg += _INTL("Um Paldiatina selvagem apareceu!",t.full_name)
             else
-              msg += _INTL("{1} sent out Zapmolcuno!",t.full_name)
+              msg += _INTL("{1} enviou Zapmolcuno!",t.full_name)
             end
           else
-            msg += _INTL("{1} sent out {2}, {3} and {4}!",t.full_name,
+            msg += _INTL("{1} enviou {2}, {3} e {4}!",t.full_name,
                          @battlers[sent[0]].name,@battlers[sent[1]].name,@battlers[sent[2]].name)
           end
 
@@ -222,11 +222,11 @@ class PokeBattle_Battle
         sent = sendOuts[side][0]
         case sent.length
         when 1
-          msg += _INTL("Go! {1}!",@battlers[sent[0]].name)
+          msg += _INTL("Vai! {1}!",@battlers[sent[0]].name)
         when 2
-          msg += _INTL("Go! {1} and {2}!",@battlers[sent[0]].name,@battlers[sent[1]].name)
+          msg += _INTL("Vai! {1} e {2}!",@battlers[sent[0]].name,@battlers[sent[1]].name)
         when 3
-          msg += _INTL("Go! {1}, {2} and {3}!",@battlers[sent[0]].name,
+          msg += _INTL("Vai! {1}, {2} e {3}!",@battlers[sent[0]].name,
              @battlers[sent[1]].name,@battlers[sent[2]].name)
         end
         toSendOut.concat(sent)
@@ -286,27 +286,27 @@ class PokeBattle_Battle
 
     pbCommonAnimation(weather_data.animation) if weather_data
     case @field.weather
-    when :Sun         then pbDisplay(_INTL("The sunlight is strong."))
-    when :Rain        then pbDisplay(_INTL("It is raining."))
-    when :Sandstorm   then pbDisplay(_INTL("A sandstorm is raging."))
-    when :Hail        then pbDisplay(_INTL("Hail is falling."))
-    when :HarshSun    then pbDisplay(_INTL("The sunlight is extremely harsh."))
-    when :HeavyRain   then pbDisplay(_INTL("It is raining heavily."))
-    when :StrongWinds then pbDisplay(_INTL("The wind is strong."))
-    when :ShadowSky   then pbDisplay(_INTL("The sky is shadowy."))
+    when :Sun         then pbDisplay(_INTL("A luz do sol está forte."))
+    when :Rain        then pbDisplay(_INTL("Está chovendo."))
+    when :Sandstorm   then pbDisplay(_INTL("Uma tempestade de areia está intensa."))
+    when :Hail        then pbDisplay(_INTL("Está caindo granizo."))
+    when :HarshSun    then pbDisplay(_INTL("A luz do sol está extremamente forte."))
+    when :HeavyRain   then pbDisplay(_INTL("Está chovendo muito forte."))
+    when :StrongWinds then pbDisplay(_INTL("O vento está forte."))
+    when :ShadowSky   then pbDisplay(_INTL("O céu está sombrio."))
     end
     # Terrain announcement
     terrain_data = GameData::BattleTerrain.try_get(@field.terrain)
     pbCommonAnimation(terrain_data.animation) if terrain_data
     case @field.terrain
     when :Electric
-      pbDisplay(_INTL("An electric current runs across the battlefield!"))
+      pbDisplay(_INTL("Uma corrente elétrica percorre o campo de batalha!"))
     when :Grassy
-      pbDisplay(_INTL("Grass is covering the battlefield!"))
+      pbDisplay(_INTL("A grama está cobrindo o campo de batalha!"))
     when :Misty
-      pbDisplay(_INTL("Mist swirls about the battlefield!"))
+      pbDisplay(_INTL("Uma névoa envolve o campo de batalha!"))
     when :Psychic
-      pbDisplay(_INTL("The battlefield is weird!"))
+      pbDisplay(_INTL("O campo de batalha está estranho!"))
     end
     # Abilities upon entering battle
     pbOnActiveAll

@@ -99,7 +99,7 @@ namespace InfiniteFusionPtbrInstaller
             var badgePanel = new FlowLayoutPanel();
             badgePanel.AutoSize = true;
             badgePanel.Margin = new Padding(0, 10, 0, 0);
-            badgePanel.Controls.Add(CreateBadge("v1.0.0", Color.FromArgb(9, 105, 218), Color.White));
+            badgePanel.Controls.Add(CreateBadge("v1.1.0", Color.FromArgb(9, 105, 218), Color.White));
             badgePanel.Controls.Add(CreateBadge("Backup required", Color.FromArgb(191, 135, 0), Color.White));
             badgePanel.Controls.Add(CreateBadge("Unofficial fan mod", Color.FromArgb(130, 80, 223), Color.White));
             header.Controls.Add(badgePanel);
@@ -484,7 +484,7 @@ namespace InfiniteFusionPtbrInstaller
             {
                 var backupManifest = new BackupManifest
                 {
-                    version = "1.0.0",
+                    version = "1.1.0",
                     created_on = DateTime.Now.ToString("s"),
                     game_dir = gameRoot,
                     entries = backupEntries

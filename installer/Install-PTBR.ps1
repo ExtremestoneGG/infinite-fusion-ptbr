@@ -1,6 +1,5 @@
 param(
     [string]$GameDir = "",
-    [switch]$NoBackup,
     [switch]$RestoreLatest,
     [switch]$ValidateOnly,
     [switch]$Quiet
@@ -70,9 +69,9 @@ function Confirm-Install {
     param([string]$SelectedGameDir, [bool]$BackupEnabled)
     if ($Quiet) { return }
     Add-Type -AssemblyName System.Windows.Forms
-    $backupText = if ($BackupEnabled) { "A backup will be created before changes are applied." } else { "Backup is disabled." }
+    $backupText = "A required backup will be created before changes are applied."
     $message = @"
-Pokemon Infinite Fusion PT-BR Fan Translation v1.0.0
+Pokemon Infinite Fusion PT-BR Fan Translation v1.1.0
 
 This is an unofficial fan-made translation patch. It does not include the game and does not download anything.
 
@@ -246,7 +245,7 @@ function Install-Translation {
     } finally {
         if ($BackupEnabled -and $script:BackupEntries.Count -gt 0) {
             $backupManifest = [pscustomobject]@{
-                version = "1.0.0"
+                version = "1.1.0"
                 created_on = (Get-Date).ToString("s")
                 game_dir = $GameRoot
                 entries = $script:BackupEntries

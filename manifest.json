@@ -1,6 +1,6 @@
 {
   "name": "Pokemon Infinite Fusion PT-BR Fan Translation",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "language": "pt-BR",
   "release_type": "fan_translation_patch",
   "created_on": "2026-06-18",
@@ -81,9 +81,11 @@
     "base_translation_sections": 11,
     "fusion_pokedex_cache_entries": 61827,
     "fusion_pokedex_errors": 0,
-    "graphical_installer_exe_bytes": 10143232,
+    "graphical_installer_exe_bytes": 11276288,
     "readme_logo_bytes": 1050144,
-    "readme_dark_logo_bytes": 1051024
+    "readme_dark_logo_bytes": 961512,
+    "showcase_screenshots": 9,
+    "reported_battle_strings_fixed_v110": 18
   },
   "translation_policy": {
     "translated": [
@@ -110,12 +112,47 @@
   },
   "json_patch_schema": 2,
   "release_assets": {
-    "recommended_exe": "InfiniteFusionPTBRInstaller-v1.0.0.exe",
-    "bat_powershell_zip": "PTBR-Translation-BAT-v1.0.0.zip"
+    "recommended_exe": "InfiniteFusionPTBRInstaller-v1.1.0.exe",
+    "bat_powershell_zip": "PTBR-Translation-BAT-v1.1.0.zip"
   },
-  "recommended_installer": "InfiniteFusionPTBRInstaller-v1.0.0.exe",
+  "recommended_installer": "InfiniteFusionPTBRInstaller-v1.1.0.exe",
   "repository_installer_path": "installer/InfiniteFusionPTBRInstaller.exe",
-  "installer_source": "installer-src/InfiniteFusionPtbrInstaller.cs",
+  "installer_source": "installer-src/ModernInstaller.cs",
+  "installer_core_source": "installer-src/InfiniteFusionPtbrInstaller.cs",
+  "installer_icon": "assets/installer-icon.png",
+  "showcase_screenshots_dir": "assets/screenshots",
+  "coverage_snapshot": {
+    "base_language_entries": {
+      "translated": 20577,
+      "total": 20577,
+      "coverage_percent": 100
+    },
+    "base_pokedex_entries": {
+      "translated": 475,
+      "total": 475,
+      "coverage_percent": 100
+    },
+    "fusion_pokedex_mappings": {
+      "translated": 61726,
+      "total": 61726,
+      "coverage_percent": 100
+    },
+    "outfit_descriptions": {
+      "translated": 314,
+      "total": 314,
+      "coverage_percent": 100
+    },
+    "packaged_script_files": {
+      "translated": 55,
+      "total": 55,
+      "coverage_percent": 100
+    },
+    "reported_battle_strings_v110": {
+      "translated": 18,
+      "total": 18,
+      "coverage_percent": 100
+    }
+  },
   "github_bootstrap_script": "scripts/install-from-github.ps1",
   "recommended_exe_excludes_bat_files": true,
   "fallback_installers": [

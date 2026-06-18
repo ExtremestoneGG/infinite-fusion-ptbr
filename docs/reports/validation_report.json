@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "generated_on": "2026-06-18T15:41:45",
+  "version": "1.1.0",
+  "generated_on": "2026-06-18T19:50:00",
   "base_report": {
     "target": "D:\\InfiniteFusion - Copia\\Data\\portuguese.dat",
     "translated_maps": 699,
@@ -49,7 +49,48 @@
     "base_translation_maps": 699,
     "base_translation_sections": 11,
     "fusion_pokedex_cache_entries": 61827,
-    "fusion_pokedex_errors": 0
+    "fusion_pokedex_errors": 0,
+    "reported_battle_strings_fixed_v110": 18,
+    "showcase_screenshots": 9
+  },
+  "coverage_snapshot": {
+    "base_language_entries": {
+      "translated": 20577,
+      "total": 20577,
+      "remaining_known": 0,
+      "coverage_percent": 100
+    },
+    "base_pokedex_entries": {
+      "translated": 475,
+      "total": 475,
+      "remaining_known": 0,
+      "coverage_percent": 100
+    },
+    "fusion_pokedex_mappings": {
+      "translated": 61726,
+      "total": 61726,
+      "remaining_known": 0,
+      "coverage_percent": 100
+    },
+    "outfit_descriptions": {
+      "translated": 314,
+      "total": 314,
+      "remaining_known": 0,
+      "coverage_percent": 100
+    },
+    "packaged_script_files": {
+      "translated": 55,
+      "total": 55,
+      "remaining_known": 0,
+      "coverage_percent": 100
+    },
+    "reported_battle_strings_v110": {
+      "translated": 18,
+      "total": 18,
+      "remaining_known": 0,
+      "coverage_percent": 100
+    },
+    "notes": "Coverage is based on the extracted and packaged PT-BR scope plus the current public screenshot report set. Hidden hardcoded text may still appear during gameplay testing."
   },
   "excluded_from_release": [
     "Game binaries and original game assets",
@@ -77,15 +118,19 @@
   },
   "graphical_installer": {
     "path": "installer/InfiniteFusionPTBRInstaller.exe",
-    "release_asset": "InfiniteFusionPTBRInstaller-v1.0.0.exe",
-    "source": "installer-src/InfiniteFusionPtbrInstaller.cs",
-    "compiled_with": "Microsoft .NET Framework C# compiler 4.8",
+    "release_asset": "InfiniteFusionPTBRInstaller-v1.1.0.exe",
+    "source": "installer-src/ModernInstaller.cs",
+    "core_source": "installer-src/InfiniteFusionPtbrInstaller.cs",
+    "compiled_with": "Microsoft .NET Framework C# compiler 4.8 WPF",
     "unsigned_fan_tool": true,
     "network_access": "none",
     "requires_admin": false,
     "backup_required": true,
     "embedded_payload": true,
-    "exe_bytes": 10143232,
+    "game_exe_picker": true,
+    "automatic_folder_scan": true,
+    "update_existing_install": true,
+    "exe_bytes": 11276288,
     "sandbox_core_test": {
       "install": "passed",
       "backup": "passed",
@@ -96,13 +141,13 @@
   },
   "release_assets": {
     "recommended_exe": {
-      "name": "InfiniteFusionPTBRInstaller-v1.0.0.exe",
+      "name": "InfiniteFusionPTBRInstaller-v1.1.0.exe",
       "bat_files_included": false,
       "embedded_payload": true,
       "backup_required": true
     },
     "bat_powershell_zip": {
-      "name": "PTBR-Translation-BAT-v1.0.0.zip",
+      "name": "PTBR-Translation-BAT-v1.1.0.zip",
       "bat_files_included": true,
       "installer": "installer/Install-PTBR.bat",
       "github_bootstrap_script": "scripts/install-from-github.ps1"
@@ -111,6 +156,9 @@
   "readme_art": {
     "path": "assets/infinite-fusion-ptbr-mod-logo-github-bg.png",
     "dark_mode_path": "assets/infinite-fusion-ptbr-mod-logo-github-dark-bg.png",
+    "installer_icon": "assets/installer-icon.png",
+    "showcase_screenshots_dir": "assets/screenshots",
+    "showcase_screenshots": 9,
     "source": "edited from user-provided logo image",
     "label": "PT-BR MOD"
   }

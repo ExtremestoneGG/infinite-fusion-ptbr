@@ -5,17 +5,17 @@
   <img alt="Pokemon Infinite Fusion PT-BR Mod" src="assets/infinite-fusion-ptbr-mod-logo-github-bg.png">
 </picture>
 
-![Release](https://img.shields.io/badge/release-v1.0.0-blue)
+![Release](https://img.shields.io/badge/release-v1.1.0-blue)
 ![Language](https://img.shields.io/badge/language-PT--BR-green)
 ![Installer](https://img.shields.io/badge/installer-Windows%20EXE-2ea44f)
 ![Backup](https://img.shields.io/badge/backup-required-yellow)
 ![Fan Made](https://img.shields.io/badge/fan--made-unofficial-purple)
 ![Game Download](https://img.shields.io/badge/game%20download-official%20Discord%20only-red)
 
-**Version:** 1.0.0  
-**Language:** Brazilian Portuguese  
-**Status:** fan-made release candidate for public testing and feedback
-**Repository:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr  
+**Version:** 1.1.0<br>
+**Language:** Brazilian Portuguese<br>
+**Status:** fan-made release candidate for public testing and feedback<br>
+**Repository:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr<br>
 **Downloads:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases
 
 > **Important:** this is an unofficial, fan-made translation project. It is not affiliated with, endorsed by, or presented as official by the Pokemon Infinite Fusion developers, Nintendo, Game Freak, The Pokemon Company, or any related rights holder.
@@ -29,6 +29,26 @@ This is a Brazilian Portuguese fan translation patch for **Pokemon Infinite Fusi
 The project was coordinated by a designer and AI enthusiast, not by a professional programmer. AI was used as a tool to help extract text, maintain consistency, draft translations, and run validation passes. The project is open to feedback, corrections, human review, and improvements from the community.
 
 This is made **by fans, for fans**. It does not try to replace the official project or pretend to be official. If the Pokemon Infinite Fusion team ever finds this useful as a reference for an official localization workflow, that would be amazing, but the current release should be treated as a community testing build.
+
+## Translation Showcase
+
+<table>
+  <tr>
+    <td><img src="assets/screenshots/01-menu-ptbr.png" alt="PT-BR pause menu" width="280"></td>
+    <td><img src="assets/screenshots/02-summary-ptbr.png" alt="PT-BR Pokemon summary" width="280"></td>
+    <td><img src="assets/screenshots/03-moves-ptbr.png" alt="PT-BR move description" width="280"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screenshots/04-bag-key-items-ptbr.png" alt="PT-BR key item description" width="280"></td>
+    <td><img src="assets/screenshots/06-outfit-description-ptbr.png" alt="PT-BR outfit description" width="280"></td>
+    <td><img src="assets/screenshots/09-pokedex-entry-ptbr.png" alt="PT-BR Pokedex entry" width="280"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screenshots/07-bike-dialogue-ptbr.png" alt="PT-BR NPC dialogue" width="280"></td>
+    <td><img src="assets/screenshots/08-gym-dialogue-ptbr.png" alt="PT-BR Gym dialogue" width="280"></td>
+    <td><img src="assets/screenshots/05-bag-items-ptbr.png" alt="PT-BR item description" width="280"></td>
+  </tr>
+</table>
 
 ## What Was Translated
 
@@ -49,6 +69,20 @@ The translation focuses on readable Portuguese while preserving the Pokemon voca
 
 Example: an item name like **Pokeball** or **Rare Candy** remains in English, but the explanation of what it does can be translated into Portuguese.
 
+## Coverage Snapshot
+
+These numbers describe the extracted and packaged PT-BR scope for v1.1.0. Hidden hardcoded text may still appear during public testing and should be reported with screenshots.
+
+| Category | Translated / Total | Remaining Known Work | Coverage |
+| --- | ---: | ---: | ---: |
+| Story, dialogue, quests, menus, and language database entries | 20,577 / 20,577 | 0 extracted entries | 100% |
+| Base Pokedex entries | 475 / 475 | 0 known entries | 100% |
+| Fusion Pokedex entry mappings | 61,726 / 61,726 | 0 known patch errors | 100% |
+| Outfit, hat, and hairstyle descriptions | 314 / 314 | 0 known descriptions | 100% |
+| Packaged gameplay UI/script files | 55 / 55 target files | 0 known missing target files | 100% |
+| Submitted v1.1.0 battle text issues | 18 / 18 known strings | 0 from the current report set | 100% |
+| Preserved names and drawn/bitmap text | Not translated by design | Not part of PT-BR scope | N/A |
+
 ## What Changed
 
 This release contains:
@@ -57,7 +91,7 @@ This release contains:
 - `Data/pokedex/all_entries.json`, a translated base Pokedex entries file generated from the existing language data.
 - 53 script files with translated gameplay UI strings and language support adjustments.
 - A text patch for Pokedex entries and outfit descriptions that changes only text fields.
-- A graphical Windows `.exe` installer with folder selection, backup, install, validation, and restore options.
+- A rebuilt graphical Windows `.exe` installer with `Game.exe` selection, automatic scan, backup, install/update, validation, and restore options.
 - A separate BAT/PowerShell package for users who prefer transparent scripts.
 - Validation reports documenting what was checked before release.
 
@@ -75,25 +109,25 @@ This release does **not** include:
 
 1. Download and install Pokemon Infinite Fusion from the **official Pokemon Infinite Fusion Discord only**.
 2. Open the [Releases page](https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases).
-3. Download `InfiniteFusionPTBRInstaller-v1.0.0.exe`, the recommended graphical installer. Do not use this project as a game download.
-4. Run `InfiniteFusionPTBRInstaller-v1.0.0.exe`.
-5. When the folder picker opens, select the main Pokemon Infinite Fusion folder, the one that contains `Game.exe` and the `Data` folder.
+3. Download `InfiniteFusionPTBRInstaller-v1.1.0.exe`, the recommended graphical installer. Do not use this project as a game download.
+4. Run `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
+5. Click `Choose Game.exe` and select the game's `Game.exe`, or use `Scan` to look for likely game folders automatically.
 6. Confirm the install message. Backup is required and will be created inside the selected game folder.
 7. Wait while the installer copies the translated files and applies the Pokedex/outfit text patches. Older machines may take a few minutes.
 8. Start the game.
 9. Open the language menu and select `Português`.
 
-To undo the patch, open `InfiniteFusionPTBRInstaller-v1.0.0.exe` again and click `Restore Latest Backup`.
+To undo the patch, open `InfiniteFusionPTBRInstaller-v1.1.0.exe` again and click `Restore Latest Backup`.
 
 If Windows SmartScreen warns about the file, it is because this is a small unsigned fan tool. The installer source code is included in `installer-src/InfiniteFusionPtbrInstaller.cs`.
 
-If you prefer the script-based method, download the separate `PTBR-Translation-BAT-v1.0.0.zip` package and follow [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
+If you prefer the script-based method, download the separate `PTBR-Translation-BAT-v1.1.0.zip` package and follow [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
 
 ### How The Installer Works
 
-The recommended installer is `InfiniteFusionPTBRInstaller-v1.0.0.exe`. It is a small Windows Forms app with the PT-BR payload embedded inside the executable, so the main download does not need a folder full of files.
+The recommended installer is `InfiniteFusionPTBRInstaller-v1.1.0.exe`. It is a small WPF app with the PT-BR payload embedded inside the executable, so the main download does not need a folder full of files.
 
-The `.bat` installer is not included inside the recommended `.exe` ZIP. It is shipped separately as `PTBR-Translation-BAT-v1.0.0.zip`, which includes `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1`, and `installer/Restore-Latest-Backup.bat`.
+The `.bat` installer is not included inside the recommended `.exe` ZIP. It is shipped separately as `PTBR-Translation-BAT-v1.1.0.zip`, which includes `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1`, and `installer/Restore-Latest-Backup.bat`.
 
 The installer:
 
@@ -105,7 +139,7 @@ The installer:
 
 ### Restore Tutorial
 
-1. Open `InfiniteFusionPTBRInstaller-v1.0.0.exe`.
+1. Open `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
 2. Select the same Pokemon Infinite Fusion folder used during installation.
 3. Click `Restore Latest Backup`.
 4. The installer restores the newest backup from `PTBR_BACKUPS`.
@@ -142,7 +176,7 @@ That command downloads the script package from this GitHub release, creates a re
 
 ## Validation Summary
 
-Release 1.0.0 was checked with a final validation sweep:
+Release 1.1.0 was checked with a final validation sweep:
 
 - Base translated language entries: `20,577`
 - Fusion Pokedex translation mappings: `61,726`
@@ -153,6 +187,8 @@ Release 1.0.0 was checked with a final validation sweep:
 - Active Pokedex English sentence flags after final polish: `0`
 - Active `Pokébola`/`Pokebola` flags after final polish: `0`
 - Outfit names were preserved; only descriptions were translated.
+- v1.1.0 battle text issues from the current screenshot report set fixed: `18/18`
+- README showcase screenshots added: `9`
 
 The full machine-readable validation report is available at [docs/reports/validation_report.json](docs/reports/validation_report.json).
 
@@ -179,10 +215,10 @@ If you are part of the Pokemon Infinite Fusion team and want this project change
 
 # Tradução PT-BR Fanmade de Pokemon Infinite Fusion
 
-**Versão:** 1.0.0  
-**Idioma:** Português do Brasil  
-**Status:** versão fanmade para testes públicos e feedback
-**Repositório:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr  
+**Versão:** 1.1.0<br>
+**Idioma:** Português do Brasil<br>
+**Status:** versão fanmade para testes públicos e feedback<br>
+**Repositório:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr<br>
 **Downloads:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases
 
 > **Importante:** este é um projeto de tradução não oficial, feito por fã. Ele não é afiliado, aprovado, endossado nem apresentado como oficial pelos desenvolvedores de Pokemon Infinite Fusion, Nintendo, Game Freak, The Pokemon Company ou qualquer detentor relacionado.
@@ -196,6 +232,26 @@ Esta é uma tradução fanmade para Português do Brasil de **Pokemon Infinite F
 O projeto foi coordenado por um designer e entusiasta de IA, não por um programador profissional. IA foi usada como ferramenta para ajudar na extração de textos, consistência, rascunhos de tradução e validações. O projeto está aberto a feedback, correções, revisão humana e melhorias da comunidade.
 
 Isto foi feito **de fã para fã**. A tradução não tenta substituir o projeto oficial nem fingir que é oficial. Se um dia a equipe de Pokemon Infinite Fusion achar este trabalho útil como referência para uma localização oficial, seria incrível, mas esta versão deve ser tratada como uma build comunitária de testes.
+
+## Demonstração Da Tradução
+
+<table>
+  <tr>
+    <td><img src="assets/screenshots/01-menu-ptbr.png" alt="Menu em PT-BR" width="280"></td>
+    <td><img src="assets/screenshots/02-summary-ptbr.png" alt="Resumo do Pokemon em PT-BR" width="280"></td>
+    <td><img src="assets/screenshots/03-moves-ptbr.png" alt="Descrição de golpe em PT-BR" width="280"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screenshots/04-bag-key-items-ptbr.png" alt="Descrição de item-chave em PT-BR" width="280"></td>
+    <td><img src="assets/screenshots/06-outfit-description-ptbr.png" alt="Descrição de roupa em PT-BR" width="280"></td>
+    <td><img src="assets/screenshots/09-pokedex-entry-ptbr.png" alt="Entrada da Pokédex em PT-BR" width="280"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screenshots/07-bike-dialogue-ptbr.png" alt="Diálogo de NPC em PT-BR" width="280"></td>
+    <td><img src="assets/screenshots/08-gym-dialogue-ptbr.png" alt="Diálogo de ginásio em PT-BR" width="280"></td>
+    <td><img src="assets/screenshots/05-bag-items-ptbr.png" alt="Descrição de item em PT-BR" width="280"></td>
+  </tr>
+</table>
 
 ## O Que Foi Traduzido
 
@@ -216,6 +272,20 @@ A tradução tenta soar natural em português sem mexer no vocabulário de Pokem
 
 Exemplo: um item como **Pokeball** ou **Rare Candy** continua com o nome em inglês, mas a explicação do que ele faz pode aparecer em português.
 
+## Resumo De Cobertura
+
+Estes números descrevem o escopo PT-BR extraído e empacotado na v1.1.0. Textos escondidos em scripts/eventos ainda podem aparecer durante os testes públicos e devem ser reportados com prints.
+
+| Categoria | Traduzido / Total | Falta conhecida | Cobertura |
+| --- | ---: | ---: | ---: |
+| História, diálogos, quests, menus e entradas do banco de idioma | 20.577 / 20.577 | 0 entradas extraídas | 100% |
+| Entradas base da Pokédex | 475 / 475 | 0 entradas conhecidas | 100% |
+| Mapeamentos da Pokédex de fusões | 61.726 / 61.726 | 0 erros conhecidos de patch | 100% |
+| Descrições de roupas, chapéus e cabelos | 314 / 314 | 0 descrições conhecidas | 100% |
+| Arquivos empacotados de interface/scripts | 55 / 55 arquivos-alvo | 0 arquivos-alvo conhecidos faltando | 100% |
+| Problemas de texto de batalha reportados na v1.1.0 | 18 / 18 textos conhecidos | 0 do conjunto atual de reports | 100% |
+| Nomes preservados e textos desenhados/bitmap | Não traduzidos por escolha | Fora do escopo PT-BR | N/A |
+
 ## O Que Foi Alterado
 
 Esta release contém:
@@ -224,7 +294,7 @@ Esta release contém:
 - `Data/pokedex/all_entries.json`, um arquivo de entradas base da Pokédex traduzido a partir dos dados de idioma existentes.
 - 53 arquivos de script com textos de interface traduzidos e ajustes de suporte ao idioma.
 - Um patch de texto para entradas da Pokédex e descrições de roupas, alterando apenas campos de texto.
-- Um instalador gráfico `.exe` para Windows com seleção de pasta, backup, instalação, validação e restauração.
+- Um instalador gráfico `.exe` refeito para Windows com seleção por `Game.exe`, busca automática, backup, instalação/atualização, validação e restauração.
 - Um pacote separado em BAT/PowerShell para quem prefere scripts transparentes.
 - Relatórios de validação documentando o que foi checado antes da release.
 
@@ -242,25 +312,25 @@ Esta release **não** contém:
 
 1. Baixe e instale Pokemon Infinite Fusion **somente pelo Discord oficial de Pokemon Infinite Fusion**.
 2. Abra a [página de Releases](https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases).
-3. Baixe `InfiniteFusionPTBRInstaller-v1.0.0.exe`, o instalador gráfico recomendado. Não use este projeto como download do jogo.
-4. Execute `InfiniteFusionPTBRInstaller-v1.0.0.exe`.
-5. Quando a janela de seleção abrir, escolha a pasta principal do Pokemon Infinite Fusion, aquela que contém `Game.exe` e a pasta `Data`.
+3. Baixe `InfiniteFusionPTBRInstaller-v1.1.0.exe`, o instalador gráfico recomendado. Não use este projeto como download do jogo.
+4. Execute `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
+5. Clique em `Escolher Game.exe` e selecione o `Game.exe` do jogo, ou use `Escanear` para procurar possíveis pastas do jogo automaticamente.
 6. Confirme a mensagem de instalação. O backup é obrigatório e será criado dentro da pasta escolhida do jogo.
 7. Aguarde enquanto o instalador copia os arquivos traduzidos e aplica os patches de texto da Pokédex/roupas. Em computadores mais antigos isso pode levar alguns minutos.
 8. Abra o jogo.
 9. Entre no menu de idioma e selecione `Português`.
 
-Para desfazer a instalação, abra `InfiniteFusionPTBRInstaller-v1.0.0.exe` de novo e clique em `Restore Latest Backup`.
+Para desfazer a instalação, abra `InfiniteFusionPTBRInstaller-v1.1.0.exe` de novo e clique em `Restore Latest Backup`.
 
 Se o Windows SmartScreen avisar sobre o arquivo, é porque ele é uma ferramenta pequena de fã e não possui assinatura digital. O código-fonte do instalador está incluído em `installer-src/InfiniteFusionPtbrInstaller.cs`.
 
-Se você preferir o método por script, baixe o pacote separado `PTBR-Translation-BAT-v1.0.0.zip` e siga [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
+Se você preferir o método por script, baixe o pacote separado `PTBR-Translation-BAT-v1.1.0.zip` e siga [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
 
 ### Como O Instalador Funciona
 
-O instalador recomendado é `InfiniteFusionPTBRInstaller-v1.0.0.exe`. Ele é um pequeno app Windows Forms com o pacote PT-BR embutido dentro do executável, então o download principal não precisa vir como uma pasta cheia de arquivos.
+O instalador recomendado é `InfiniteFusionPTBRInstaller-v1.1.0.exe`. Ele é um pequeno app WPF com o pacote PT-BR embutido dentro do executável, então o download principal não precisa vir como uma pasta cheia de arquivos.
 
-O instalador `.bat` não fica dentro do download principal em `.exe`. Ele é distribuído separadamente como `PTBR-Translation-BAT-v1.0.0.zip`, que inclui `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1` e `installer/Restore-Latest-Backup.bat`.
+O instalador `.bat` não fica dentro do download principal em `.exe`. Ele é distribuído separadamente como `PTBR-Translation-BAT-v1.1.0.zip`, que inclui `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1` e `installer/Restore-Latest-Backup.bat`.
 
 O instalador:
 
@@ -272,7 +342,7 @@ O instalador:
 
 ### Tutorial De Restauração
 
-1. Abra `InfiniteFusionPTBRInstaller-v1.0.0.exe`.
+1. Abra `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
 2. Selecione a mesma pasta do Pokemon Infinite Fusion usada na instalação.
 3. Clique em `Restore Latest Backup`.
 4. O instalador restaura o backup mais recente dentro de `PTBR_BACKUPS`.
@@ -309,7 +379,7 @@ Esse comando baixa o pacote de scripts desta release no GitHub, cria backup obri
 
 ## Resumo Da Validação
 
-A versão 1.0.0 passou por uma varredura final:
+A versão 1.1.0 passou por uma varredura final:
 
 - Entradas traduzidas do arquivo base de idioma: `20.577`
 - Mapeamentos de tradução da Pokédex de fusões: `61.726`
@@ -320,6 +390,8 @@ A versão 1.0.0 passou por uma varredura final:
 - Frases em inglês detectadas na Pokédex ativa após polimento final: `0`
 - Ocorrências de `Pokébola`/`Pokebola` na Pokédex ativa após polimento final: `0`
 - Nomes de roupas foram preservados; apenas descrições foram traduzidas.
+- Textos de batalha da v1.1.0 reportados no conjunto atual de prints corrigidos: `18/18`
+- Imagens de demonstração adicionadas ao README: `9`
 
 O relatório completo em formato de máquina está em [docs/reports/validation_report.json](docs/reports/validation_report.json).
 

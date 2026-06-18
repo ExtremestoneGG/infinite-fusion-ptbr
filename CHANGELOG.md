@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.1.0
+
+### English
+
+- Rebuilt the recommended Windows installer with a cleaner WPF interface, GitHub-dark styling, project artwork, and a custom installer icon.
+- Added `Game.exe` selection, automatic scan for likely game folders, update flow for existing PT-BR installs, and a shortcut to open the backup folder.
+- Kept backup mandatory before every install/update.
+- Fixed remaining English battle intro messages such as wild encounters, trainer challenges, send-out messages, Safari encounters, weather, and terrain announcements.
+- Added README showcase screenshots from the in-game PT-BR translation.
+- Added a coverage snapshot by translation category for public testing.
+
+### Português
+
+- Refeito o instalador recomendado para Windows com interface WPF mais limpa, estilo escuro do GitHub, arte do projeto e ícone personalizado.
+- Adicionada seleção por `Game.exe`, busca automática por possíveis pastas do jogo, fluxo de atualização para instalações PT-BR existentes e atalho para abrir a pasta de backups.
+- Backup mantido como obrigatório antes de toda instalação/atualização.
+- Corrigidas mensagens de batalha que ainda apareciam em inglês, incluindo encontros selvagens, desafios de treinadores, envio de Pokémon, Safari, clima e terreno.
+- Adicionadas imagens de demonstração da tradução PT-BR no README.
+- Adicionado resumo de cobertura por categoria para a fase de testes públicos.
+
 ## 1.0.0
 
 ### English
