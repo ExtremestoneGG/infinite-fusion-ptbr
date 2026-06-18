@@ -4,6 +4,19 @@
 
 The PT-BR installer is a plain PowerShell patcher. It was intentionally kept readable and uncompiled so players can inspect what it does before running it.
 
+## Installation Tutorial
+
+1. Download the game only from the official Pokemon Infinite Fusion Discord.
+2. Download the translation ZIP from this repository's Releases page.
+3. Extract the ZIP.
+4. Run `installer/Install-PTBR.bat`.
+5. Select the main Pokemon Infinite Fusion folder.
+6. Confirm the install prompt.
+7. Wait for the copy and patch steps to finish.
+8. Open the game and select `Português` in the language menu.
+
+The selected game folder should contain `Game.exe` and `Data`.
+
 It performs four actions:
 
 1. Validates that the selected folder contains `Data` and `Data/Scripts`.
@@ -29,9 +42,30 @@ powershell -NoProfile -ExecutionPolicy Bypass -File installer\Install-PTBR.ps1 -
 powershell -NoProfile -ExecutionPolicy Bypass -File installer\Install-PTBR.ps1 -GameDir "D:\Games\InfiniteFusion" -ValidateOnly
 ```
 
+## Restore Tutorial
+
+1. Run `installer/Restore-Latest-Backup.bat`.
+2. Select the same game folder.
+3. The newest backup in `PTBR_BACKUPS` is restored.
+
+Use this if the game update overwrites files, if you want to test another version, or if anything feels wrong after installation.
+
 ## Português
 
 O instalador PT-BR é um patcher simples em PowerShell. Ele foi mantido aberto e sem compilar para que qualquer pessoa possa abrir o arquivo e conferir o que ele faz antes de executar.
+
+## Tutorial De Instalação
+
+1. Baixe o jogo somente pelo Discord oficial de Pokemon Infinite Fusion.
+2. Baixe o ZIP da tradução pela página de Releases deste repositório.
+3. Extraia o ZIP.
+4. Execute `installer/Install-PTBR.bat`.
+5. Selecione a pasta principal do Pokemon Infinite Fusion.
+6. Confirme a janela de instalação.
+7. Aguarde a cópia e os patches terminarem.
+8. Abra o jogo e selecione `Português` no menu de idioma.
+
+A pasta escolhida deve conter `Game.exe` e `Data`.
 
 Ele faz quatro coisas:
 
@@ -49,3 +83,11 @@ O instalador não baixa arquivos, não acessa a internet, não inclui o jogo e n
 - `installer/Restore-Latest-Backup.bat`: restaura o backup mais recente criado pelo instalador.
 - `payload/files`: dados de idioma e scripts de interface traduzidos.
 - `payload/patches/text_patches.json`: mapeamentos de texto da Pokédex e descrições de roupas.
+
+## Tutorial De Restauração
+
+1. Execute `installer/Restore-Latest-Backup.bat`.
+2. Selecione a mesma pasta do jogo.
+3. O backup mais recente dentro de `PTBR_BACKUPS` será restaurado.
+
+Use isso se uma atualização do jogo sobrescrever arquivos, se você quiser testar outra versão ou se algo parecer errado depois da instalação.

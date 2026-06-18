@@ -60,15 +60,42 @@ This release does **not** include:
 
 ## Installation
 
+### Quick Tutorial
+
 1. Download and install Pokemon Infinite Fusion from the **official Pokemon Infinite Fusion Discord only**.
-2. Download this translation release from GitHub.
-3. Extract the release ZIP anywhere you trust.
-4. Run `installer/Install-PTBR.bat`.
-5. Select your Pokemon Infinite Fusion folder.
-6. Leave backup enabled unless you know exactly what you are doing.
-7. Start the game and select `Português` in the language menu.
+2. Open the [Releases page](https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases).
+3. Download `PTBR-Translation-v1.0.0.zip`. Do not use this project as a game download.
+4. Extract the ZIP into any folder you trust, for example your Downloads folder or a folder on your desktop.
+5. Open the extracted folder.
+6. Run `installer/Install-PTBR.bat`.
+7. When the folder picker opens, select the main Pokemon Infinite Fusion folder, the one that contains `Game.exe` and the `Data` folder.
+8. Confirm the install message. Backup is enabled by default and should stay enabled.
+9. Wait while the installer copies the translated files and applies the Pokedex/outfit text patches. Older machines may take a few minutes.
+10. Start the game.
+11. Open the language menu and select `Português`.
 
 To undo the patch, run `installer/Restore-Latest-Backup.bat` and select the same game folder.
+
+### How The Installer Works
+
+When you run `Install-PTBR.bat`, it launches the readable PowerShell script at `installer/Install-PTBR.ps1`.
+
+The installer:
+
+- Checks if the selected folder looks like Pokemon Infinite Fusion.
+- Creates a backup in `PTBR_BACKUPS`.
+- Copies the Portuguese language file and translated script files.
+- Applies text-only patches to Pokedex entries and outfit descriptions.
+- Keeps the game's executable, sprites, music, saves, and unrelated files untouched.
+
+### Restore Tutorial
+
+1. Run `installer/Restore-Latest-Backup.bat`.
+2. Select the same Pokemon Infinite Fusion folder used during installation.
+3. The installer restores the newest backup from `PTBR_BACKUPS`.
+4. Files created by the translation installer are removed, and overwritten files are restored.
+
+If you want to be extra careful, copy your save folder before testing any mod or fan patch.
 
 ## Installer Notes
 
@@ -179,15 +206,42 @@ Esta release **não** contém:
 
 ## Instalação
 
+### Tutorial Rápido
+
 1. Baixe e instale Pokemon Infinite Fusion **somente pelo Discord oficial de Pokemon Infinite Fusion**.
-2. Baixe a release desta tradução pelo GitHub.
-3. Extraia o ZIP da tradução em uma pasta confiável.
-4. Execute `installer/Install-PTBR.bat`.
-5. Selecione a pasta do Pokemon Infinite Fusion.
-6. Deixe o backup ativado, a menos que você saiba exatamente o que está fazendo.
-7. Abra o jogo e selecione `Português` no menu de idioma.
+2. Abra a [página de Releases](https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases).
+3. Baixe `PTBR-Translation-v1.0.0.zip`. Não use este projeto como download do jogo.
+4. Extraia o ZIP em uma pasta confiável, como Downloads ou uma pasta na área de trabalho.
+5. Abra a pasta extraída.
+6. Execute `installer/Install-PTBR.bat`.
+7. Quando a janela de seleção abrir, escolha a pasta principal do Pokemon Infinite Fusion, aquela que contém `Game.exe` e a pasta `Data`.
+8. Confirme a mensagem de instalação. O backup fica ativado por padrão e é recomendado deixar assim.
+9. Aguarde enquanto o instalador copia os arquivos traduzidos e aplica os patches de texto da Pokédex/roupas. Em computadores mais antigos isso pode levar alguns minutos.
+10. Abra o jogo.
+11. Entre no menu de idioma e selecione `Português`.
 
 Para desfazer a instalação, execute `installer/Restore-Latest-Backup.bat` e selecione a mesma pasta do jogo.
+
+### Como O Instalador Funciona
+
+Ao executar `Install-PTBR.bat`, ele abre o script PowerShell legível em `installer/Install-PTBR.ps1`.
+
+O instalador:
+
+- Verifica se a pasta escolhida parece ser o Pokemon Infinite Fusion.
+- Cria um backup em `PTBR_BACKUPS`.
+- Copia o arquivo de idioma português e os scripts traduzidos.
+- Aplica patches somente de texto nas entradas da Pokédex e descrições de roupas.
+- Mantém executável, sprites, músicas, saves e arquivos não relacionados do jogo sem mexer.
+
+### Tutorial De Restauração
+
+1. Execute `installer/Restore-Latest-Backup.bat`.
+2. Selecione a mesma pasta do Pokemon Infinite Fusion usada na instalação.
+3. O instalador restaura o backup mais recente dentro de `PTBR_BACKUPS`.
+4. Arquivos criados pelo instalador da tradução são removidos, e arquivos sobrescritos são restaurados.
+
+Se quiser ter cuidado extra, copie sua pasta de saves antes de testar qualquer mod ou patch fanmade.
 
 ## Sobre O Instalador
 
