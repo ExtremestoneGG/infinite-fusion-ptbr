@@ -1,0 +1,77 @@
+{
+  "version": "1.0.0",
+  "generated_on": "2026-06-18T15:41:45",
+  "base_report": {
+    "target": "D:\\InfiniteFusion - Copia\\Data\\portuguese.dat",
+    "translated_maps": 699,
+    "translated_map_entries": 15515,
+    "translated_sections": 11,
+    "translated_section_entries": 5062,
+    "total_entries": 20577
+  },
+  "fusion_pokedex_errors": 0,
+  "active_json_checks": {
+    "Data/pokedex/dex.json": {
+      "rows": 62149,
+      "english_sentence_flags": 0,
+      "pokebola_flags": 0
+    },
+    "Data/dex.json": {
+      "rows": 8411,
+      "english_sentence_flags": 0,
+      "pokebola_flags": 0
+    }
+  },
+  "outfit_integrity": {
+    "Data/outfits/clothes_data.json": {
+      "rows": 97,
+      "name_changes": 0,
+      "description_changes": 70
+    },
+    "Data/outfits/hats_data.json": {
+      "rows": 187,
+      "name_changes": 0,
+      "description_changes": 167
+    },
+    "Data/outfits/hairstyles_data.json": {
+      "rows": 84,
+      "name_changes": 0,
+      "description_changes": 77
+    }
+  },
+  "package_counts": {
+    "direct_files": 54,
+    "script_files": 53,
+    "entry_translation_mappings": 61726,
+    "outfit_description_mappings": 314,
+    "base_translation_entries": 20577,
+    "base_translation_maps": 699,
+    "base_translation_sections": 11,
+    "fusion_pokedex_cache_entries": 61827,
+    "fusion_pokedex_errors": 0
+  },
+  "excluded_from_release": [
+    "Game binaries and original game assets",
+    "Downloaded or updated sprites",
+    "Updater folders and BAT files from the game installation",
+    "Recovery backups generated during translation work",
+    "Translation tool caches not required by the installer, except the text patch payload"
+  ],
+  "json_patch_schema": 2,
+  "installer_sandbox_test": {
+    "install": "passed",
+    "backup": "passed",
+    "restore_latest_backup": "passed",
+    "json_metadata_preserved": true,
+    "created_files_removed_on_restore": true
+  },
+  "final_package_validation": {
+    "manifest_loaded": true,
+    "patch_loaded": true,
+    "readme_bilingual": true,
+    "official_discord_warning_present": true,
+    "unofficial_fanmade_warning_present": true,
+    "forbidden_game_payload_check": "passed",
+    "errors": []
+  }
+}
