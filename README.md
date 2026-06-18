@@ -6,6 +6,8 @@
 **Version:** 1.0.0  
 **Language:** Brazilian Portuguese  
 **Status:** fan-made release candidate for public testing and feedback
+**Repository:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr  
+**Downloads:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases
 
 > **Important:** this is an unofficial, fan-made translation project. It is not affiliated with, endorsed by, or presented as official by the Pokemon Infinite Fusion developers, Nintendo, Game Freak, The Pokemon Company, or any related rights holder.
 
@@ -123,6 +125,8 @@ If you are part of the Pokemon Infinite Fusion team and want this project change
 **Versão:** 1.0.0  
 **Idioma:** Português do Brasil  
 **Status:** versão fanmade para testes públicos e feedback
+**Repositório:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr  
+**Downloads:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases
 
 > **Importante:** este é um projeto de tradução não oficial, feito por fã. Ele não é afiliado, aprovado, endossado nem apresentado como oficial pelos desenvolvedores de Pokemon Infinite Fusion, Nintendo, Game Freak, The Pokemon Company ou qualquer detentor relacionado.
 
