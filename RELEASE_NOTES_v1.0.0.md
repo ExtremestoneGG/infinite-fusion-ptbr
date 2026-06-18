@@ -11,6 +11,7 @@ This release includes:
 - Pokedex text patch mappings.
 - Outfit, hat, and hairstyle description mappings.
 - PowerShell installer with backup and restore.
+- Graphical Windows `.exe` installer with folder selection, backup, install, validation, and restore options.
 - Bilingual documentation in English and Portuguese.
 - Final validation report.
 
@@ -27,6 +28,7 @@ Esta release inclui:
 - Mapeamentos de tradução da Pokédex.
 - Mapeamentos de descrições de roupas, chapéus e cabelos.
 - Instalador em PowerShell com backup e restauração.
+- Instalador gráfico `.exe` para Windows com seleção de pasta, backup, instalação, validação e restauração.
 - Documentação bilingue em inglês e português.
 - Relatório final de validação.
 

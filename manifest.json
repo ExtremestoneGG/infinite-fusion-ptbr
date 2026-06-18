@@ -79,7 +79,9 @@
     "base_translation_maps": 699,
     "base_translation_sections": 11,
     "fusion_pokedex_cache_entries": 61827,
-    "fusion_pokedex_errors": 0
+    "fusion_pokedex_errors": 0,
+    "graphical_installer_exe_bytes": 22528,
+    "readme_logo_bytes": 401610
   },
   "translation_policy": {
     "translated": [
@@ -104,5 +106,12 @@
       "drawn/bitmap text"
     ]
   },
-  "json_patch_schema": 2
+  "json_patch_schema": 2,
+  "recommended_installer": "installer/InfiniteFusionPTBRInstaller.exe",
+  "installer_source": "installer-src/InfiniteFusionPtbrInstaller.cs",
+  "fallback_installers": [
+    "installer/Install-PTBR.bat",
+    "installer/Install-PTBR.ps1",
+    "installer/Restore-Latest-Backup.bat"
+  ]
 }

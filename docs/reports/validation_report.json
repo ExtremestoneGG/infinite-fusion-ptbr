@@ -73,5 +73,25 @@
     "unofficial_fanmade_warning_present": true,
     "forbidden_game_payload_check": "passed",
     "errors": []
+  },
+  "graphical_installer": {
+    "path": "installer/InfiniteFusionPTBRInstaller.exe",
+    "source": "installer-src/InfiniteFusionPtbrInstaller.cs",
+    "compiled_with": "Microsoft .NET Framework C# compiler 4.8",
+    "unsigned_fan_tool": true,
+    "network_access": "none",
+    "requires_admin": false,
+    "sandbox_core_test": {
+      "install": "passed",
+      "backup": "passed",
+      "restore_latest_backup": "passed",
+      "json_metadata_preserved": true,
+      "created_files_removed_on_restore": true
+    }
+  },
+  "readme_art": {
+    "path": "assets/infinite-fusion-ptbr-mod-logo.png",
+    "source": "edited from user-provided logo image",
+    "label": "PT-BR MOD / Portugu?s Brasil"
   }
 }

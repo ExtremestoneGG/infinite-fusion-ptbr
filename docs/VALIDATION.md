@@ -12,6 +12,8 @@ Release 1.0.0 passed the following checks:
 - The active Pokedex files have `0` `Pokébola`/`Pokebola` flags after final polish, keeping the item/object term as `Pokéball`.
 - Outfit JSON validation confirmed `0` outfit name changes; only descriptions were translated.
 - The installer was tested on a temporary sandbox folder for install, backup, JSON patching, and restore.
+- The graphical `.exe` installer core was tested on a temporary sandbox folder for install, backup, JSON patching, and restore.
+- The `.exe` installer source code is included in `installer-src/InfiniteFusionPtbrInstaller.cs`.
 
 The machine-readable report is in `docs/reports/validation_report.json`.
 
@@ -27,5 +29,7 @@ A versão 1.0.0 passou pelas seguintes checagens:
 - Os arquivos ativos da Pokédex têm `0` ocorrências de `Pokébola`/`Pokebola` após o polimento final, mantendo o termo como `Pokéball`.
 - A validação dos JSONs de roupas confirmou `0` alterações em nomes; apenas descrições foram traduzidas.
 - O instalador foi testado em uma pasta temporária para instalar, criar backup, aplicar patch JSON e restaurar.
+- O núcleo do instalador gráfico `.exe` foi testado em uma pasta temporária para instalar, criar backup, aplicar patch JSON e restaurar.
+- O código-fonte do instalador `.exe` está incluído em `installer-src/InfiniteFusionPtbrInstaller.cs`.
 
 O relatório em formato de máquina está em `docs/reports/validation_report.json`.
