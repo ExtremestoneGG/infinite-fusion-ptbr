@@ -5,20 +5,24 @@
 ### English
 
 - Rebuilt the recommended Windows installer with a cleaner WPF interface, GitHub-dark styling, project artwork, and a custom installer icon.
-- Added `Game.exe` selection, automatic scan for likely game folders, update flow for existing PT-BR installs, and a shortcut to open the backup folder.
+- Added `Game.exe` selection, automatic scan for likely game folders, update flow for existing PT-BR installs, scan cancellation, and a shortcut to open the backup folder.
 - Kept backup mandatory before every install/update.
 - Fixed remaining English battle intro messages such as wild encounters, trainer challenges, send-out messages, Safari encounters, weather, and terrain announcements.
 - Added README showcase screenshots from the in-game PT-BR translation.
 - Added a coverage snapshot by translation category for public testing.
+- Documented the official updater/save compatibility crash and the reinstall workaround.
+- Kept Pokedex species/fusion descriptions out of the active v1.1.0 payload; they remain future work.
 
 ### Português
 
 - Refeito o instalador recomendado para Windows com interface WPF mais limpa, estilo escuro do GitHub, arte do projeto e ícone personalizado.
-- Adicionada seleção por `Game.exe`, busca automática por possíveis pastas do jogo, fluxo de atualização para instalações PT-BR existentes e atalho para abrir a pasta de backups.
+- Adicionada seleção por `Game.exe`, busca automática por possíveis pastas do jogo, fluxo de atualização para instalações PT-BR existentes, cancelamento de busca e atalho para abrir a pasta de backups.
 - Backup mantido como obrigatório antes de toda instalação/atualização.
 - Corrigidas mensagens de batalha que ainda apareciam em inglês, incluindo encontros selvagens, desafios de treinadores, envio de Pokémon, Safari, clima e terreno.
 - Adicionadas imagens de demonstração da tradução PT-BR no README.
 - Adicionado resumo de cobertura por categoria para a fase de testes públicos.
+- Documentado o crash conhecido de compatibilidade entre updater oficial/save e a solução de reinstalar a tradução.
+- Descrições de espécies/fusões da Pokédex ficaram fora do payload ativo da v1.1.0; seguem como trabalho futuro.
 
 ## 1.0.0
 
@@ -26,7 +30,7 @@
 
 - Added Brazilian Portuguese language file.
 - Added Portuguese as a selectable language.
-- Translated story, quest, dialogue, gameplay UI, shop/service text, descriptions, Pokedex entries, and outfit descriptions within the agreed scope.
+- Translated story, quest, dialogue, gameplay UI, shop/service text, item/move/ability descriptions, and outfit descriptions within the agreed scope. Pokedex species/fusion descriptions are tracked as future work.
 - Preserved Pokemon, move, item, ability, NPC, location, organization, and type names.
 - Added a single-file graphical Windows `.exe` installer with folder selection, install, required backup, validation, and restore options.
 - Added a separate BAT/PowerShell installer package with backup, restore, and one-line PowerShell install support.
@@ -38,7 +42,7 @@
 
 - Adicionado arquivo de idioma em Português do Brasil.
 - Adicionado Português como idioma selecionável.
-- Traduzidos textos de história, quests, diálogos, interface, lojas/serviços, descrições, entradas da Pokédex e descrições de roupas dentro do escopo combinado.
+- Traduzidos textos de história, quests, diálogos, interface, lojas/serviços, descrições de itens/golpes/habilidades e descrições de roupas dentro do escopo combinado. Descrições de espécies/fusões da Pokédex ficam registradas como trabalho futuro.
 - Preservados nomes de Pokemon, golpes, itens, habilidades, NPCs, locais, organizações e tipos.
 - Adicionado instalador gráfico `.exe` em arquivo único para Windows com seleção de pasta, instalação, backup obrigatório, validação e restauração.
 - Adicionado pacote separado de instalação BAT/PowerShell com backup, restauração e suporte a instalação por uma linha no PowerShell.

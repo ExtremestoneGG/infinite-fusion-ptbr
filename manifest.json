@@ -7,24 +7,44 @@
   "requires_existing_game_installation": true,
   "official_game_download_notice": "Download Pokemon Infinite Fusion only from the official Pokemon Infinite Fusion Discord maintained by the game developers. This package does not include the game.",
   "direct_files": [
-    "Data/portuguese.dat",
-    "Data/pokedex/all_entries.json",
     "Data/Scripts/001_Settings.rb",
+    "Data/Scripts/003_Game processing/004_Interpreter_Commands.rb",
+    "Data/Scripts/007_Objects and windows/011_Messages.rb",
+    "Data/Scripts/010_Data/001_Hardcoded data/004_BodyShape.rb",
+    "Data/Scripts/010_Data/001_Hardcoded data/008_Stat.rb",
     "Data/Scripts/010_Data/001_Hardcoded data/009_Nature.rb",
     "Data/Scripts/010_Data/002_PBS data/008_Species.rb",
+    "Data/Scripts/011_Battle/001_Battler/005_Battler_StatStages.rb",
+    "Data/Scripts/011_Battle/001_Battler/006_Battler_AbilityAndItem.rb",
+    "Data/Scripts/011_Battle/001_Battler/010_Battler_UseMove_TriggerEffects.rb",
+    "Data/Scripts/011_Battle/002_Move/002_Move_Usage.rb",
+    "Data/Scripts/011_Battle/002_Move/006_Move_Effects_080-0FF.rb",
     "Data/Scripts/011_Battle/003_Battle/001_PokeBattle_BattleCommon.rb",
     "Data/Scripts/011_Battle/003_Battle/003_Battle_StartAndEnd.rb",
     "Data/Scripts/011_Battle/003_Battle/004_Battle_ExpAndMoveLearning.rb",
     "Data/Scripts/011_Battle/003_Battle/006_Battle_Action_Switching.rb",
+    "Data/Scripts/011_Battle/003_Battle/007_Battle_Action_UseItem.rb",
+    "Data/Scripts/011_Battle/003_Battle/008_Battle_Action_Running.rb",
+    "Data/Scripts/011_Battle/003_Battle/009_Battle_Action_Other.rb",
+    "Data/Scripts/011_Battle/003_Battle/010_Battle_Phase_Command.rb",
+    "Data/Scripts/011_Battle/005_Battle scene/005_PokeBattle_SceneMenus.rb",
+    "Data/Scripts/011_Battle/005_Battle scene/006_PokeBattle_Scene.rb",
     "Data/Scripts/011_Battle/005_Battle scene/008_Scene_Commands.rb",
     "Data/Scripts/011_Battle/006_Other battle types/002_PokeBattle_SafariZone.rb",
     "Data/Scripts/011_Battle/006_Other battle types/003_PokeBattle_BugContest.rb",
+    "Data/Scripts/011_Battle/006_Other battle types/009_PokeBattle_Clauses.rb",
+    "Data/Scripts/012_Overworld/001_Overworld visuals/003_Overworld_MapTransitionAnims.rb",
     "Data/Scripts/012_Overworld/001_Overworld.rb",
     "Data/Scripts/012_Overworld/003_Overworld_Time.rb",
     "Data/Scripts/012_Overworld/004_Overworld_FieldMoves.rb",
+    "Data/Scripts/012_Overworld/005_Overworld_Fishing.rb",
     "Data/Scripts/012_Overworld/006_Overworld_BerryPlants.rb",
+    "Data/Scripts/012_Overworld/007_Overworld_DayCare.rb",
     "Data/Scripts/013_Items/001_Item_Utilities.rb",
     "Data/Scripts/013_Items/002_Item_Effects.rb",
+    "Data/Scripts/013_Items/003_Item_BattleEffects.rb",
+    "Data/Scripts/015_Trainers and player/002_Trainer_LoadAndNew.rb",
+    "Data/Scripts/016_UI/001_Non-interactive UI/003_UI_EggHatching.rb",
     "Data/Scripts/016_UI/001_UI_PauseMenu.rb",
     "Data/Scripts/016_UI/002_UI_Pokedex_Menu.rb",
     "Data/Scripts/016_UI/003_UI_Pokedex_Main.rb",
@@ -34,14 +54,21 @@
     "Data/Scripts/016_UI/007_UI_Bag.rb",
     "Data/Scripts/016_UI/014_UI_Save.rb",
     "Data/Scripts/016_UI/015_UI_Options.rb",
+    "Data/Scripts/016_UI/018_UI_ItemStorage.rb",
     "Data/Scripts/016_UI/019_UI_PC.rb",
     "Data/Scripts/016_UI/020_UI_PokeMart.rb",
     "Data/Scripts/016_UI/021_UI_MoveRelearner.rb",
+    "Data/Scripts/016_UI/022_UI_PurifyChamber.rb",
     "Data/Scripts/016_UI/024_UI_TextEntry.rb",
     "Data/Scripts/016_UI/PokemonStorage/PokemonStorageScene.rb",
     "Data/Scripts/016_UI/PokemonStorage/PokemonStorageScreen.rb",
     "Data/Scripts/016_UI/PokemonStorage/PokemonStorageScreen_Fusing.rb",
+    "Data/Scripts/017_Minigames/002_Minigame_TripleTriad.rb",
+    "Data/Scripts/018_Alternate battle modes/002_Battle Frontier rules/003_Challenge_EntryRestrictions.rb",
+    "Data/Scripts/018_Alternate battle modes/002_BugContest.rb",
+    "Data/Scripts/018_Alternate battle modes/003_Battle Frontier generator/001_ChallengeGenerator_Data.rb",
     "Data/Scripts/019_Utilities/001_Utilities.rb",
+    "Data/Scripts/019_Utilities/002_Utilities_Pokemon.rb",
     "Data/Scripts/050_Outfits/UI/CharacterSelectMenu.rb",
     "Data/Scripts/050_Outfits/UI/CharacterSelectMenuPresenter.rb",
     "Data/Scripts/050_Outfits/UI/LayeredClothes_Menus.rb",
@@ -54,45 +81,74 @@
     "Data/Scripts/050_Outfits/UI/clothesShop/HatsMartAdapter.rb",
     "Data/Scripts/050_Outfits/UI/hairMenu/HairStyleSelectionMenuView.rb",
     "Data/Scripts/050_Outfits/utils/OutfitsGameplayUtils.rb",
+    "Data/Scripts/051_Wrappers/type_expert.rb",
     "Data/Scripts/052_InfiniteFusion/Fusion/FusionMenu.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Features/TrainerCardBackgrounds.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Features/WallpaperLottery.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Items/New HMs.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Items/New Items effects.rb",
     "Data/Scripts/052_InfiniteFusion/Gameplay/Items/NonMoneyShop.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/NPCs/GuessPokemonQuiz.rb",
     "Data/Scripts/052_InfiniteFusion/Gameplay/Pokedex/UI_Pokedex_SpritesPage.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/Constellations/Constellations.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/DarkraiQuest/DarkraiQuest.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/EeveeStepCounter.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/Meloetta/MeloettaQuest.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/PoliceQuest.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/QuestIcons.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/QuestLogScript.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/QuestRewards.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/QuestUtils.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/Quests.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/RegiPuzzles/RegiPuzzles.rb",
+    "Data/Scripts/052_InfiniteFusion/Gameplay/Quests/TRQuests.rb",
+    "Data/Scripts/052_InfiniteFusion/Menus/ExperimentalOptions.rb",
+    "Data/Scripts/052_InfiniteFusion/Menus/PC/Multiselect/MultiSelect_PokemonStorageScreen.rb",
+    "Data/Scripts/052_InfiniteFusion/Menus/PC/Multiselect/MultiSelect_StorageScreen_Sort.rb",
     "Data/Scripts/052_InfiniteFusion/Menus/PokemonSelection.rb",
     "Data/Scripts/052_InfiniteFusion/System/Autosave.rb",
     "Data/Scripts/052_InfiniteFusion/System/GameOptions.rb",
     "Data/Scripts/052_InfiniteFusion/System/MultiSaves.rb",
-    "Data/Scripts/DownloadedSettings.rb"
+    "Data/Scripts/053_PIF_Hoenn/HoennGameplayUtils.rb",
+    "Data/Scripts/053_PIF_Hoenn/StartersSelectionScene.rb",
+    "Data/Scripts/DownloadedSettings.rb",
+    "Data/portuguese.dat"
   ],
   "json_patch_file": "payload/patches/text_patches.json",
   "json_patch_targets": [
-    "Data/pokedex/dex.json",
-    "Data/dex.json",
     "Data/outfits/clothes_data.json",
     "Data/outfits/hats_data.json",
     "Data/outfits/hairstyles_data.json"
   ],
   "counts": {
-    "direct_files": 55,
-    "script_files": 53,
-    "entry_translation_mappings": 61726,
+    "direct_files": 106,
+    "script_files": 105,
+    "entry_translation_mappings": 0,
     "outfit_description_mappings": 314,
-    "base_translation_entries": 20577,
+    "base_translation_entries": 20581,
     "base_translation_maps": 699,
     "base_translation_sections": 11,
-    "fusion_pokedex_cache_entries": 61827,
+    "fusion_pokedex_cache_entries": 0,
     "fusion_pokedex_errors": 0,
-    "graphical_installer_exe_bytes": 11276288,
+    "graphical_installer_exe_bytes": 1533440,
     "readme_logo_bytes": 1050144,
     "readme_dark_logo_bytes": 961512,
-    "showcase_screenshots": 9,
-    "reported_battle_strings_fixed_v110": 18
+    "showcase_screenshots": 8,
+    "reported_battle_strings_fixed_v110": 18,
+    "pokedex_completion_target": "deferred_future_project",
+    "pokedex_experimental_assets_present": false,
+    "manual_postbuild_text_fixes": 8,
+    "pokedex_active_payload_entries_removed_v110": 61726,
+    "installer_embedded_payload_bytes": "see GitHub release asset",
+    "bat_powershell_zip_bytes": "see GitHub release asset",
+    "base_pokedex_all_entries_translated": 0,
+    "known_issues_documented": 1
   },
   "translation_policy": {
     "translated": [
       "story/dialogue/quest text",
       "gameplay UI strings that react to language or are script-level text",
       "shop/service NPC lines",
-      "Pokedex descriptions",
       "item, move, and ability descriptions/effects",
       "Nature names",
       "stat labels where the game exposes them as text",
@@ -108,6 +164,9 @@
       "organization names",
       "type/element names",
       "drawn/bitmap text"
+    ],
+    "deferred": [
+      "Pokedex species and fusion descriptions are future work; experimental patch assets may exist but are not counted as complete in v1.1.0"
     ]
   },
   "json_patch_schema": 2,
@@ -123,34 +182,47 @@
   "showcase_screenshots_dir": "assets/screenshots",
   "coverage_snapshot": {
     "base_language_entries": {
-      "translated": 20577,
-      "total": 20577,
-      "coverage_percent": 100
+      "translated": 20581,
+      "total": 20581,
+      "coverage_percent": 99,
+      "notes": "All extracted language entries were generated; hidden hardcoded/event text can still appear during public testing."
     },
-    "base_pokedex_entries": {
-      "translated": 475,
-      "total": 475,
-      "coverage_percent": 100
+    "gameplay_ui_and_script_files": {
+      "translated": 106,
+      "total": 106,
+      "coverage_percent": 98,
+      "notes": "Packaged script/UI files are synced with the working translated game folder; screenshot-driven polish is ongoing."
     },
-    "fusion_pokedex_mappings": {
-      "translated": 61726,
-      "total": 61726,
-      "coverage_percent": 100
+    "item_move_ability_effect_descriptions": {
+      "translated": "covered in language/script scope",
+      "total": "covered in language/script scope",
+      "coverage_percent": 98,
+      "notes": "Names stay in English; descriptions/effects are translated where extracted or found in scripts."
     },
     "outfit_descriptions": {
       "translated": 314,
       "total": 314,
       "coverage_percent": 100
     },
-    "packaged_script_files": {
-      "translated": 55,
-      "total": 55,
-      "coverage_percent": 100
-    },
     "reported_battle_strings_v110": {
       "translated": 18,
       "total": 18,
       "coverage_percent": 100
+    },
+    "pokedex_ui_labels": {
+      "translated": "included in UI/script scope",
+      "total": "included in UI/script scope",
+      "coverage_percent": 85,
+      "notes": "UI labels are in scope; species/fusion description entries are deferred."
+    },
+    "pokedex_species_and_fusion_descriptions": {
+      "translated": 0,
+      "total": "not counted in v1.1.0",
+      "coverage_percent": 0,
+      "status": "deferred_future_project"
+    },
+    "preserved_names_and_bitmap_text": {
+      "status": "not translated by design"
     }
   },
   "github_bootstrap_script": "scripts/install-from-github.ps1",
@@ -159,5 +231,31 @@
     "installer/Install-PTBR.bat",
     "installer/Install-PTBR.ps1",
     "installer/Restore-Latest-Backup.bat"
-  ]
+  ],
+  "pokedex_policy": {
+    "status": "deferred_future_project",
+    "installer_behavior": "v1.1.0 does not include or apply Pokedex species/fusion description patching",
+    "reason": "Pokedex descriptions need a separate review pass and are not counted in the public completion percentage.",
+    "active_payload_entries": 0,
+    "release_note": "Pokedex species/fusion descriptions are not shipped or applied in v1.1.0."
+  },
+  "known_issues": [
+    {
+      "id": "official_updater_save_compatibility",
+      "title": "Official updater/save compatibility crash",
+      "error": "Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass",
+      "when": "After running the official game updater .bat or restoring the game to an untranslated/original state before opening a save last used with the PT-BR translation.",
+      "workaround": "Reinstall/update the PT-BR translation with InfiniteFusionPTBRInstaller-v1.1.0.exe before opening the save again.",
+      "save_folder": "%APPDATA%\\infinitefusion",
+      "save_file_editing_v110": false,
+      "status": "documented_known_issue_future_installer_work"
+    }
+  ],
+  "save_policy": {
+    "save_folder": "%APPDATA%\\infinitefusion",
+    "installer_v110_edits_save_files": false,
+    "manual_save_backup_recommended_before_official_updates": true,
+    "after_official_update": "Run the PT-BR installer again before opening a save.",
+    "future_work": "Automatic save backup/compatibility helper may be added in a later installer version."
+  }
 }

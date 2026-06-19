@@ -2,7 +2,7 @@
 # UseText handlers
 #===============================================================================
 ItemHandlers::UseText.add(:BICYCLE, proc { |item|
-  next ($PokemonGlobal.bicycle) ? _INTL("Walk") : _INTL("Use")
+  next ($PokemonGlobal.bicycle) ? _INTL("Andar") : _INTL("Usar")
 })
 
 ItemHandlers::UseText.copy(:BICYCLE, :RACEBIKE)
@@ -24,13 +24,13 @@ ItemHandlers::UseFromBag.add(:HONEY, proc { |item|
 
 ItemHandlers::UseFromBag.add(:ESCAPEROPE, proc { |item|
   if $game_player.pbHasDependentEvents?
-    pbMessage(_INTL("It can't be used when you have someone with you."))
+    pbMessage(_INTL("Não dá para usar quando há alguém com você."))
     next 0
   end
   if ($PokemonGlobal.escapePoint rescue false) && $PokemonGlobal.escapePoint.length > 0
     next 4 # End screen and consume item
   end
-  pbMessage(_INTL("Can't use that here."))
+  pbMessage(_INTL("Não dá para usar isso aqui."))
   next 0
 })
 
@@ -43,7 +43,7 @@ ItemHandlers::UseFromBag.copy(:BICYCLE, :RACEBIKE)
 ItemHandlers::UseFromBag.add(:OLDROD, proc { |item|
   notCliff = $game_map.passable?($game_player.x, $game_player.y, $game_player.direction, $game_player)
   next 2 if $game_player.pbFacingTerrainTag.can_fish && ($PokemonGlobal.surfing || notCliff)
-  pbMessage(_INTL("Can't use that here."))
+  pbMessage(_INTL("Não dá para usar isso aqui."))
   next 0
 })
 
@@ -140,7 +140,7 @@ Events.onStepTaken += proc {
           pbUseItem($PokemonBag, ret) if ret
         end
       else
-        pbMessage(_INTL("The {1}'s effect wore off!",itemName))
+        pbMessage(_INTL("O efeito de {1} acabou!",itemName))
       end
     end
   end
@@ -148,19 +148,19 @@ Events.onStepTaken += proc {
 
 ItemHandlers::UseInField.add(:BLACKFLUTE, proc { |item|
   pbUseItemMessage(item)
-  message = $PokemonMap.blackFluteUsed ? "Wild Pokemon will no longer be repelled.": "Wild Pokémon will be repelled."
+  message = $PokemonMap.blackFluteUsard ? "Wild Pokemon will no longer be repelled.": "Wild Pokémon will be repelled."
   pbMessage(_INTL(message))
-  $PokemonMap.blackFluteUsed = !$PokemonMap.blackFluteUsed
-  $PokemonMap.whiteFluteUsed = false
+  $PokemonMap.blackFluteUsard = !$PokemonMap.blackFluteUsard
+  $PokemonMap.whiteFluteUsard = false
   next 1
 })
 
 ItemHandlers::UseInField.add(:WHITEFLUTE, proc { |item|
   pbUseItemMessage(item)
-  message = $PokemonMap.whiteFluteUsed ? "Wild Pokemon will no longer be lured.": "Wild Pokémon will be lured."
+  message = $PokemonMap.whiteFluteUsard ? "Wild Pokemon will no longer be lured.": "Wild Pokémon will be lured."
   pbMessage(_INTL(message))
-  $PokemonMap.whiteFluteUsed = !$PokemonMap.whiteFluteUsed
-  $PokemonMap.blackFluteUsed = false
+  $PokemonMap.whiteFluteUsard = !$PokemonMap.whiteFluteUsard
+  $PokemonMap.blackFluteUsard = false
   next 1
 })
 
@@ -173,11 +173,11 @@ ItemHandlers::UseInField.add(:HONEY, proc { |item|
 ItemHandlers::UseInField.add(:ESCAPEROPE, proc { |item|
   escape = ($PokemonGlobal.escapePoint rescue nil)
   if !escape || escape == []
-    pbMessage(_INTL("Can't use that here."))
+    pbMessage(_INTL("Não dá para usar isso aqui."))
     next 0
   end
   if $game_player.pbHasDependentEvents?
-    pbMessage(_INTL("It can't be used when you have someone with you."))
+    pbMessage(_INTL("Não dá para usar quando há alguém com você."))
     next 0
   end
   pbUseItemMessage(item)
@@ -197,7 +197,7 @@ ItemHandlers::UseInField.add(:ESCAPEROPE, proc { |item|
 
 ItemHandlers::UseInField.add(:SACREDASH, proc { |item|
   if $Trainer.pokemon_count == 0
-    pbMessage(_INTL("There is no Pokémon."))
+    pbMessage(_INTL("Não há nenhum Pokémon."))
     next 0
   end
   canrevive = false
@@ -206,24 +206,24 @@ ItemHandlers::UseInField.add(:SACREDASH, proc { |item|
     canrevive = true; break
   end
   if !canrevive
-    pbMessage(_INTL("It won't have any effect."))
+    pbMessage(_INTL("Isso não terá efeito."))
     next 0
   end
   revived = 0
   pbFadeOutIn {
     scene = PokemonParty_Scene.new
     screen = PokemonPartyScreen.new(scene, $Trainer.party)
-    screen.pbStartScene(_INTL("Using item..."), false)
+    screen.pbStartScene(_INTL("Usando item..."), false)
     for i in 0...$Trainer.party.length
       if $Trainer.party[i].fainted?
         revived += 1
         $Trainer.party[i].heal
         screen.pbRefreshSingle(i)
-        screen.pbDisplay(_INTL("{1}'s HP was restored.", $Trainer.party[i].name))
+        screen.pbDisplay(_INTL("O HP de {1} foi restaurado.", $Trainer.party[i].name))
       end
     end
     if revived == 0
-      screen.pbDisplay(_INTL("It won't have any effect."))
+      screen.pbDisplay(_INTL("Isso não terá efeito."))
     end
     screen.pbEndScene
   }
@@ -247,7 +247,7 @@ ItemHandlers::UseInField.copy(:BICYCLE, :RACEBIKE)
 ItemHandlers::UseInField.add(:OLDROD, proc { |item|
   notCliff = $game_map.passable?($game_player.x, $game_player.y, $game_player.direction, $game_player)
   if !$game_player.pbFacingTerrainTag.can_fish || (!$PokemonGlobal.surfing && !notCliff) || $PokemonGlobal.surfing
-    pbMessage(_INTL("Can't use that here."))
+    pbMessage(_INTL("Não dá para usar isso aqui."))
     next 0
   end
   encounter = $PokemonEncounters.has_encounter_type?(:OldRod)
@@ -260,7 +260,7 @@ ItemHandlers::UseInField.add(:OLDROD, proc { |item|
 ItemHandlers::UseInField.add(:GOODROD, proc { |item|
   notCliff = $game_map.passable?($game_player.x, $game_player.y, $game_player.direction, $game_player)
   if !$game_player.pbFacingTerrainTag.can_fish || (!$PokemonGlobal.surfing && !notCliff) || $PokemonGlobal.surfing
-    pbMessage(_INTL("Can't use that here."))
+    pbMessage(_INTL("Não dá para usar isso aqui."))
     next 0
   end
   encounter = $PokemonEncounters.has_encounter_type?(:GoodRod)
@@ -273,7 +273,7 @@ ItemHandlers::UseInField.add(:GOODROD, proc { |item|
 ItemHandlers::UseInField.add(:SUPERROD, proc { |item|
   notCliff = $game_map.passable?($game_player.x, $game_player.y, $game_player.direction, $game_player)
   if !$game_player.pbFacingTerrainTag.can_fish || (!$PokemonGlobal.surfing && !notCliff) || $PokemonGlobal.surfing
-    pbMessage(_INTL("Can't use that here."))
+    pbMessage(_INTL("Não dá para usar isso aqui."))
     next 0
   end
   encounter = $PokemonEncounters.has_encounter_type?(:SuperRod)
@@ -286,7 +286,7 @@ ItemHandlers::UseInField.add(:SUPERROD, proc { |item|
 ItemHandlers::UseInField.add(:ITEMFINDER, proc { |item|
   event = pbClosestHiddenItem
   if !event
-    pbMessage(_INTL("... \\wt[10]... \\wt[10]... \\wt[10]...\\wt[10]Nope! There's no response."))
+    pbMessage(_INTL("... \\wt[10]... \\wt[10]... \\wt[10]...\\wt[10]Não! Não houve resposta."))
   else
     offsetX = event.x - $game_player.x
     offsetY = event.y - $game_player.y
@@ -296,7 +296,7 @@ ItemHandlers::UseInField.add(:ITEMFINDER, proc { |item|
         $game_player.turn_right_90
       end
       pbWait(Graphics.frame_rate * 3 / 10)
-      pbMessage(_INTL("The {1}'s indicating something right underfoot!", GameData::Item.get(item).name))
+      pbMessage(_INTL("{1} está indicando algo bem debaixo dos seus pés!", GameData::Item.get(item).name))
     else
       # Item is nearby, face towards it
       direction = $game_player.direction
@@ -316,8 +316,8 @@ ItemHandlers::UseInField.add(:ITEMFINDER, proc { |item|
         $game_player.turn_up
       end
       pbWait(Graphics.frame_rate * 3 / 10)
-      pbMessage(_INTL("Huh? The {1}'s responding!\1", GameData::Item.get(item).name))
-      pbMessage(_INTL("There's an item buried around here!"))
+      pbMessage(_INTL("Hã? {1} está reagindo!\1", GameData::Item.get(item).name))
+      pbMessage(_INTL("Há um item enterrado por aqui!"))
     end
   end
   next 1
@@ -331,19 +331,19 @@ ItemHandlers::UseInField.add(:TOWNMAP, proc { |item|
 })
 
 ItemHandlers::UseInField.add(:COINCASE, proc { |item|
-  pbMessage(_INTL("Coins: {1}", $Trainer.coins.to_s_formatted))
+  pbMessage(_INTL("Moedas: {1}", $Trainer.coins.to_s_formatted))
   next 1
 })
 
 ItemHandlers::UseInField.add(:EXPALL, proc { |item|
   $PokemonBag.pbChangeItem(:EXPALL, :EXPALLOFF)
-  pbMessage(_INTL("The Exp Share was turned off."))
+  pbMessage(_INTL("O Exp Share foi desligado."))
   next 1
 })
 
 ItemHandlers::UseInField.add(:EXPALLOFF, proc { |item|
   $PokemonBag.pbChangeItem(:EXPALLOFF, :EXPALL)
-  pbMessage(_INTL("The Exp Share was turned on."))
+  pbMessage(_INTL("O Exp Share foi ligado."))
   next 1
 })
 
@@ -352,11 +352,11 @@ ItemHandlers::UseInField.add(:EXPALLOFF, proc { |item|
 #===============================================================================
 
 # Applies to all items defined as an evolution stone.
-# No need to add more code for new ones.
+# Não need to add more code for new ones.
 ItemHandlers::UseOnPokemon.addIf(proc { |item| GameData::Item.get(item).is_evolution_stone? },
                                  proc { |item, pkmn, scene|
                                    if pkmn.shadowPokemon?
-                                     scene.pbDisplay(_INTL("It won't have any effect."))
+                                     scene.pbDisplay(_INTL("Isso não terá efeito."))
                                      next false
                                    end
                                    newspecies = pkmn.check_evolution_on_use_item(item)
@@ -373,7 +373,7 @@ ItemHandlers::UseOnPokemon.addIf(proc { |item| GameData::Item.get(item).is_evolu
                                      }
                                      next true
                                    end
-                                   scene.pbDisplay(_INTL("It won't have any effect."))
+                                   scene.pbDisplay(_INTL("Isso não terá efeito."))
                                    next false
                                  }
 )
@@ -428,7 +428,7 @@ ItemHandlers::UseOnPokemon.add(:AWAKENING, proc { |item, pkmn, scene|
   end
   pkmn.heal_status
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1} woke up.", pkmn.name))
+  scene.pbDisplay(_INTL("{1} acordou.", pkmn.name))
   next true
 })
 
@@ -436,12 +436,12 @@ ItemHandlers::UseOnPokemon.copy(:AWAKENING, :CHESTOBERRY, :BLUEFLUTE, :POKEFLUTE
 
 ItemHandlers::UseOnPokemon.add(:ANTIDOTE, proc { |item, pkmn, scene|
   if pkmn.fainted? || pkmn.status != :POISON
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.heal_status
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1} was cured of its poisoning.", pkmn.name))
+  scene.pbDisplay(_INTL("{1} foi curado do envenenamento.", pkmn.name))
   next true
 })
 
@@ -449,12 +449,12 @@ ItemHandlers::UseOnPokemon.copy(:ANTIDOTE, :PECHABERRY)
 
 ItemHandlers::UseOnPokemon.add(:BURNHEAL, proc { |item, pkmn, scene|
   if pkmn.fainted? || pkmn.status != :BURN
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.heal_status
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1}'s burn was healed.", pkmn.name))
+  scene.pbDisplay(_INTL("A queimadura de {1} foi curada.", pkmn.name))
   next true
 })
 
@@ -462,12 +462,12 @@ ItemHandlers::UseOnPokemon.copy(:BURNHEAL, :RAWSTBERRY)
 
 ItemHandlers::UseOnPokemon.add(:PARALYZEHEAL, proc { |item, pkmn, scene|
   if pkmn.fainted? || pkmn.status != :PARALYSIS
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.heal_status
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1} was cured of paralysis.", pkmn.name))
+  scene.pbDisplay(_INTL("{1} foi curado da paralisia.", pkmn.name))
   next true
 })
 
@@ -475,12 +475,12 @@ ItemHandlers::UseOnPokemon.copy(:PARALYZEHEAL, :PARLYZHEAL, :CHERIBERRY)
 
 ItemHandlers::UseOnPokemon.add(:ICEHEAL, proc { |item, pkmn, scene|
   if pkmn.fainted? || pkmn.status != :FROZEN
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.heal_status
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1} was thawed out.", pkmn.name))
+  scene.pbDisplay(_INTL("{1} descongelou.", pkmn.name))
   next true
 })
 
@@ -488,12 +488,12 @@ ItemHandlers::UseOnPokemon.copy(:ICEHEAL, :ASPEARBERRY)
 
 ItemHandlers::UseOnPokemon.add(:FULLHEAL, proc { |item, pkmn, scene|
   if pkmn.fainted? || pkmn.status == :NONE
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.heal_status
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1} became healthy.", pkmn.name))
+  scene.pbDisplay(_INTL("{1} ficou saudável.", pkmn.name))
   next true
 })
 
@@ -504,42 +504,42 @@ ItemHandlers::UseOnPokemon.copy(:FULLHEAL, :RAGECANDYBAR) if Settings::RAGE_CAND
 
 ItemHandlers::UseOnPokemon.add(:FULLRESTORE, proc { |item, pkmn, scene|
   if pkmn.fainted? || (pkmn.hp == pkmn.totalhp && pkmn.status == :NONE)
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   hpgain = pbItemRestoreHP(pkmn, pkmn.totalhp - pkmn.hp)
   pkmn.heal_status
   scene.pbRefresh
   if hpgain > 0
-    scene.pbDisplay(_INTL("{1}'s HP was restored by {2} points.", pkmn.name, hpgain))
+    scene.pbDisplay(_INTL("O HP de {1} foi restaurado em {2} pontos.", pkmn.name, hpgain))
   else
-    scene.pbDisplay(_INTL("{1} became healthy.", pkmn.name))
+    scene.pbDisplay(_INTL("{1} ficou saudável.", pkmn.name))
   end
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:REVIVE, proc { |item, pkmn, scene|
   if !pkmn.fainted?
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.hp = (pkmn.totalhp / 2).floor
   pkmn.hp = 1 if pkmn.hp <= 0
   pkmn.heal_status
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1}'s HP was restored.", pkmn.name))
+  scene.pbDisplay(_INTL("O HP de {1} foi restaurado.", pkmn.name))
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:MAXREVIVE, proc { |item, pkmn, scene|
   if !pkmn.fainted?
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.heal_HP
   pkmn.heal_status
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1}'s HP was restored.", pkmn.name))
+  scene.pbDisplay(_INTL("O HP de {1} foi restaurado.", pkmn.name))
   next true
 })
 
@@ -561,50 +561,50 @@ ItemHandlers::UseOnPokemon.add(:ENERGYROOT, proc { |item, pkmn, scene|
 
 ItemHandlers::UseOnPokemon.add(:HEALPOWDER, proc { |item, pkmn, scene|
   if pkmn.fainted? || pkmn.status == :NONE
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.heal_status
   pkmn.changeHappiness("powder")
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1} became healthy.", pkmn.name))
+  scene.pbDisplay(_INTL("{1} ficou saudável.", pkmn.name))
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:REVIVALHERB, proc { |item, pkmn, scene|
   if !pkmn.fainted?
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pkmn.heal_HP
   pkmn.heal_status
   pkmn.changeHappiness("revivalherb")
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1}'s HP was restored.", pkmn.name))
+  scene.pbDisplay(_INTL("O HP de {1} foi restaurado.", pkmn.name))
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:ETHER, proc { |item, pkmn, scene|
-  move = scene.pbChooseMove(pkmn, _INTL("Restore which move?"))
+  move = scene.pbChooseMove(pkmn, _INTL("Restaurar qual golpe?"))
   next false if move < 0
   if pbRestorePP(pkmn, move, 10) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("PP was restored."))
+  scene.pbDisplay(_INTL("PP restaurado."))
   next true
 })
 
 ItemHandlers::UseOnPokemon.copy(:ETHER, :LEPPABERRY)
 
 ItemHandlers::UseOnPokemon.add(:MAXETHER, proc { |item, pkmn, scene|
-  move = scene.pbChooseMove(pkmn, _INTL("Restore which move?"))
+  move = scene.pbChooseMove(pkmn, _INTL("Restaurar qual golpe?"))
   next false if move < 0
   if pbRestorePP(pkmn, move, pkmn.moves[move].total_pp - pkmn.moves[move].pp) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("PP was restored."))
+  scene.pbDisplay(_INTL("PP restaurado."))
   next true
 })
 
@@ -614,10 +614,10 @@ ItemHandlers::UseOnPokemon.add(:ELIXIR, proc { |item, pkmn, scene|
     pprestored += pbRestorePP(pkmn, i, 10)
   end
   if pprestored == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("PP was restored."))
+  scene.pbDisplay(_INTL("PP restaurado."))
   next true
 })
 
@@ -627,38 +627,38 @@ ItemHandlers::UseOnPokemon.add(:MAXELIXIR, proc { |item, pkmn, scene|
     pprestored += pbRestorePP(pkmn, i, pkmn.moves[i].total_pp - pkmn.moves[i].pp)
   end
   if pprestored == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("PP was restored."))
+  scene.pbDisplay(_INTL("PP restaurado."))
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:PPUP, proc { |item, pkmn, scene|
-  move = scene.pbChooseMove(pkmn, _INTL("Boost PP of which move?"))
+  move = scene.pbChooseMove(pkmn, _INTL("Aumentar PP de qual golpe?"))
   if move >= 0
     if pkmn.moves[move].total_pp <= 1 || pkmn.moves[move].ppup >= 3
-      scene.pbDisplay(_INTL("It won't have any effect."))
+      scene.pbDisplay(_INTL("Isso não terá efeito."))
       next false
     end
     pkmn.moves[move].ppup += 1
     movename = pkmn.moves[move].name
-    scene.pbDisplay(_INTL("{1}'s PP increased.", movename))
+    scene.pbDisplay(_INTL("O PP de {1} aumentou.", movename))
     next true
   end
   next false
 })
 
 ItemHandlers::UseOnPokemon.add(:PPMAX, proc { |item, pkmn, scene|
-  move = scene.pbChooseMove(pkmn, _INTL("Boost PP of which move?"))
+  move = scene.pbChooseMove(pkmn, _INTL("Aumentar PP de qual golpe?"))
   if move >= 0
     if pkmn.moves[move].total_pp <= 1 || pkmn.moves[move].ppup >= 3
-      scene.pbDisplay(_INTL("It won't have any effect."))
+      scene.pbDisplay(_INTL("Isso não terá efeito."))
       next false
     end
     pkmn.moves[move].ppup = 3
     movename = pkmn.moves[move].name
-    scene.pbDisplay(_INTL("{1}'s PP increased.", movename))
+    scene.pbDisplay(_INTL("O PP de {1} aumentou.", movename))
     next true
   end
   next false
@@ -666,122 +666,122 @@ ItemHandlers::UseOnPokemon.add(:PPMAX, proc { |item, pkmn, scene|
 
 ItemHandlers::UseOnPokemon.add(:HPUP, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :HP) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1}'s HP increased.", pkmn.name))
+  scene.pbDisplay(_INTL("O HP de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("vitamin")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:PROTEIN, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :ATTACK) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Attack increased.", pkmn.name))
+  scene.pbDisplay(_INTL("O Ataque de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("vitamin")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:IRON, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :DEFENSE) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Defense increased.", pkmn.name))
+  scene.pbDisplay(_INTL("A Defesa de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("vitamin")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:CALCIUM, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :SPECIAL_ATTACK) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Special Attack increased.", pkmn.name))
+  scene.pbDisplay(_INTL("O Ataque Especial de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("vitamin")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:ZINC, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :SPECIAL_DEFENSE) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Special Defense increased.", pkmn.name))
+  scene.pbDisplay(_INTL("A Defesa Especial de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("vitamin")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:CARBOS, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :SPEED) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Speed increased.", pkmn.name))
+  scene.pbDisplay(_INTL("A Velocidade de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("vitamin")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:HEALTHWING, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :HP, 1, false) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   scene.pbRefresh
-  scene.pbDisplay(_INTL("{1}'s HP increased.", pkmn.name))
+  scene.pbDisplay(_INTL("O HP de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("wing")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:MUSCLEWING, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :ATTACK, 1, false) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Attack increased.", pkmn.name))
+  scene.pbDisplay(_INTL("O Ataque de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("wing")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:RESISTWING, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :DEFENSE, 1, false) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Defense increased.", pkmn.name))
+  scene.pbDisplay(_INTL("A Defesa de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("wing")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:GENIUSWING, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :SPECIAL_ATTACK, 1, false) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Special Attack increased.", pkmn.name))
+  scene.pbDisplay(_INTL("O Ataque Especial de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("wing")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:CLEVERWING, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :SPECIAL_DEFENSE, 1, false) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Special Defense increased.", pkmn.name))
+  scene.pbDisplay(_INTL("A Defesa Especial de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("wing")
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:SWIFTWING, proc { |item, pkmn, scene|
   if pbRaiseEffortValues(pkmn, :SPEED, 1, false) == 0
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
-  scene.pbDisplay(_INTL("{1}'s Speed increased.", pkmn.name))
+  scene.pbDisplay(_INTL("A Velocidade de {1} aumentou.", pkmn.name))
   pkmn.changeHappiness("wing")
   next true
 })
@@ -794,7 +794,7 @@ end
 
 ItemHandlers::UseOnPokemon.add(:RARECANDY, proc { |item, pkmn, scene|
   if !(can_use_rare_candy(pkmn))
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   pbSet(VAR_STAT_RARE_CANDY,pbGet(VAR_STAT_RARE_CANDY)+1)
@@ -805,76 +805,76 @@ ItemHandlers::UseOnPokemon.add(:RARECANDY, proc { |item, pkmn, scene|
 
 ItemHandlers::UseOnPokemon.add(:POMEGBERRY, proc { |item, pkmn, scene|
   next pbRaiseHappinessAndLowerEV(pkmn, scene, :HP, [
-    _INTL("{1} adores you! Its base HP fell!", pkmn.name),
-    _INTL("{1} became more friendly. Its base HP can't go lower.", pkmn.name),
-    _INTL("{1} became more friendly. However, its base HP fell!", pkmn.name)
+    _INTL("{1} adora você! Seu HP base caiu!", pkmn.name),
+    _INTL("{1} ficou mais amigável. Seu HP base não pode diminuir mais.", pkmn.name),
+    _INTL("{1} ficou mais amigável. Porém, seu HP base caiu!", pkmn.name)
   ])
 })
 
 ItemHandlers::UseOnPokemon.add(:KELPSYBERRY, proc { |item, pkmn, scene|
   next pbRaiseHappinessAndLowerEV(pkmn, scene, :ATTACK, [
-    _INTL("{1} adores you! Its base Attack fell!", pkmn.name),
-    _INTL("{1} became more friendly. Its base Attack can't go lower.", pkmn.name),
-    _INTL("{1} became more friendly. However, its base Attack fell!", pkmn.name)
+    _INTL("{1} adora você! Seu Ataque base caiu!", pkmn.name),
+    _INTL("{1} ficou mais amigável. Seu Ataque base não pode diminuir mais.", pkmn.name),
+    _INTL("{1} ficou mais amigável. Porém, seu Ataque base caiu!", pkmn.name)
   ])
 })
 
 ItemHandlers::UseOnPokemon.add(:QUALOTBERRY, proc { |item, pkmn, scene|
   next pbRaiseHappinessAndLowerEV(pkmn, scene, :DEFENSE, [
-    _INTL("{1} adores you! Its base Defense fell!", pkmn.name),
-    _INTL("{1} became more friendly. Its base Defense can't go lower.", pkmn.name),
-    _INTL("{1} became more friendly. However, its base Defense fell!", pkmn.name)
+    _INTL("{1} adora você! Sua Defesa base caiu!", pkmn.name),
+    _INTL("{1} ficou mais amigável. Sua Defesa base não pode diminuir mais.", pkmn.name),
+    _INTL("{1} ficou mais amigável. Porém, sua Defesa base caiu!", pkmn.name)
   ])
 })
 
 ItemHandlers::UseOnPokemon.add(:HONDEWBERRY, proc { |item, pkmn, scene|
   next pbRaiseHappinessAndLowerEV(pkmn, scene, :SPECIAL_ATTACK, [
-    _INTL("{1} adores you! Its base Special Attack fell!", pkmn.name),
-    _INTL("{1} became more friendly. Its base Special Attack can't go lower.", pkmn.name),
-    _INTL("{1} became more friendly. However, its base Special Attack fell!", pkmn.name)
+    _INTL("{1} adora você! Seu Ataque Especial base caiu!", pkmn.name),
+    _INTL("{1} ficou mais amigável. Seu Ataque Especial base não pode diminuir mais.", pkmn.name),
+    _INTL("{1} ficou mais amigável. Porém, seu Ataque Especial base caiu!", pkmn.name)
   ])
 })
 
 ItemHandlers::UseOnPokemon.add(:GREPABERRY, proc { |item, pkmn, scene|
   next pbRaiseHappinessAndLowerEV(pkmn, scene, :SPECIAL_DEFENSE, [
-    _INTL("{1} adores you! Its base Special Defense fell!", pkmn.name),
-    _INTL("{1} became more friendly. Its base Special Defense can't go lower.", pkmn.name),
-    _INTL("{1} became more friendly. However, its base Special Defense fell!", pkmn.name)
+    _INTL("{1} adora você! Sua Defesa Especial base caiu!", pkmn.name),
+    _INTL("{1} ficou mais amigável. Sua Defesa Especial base não pode diminuir mais.", pkmn.name),
+    _INTL("{1} ficou mais amigável. Porém, sua Defesa Especial base caiu!", pkmn.name)
   ])
 })
 
 ItemHandlers::UseOnPokemon.add(:TAMATOBERRY, proc { |item, pkmn, scene|
   next pbRaiseHappinessAndLowerEV(pkmn, scene, :SPEED, [
-    _INTL("{1} adores you! Its base Speed fell!", pkmn.name),
-    _INTL("{1} became more friendly. Its base Speed can't go lower.", pkmn.name),
-    _INTL("{1} became more friendly. However, its base Speed fell!", pkmn.name)
+    _INTL("{1} adora você! Sua Velocidade base caiu!", pkmn.name),
+    _INTL("{1} ficou mais amigável. Sua Velocidade base não pode diminuir mais.", pkmn.name),
+    _INTL("{1} ficou mais amigável. Porém, sua Velocidade base caiu!", pkmn.name)
   ])
 })
 
 ItemHandlers::UseOnPokemon.add(:GRACIDEA, proc { |item, pkmn, scene|
   if !pkmn.isSpecies?(:SHAYMIN) || pkmn.form != 0 ||
     pkmn.status == :FROZEN || PBDayNight.isNight?
-    scene.pbDisplay(_INTL("It had no effect."))
+    scene.pbDisplay(_INTL("Não teve efeito."))
     next false
   end
   if pkmn.fainted?
-    scene.pbDisplay(_INTL("This can't be used on the fainted Pokémon."))
+    scene.pbDisplay(_INTL("Isso não pode ser usado em um Pokémon desmaiado."))
     next false
   end
   pkmn.setForm(1) {
     scene.pbRefresh
-    scene.pbDisplay(_INTL("{1} changed Forme!", pkmn.name))
+    scene.pbDisplay(_INTL("{1} mudou de forma!", pkmn.name))
   }
   next true
 })
 
 # ItemHandlers::UseOnPokemon.add(:REDNECTAR, proc { |item, pkmn, scene|
 #   if !pkmn.isSpecies?(:ORICORIO) || pkmn.form == 0
-#     scene.pbDisplay("It had no effect.")
+#     scene.pbDisplay("Não teve efeito.")
 #     next false
 #   end
 #   if pkmn.fainted?
-#     scene.pbDisplay("This can't be used on the fainted Pokémon.")
+#     scene.pbDisplay("Isso não pode ser usado em um Pokémon desmaiado.")
 #   end
 #   pkmn.setForm(0) {
 #     scene.pbRefresh
@@ -885,11 +885,11 @@ ItemHandlers::UseOnPokemon.add(:GRACIDEA, proc { |item, pkmn, scene|
 #
 # ItemHandlers::UseOnPokemon.add(:YELLOWNECTAR, proc { |item, pkmn, scene|
 #   if !pkmn.isSpecies?(:ORICORIO) || pkmn.form == 1
-#     scene.pbDisplay("It had no effect.")
+#     scene.pbDisplay("Não teve efeito.")
 #     next false
 #   end
 #   if pkmn.fainted?
-#     scene.pbDisplay("This can't be used on the fainted Pokémon.")
+#     scene.pbDisplay("Isso não pode ser usado em um Pokémon desmaiado.")
 #   end
 #   pkmn.setForm(1) {
 #     scene.pbRefresh
@@ -900,11 +900,11 @@ ItemHandlers::UseOnPokemon.add(:GRACIDEA, proc { |item, pkmn, scene|
 #
 # ItemHandlers::UseOnPokemon.add(:PINKNECTAR, proc { |item, pkmn, scene|
 #   if !pkmn.isSpecies?(:ORICORIO) || pkmn.form == 2
-#     scene.pbDisplay("It had no effect.")
+#     scene.pbDisplay("Não teve efeito.")
 #     next false
 #   end
 #   if pkmn.fainted?
-#     scene.pbDisplay("This can't be used on the fainted Pokémon.")
+#     scene.pbDisplay("Isso não pode ser usado em um Pokémon desmaiado.")
 #   end
 #   pkmn.setForm(2) {
 #     scene.pbRefresh
@@ -915,11 +915,11 @@ ItemHandlers::UseOnPokemon.add(:GRACIDEA, proc { |item, pkmn, scene|
 #
 # ItemHandlers::UseOnPokemon.add(:PURPLENECTAR, proc { |item, pkmn, scene|
 #   if !pkmn.isSpecies?(:ORICORIO) || pkmn.form == 3
-#     scene.pbDisplay("It had no effect.")
+#     scene.pbDisplay("Não teve efeito.")
 #     next false
 #   end
 #   if pkmn.fainted?
-#     scene.pbDisplay("This can't be used on the fainted Pokémon.")
+#     scene.pbDisplay("Isso não pode ser usado em um Pokémon desmaiado.")
 #   end
 #   pkmn.setForm(3) {
 #     scene.pbRefresh
@@ -932,131 +932,131 @@ ItemHandlers::UseOnPokemon.add(:REVEALGLASS, proc { |item, pkmn, scene|
   if !pkmn.isSpecies?(:TORNADUS) &&
     !pkmn.isSpecies?(:THUNDURUS) &&
     !pkmn.isSpecies?(:LANDORUS)
-    scene.pbDisplay(_INTL("It had no effect."))
+    scene.pbDisplay(_INTL("Não teve efeito."))
     next false
   end
   if pkmn.fainted?
-    scene.pbDisplay(_INTL("This can't be used on the fainted Pokémon."))
+    scene.pbDisplay(_INTL("Isso não pode ser usado em um Pokémon desmaiado."))
     next false
   end
   newForm = (pkmn.form == 0) ? 1 : 0
   pkmn.setForm(newForm) {
     scene.pbRefresh
-    scene.pbDisplay(_INTL("{1} changed Forme!", pkmn.name))
+    scene.pbDisplay(_INTL("{1} mudou de forma!", pkmn.name))
   }
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:PRISONBOTTLE, proc { |item, pkmn, scene|
   if !pkmn.isSpecies?(:HOOPA)
-    scene.pbDisplay(_INTL("It had no effect."))
+    scene.pbDisplay(_INTL("Não teve efeito."))
     next false
   end
   if pkmn.fainted?
-    scene.pbDisplay(_INTL("This can't be used on the fainted Pokémon."))
+    scene.pbDisplay(_INTL("Isso não pode ser usado em um Pokémon desmaiado."))
   end
   newForm = (pkmn.form == 0) ? 1 : 0
   pkmn.setForm(newForm) {
     scene.pbRefresh
-    scene.pbDisplay(_INTL("{1} changed Forme!", pkmn.name))
+    scene.pbDisplay(_INTL("{1} mudou de forma!", pkmn.name))
   }
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:NSOLARIZER, proc { |item, pkmn, scene|
   if !pkmn.isSpecies?(:NECROZMA) || pkmn.form == 2
-    scene.pbDisplay(_INTL("It had no effect."))
+    scene.pbDisplay(_INTL("Não teve efeito."))
     next false
   end
   if pkmn.fainted?
-    scene.pbDisplay(_INTL("This can't be used on the fainted Pokémon."))
+    scene.pbDisplay(_INTL("Isso não pode ser usado em um Pokémon desmaiado."))
     next false
   end
   # Fusing
   if pkmn.fused.nil?
-    chosen = scene.pbChoosePokemon(_INTL("Fuse with which Pokémon?"))
+    chosen = scene.pbChoosePokemon(_INTL("Fundir com qual Pokémon?"))
     next false if chosen < 0
     poke2 = $Trainer.party[chosen]
     if pkmn == poke2
-      scene.pbDisplay(_INTL("It cannot be fused with itself."))
+      scene.pbDisplay(_INTL("Não pode ser fundido consigo mesmo."))
       next false
     elsif poke2.egg?
-      scene.pbDisplay(_INTL("It cannot be fused with an Egg."))
+      scene.pbDisplay(_INTL("Não pode ser fundido com um Egg."))
       next false
     elsif poke2.fainted?
-      scene.pbDisplay(_INTL("It cannot be fused with that fainted Pokémon."))
+      scene.pbDisplay(_INTL("Não pode ser fundido com esse Pokémon desmaiado."))
       next false
     elsif !poke2.isSpecies?(:SOLGALEO)
-      scene.pbDisplay(_INTL("It cannot be fused with that Pokémon."))
+      scene.pbDisplay(_INTL("Não pode ser fundido com esse Pokémon."))
       next false
     end
     pkmn.setForm(1) {
       pkmn.fused = poke2
       $Trainer.remove_pokemon_at_index(chosen)
       scene.pbHardRefresh
-      scene.pbDisplay(_INTL("{1} changed Forme!", pkmn.name))
+      scene.pbDisplay(_INTL("{1} mudou de forma!", pkmn.name))
     }
     next true
   end
   # Unfusing
   if $Trainer.party_full?
-    scene.pbDisplay(_INTL("You have no room to separate the Pokémon."))
+    scene.pbDisplay(_INTL("Você não tem espaço para separar os Pokémon."))
     next false
   end
   pkmn.setForm(0) {
     $Trainer.party[$Trainer.party.length] = pkmn.fused
     pkmn.fused = nil
     scene.pbHardRefresh
-    scene.pbDisplay(_INTL("{1} changed Forme!", pkmn.name))
+    scene.pbDisplay(_INTL("{1} mudou de forma!", pkmn.name))
   }
   next true
 })
 
 ItemHandlers::UseOnPokemon.add(:NLUNARIZER, proc { |item, pkmn, scene|
   if !pkmn.isSpecies?(:NECROZMA) || pkmn.form == 1
-    scene.pbDisplay(_INTL("It had no effect."))
+    scene.pbDisplay(_INTL("Não teve efeito."))
     next false
   end
   if pkmn.fainted?
-    scene.pbDisplay(_INTL("This can't be used on the fainted Pokémon."))
+    scene.pbDisplay(_INTL("Isso não pode ser usado em um Pokémon desmaiado."))
     next false
   end
   # Fusing
   if pkmn.fused.nil?
-    chosen = scene.pbChoosePokemon(_INTL("Fuse with which Pokémon?"))
+    chosen = scene.pbChoosePokemon(_INTL("Fundir com qual Pokémon?"))
     next false if chosen < 0
     poke2 = $Trainer.party[chosen]
     if pkmn == poke2
-      scene.pbDisplay(_INTL("It cannot be fused with itself."))
+      scene.pbDisplay(_INTL("Não pode ser fundido consigo mesmo."))
       next false
     elsif poke2.egg?
-      scene.pbDisplay(_INTL("It cannot be fused with an Egg."))
+      scene.pbDisplay(_INTL("Não pode ser fundido com um Egg."))
       next false
     elsif poke2.fainted?
-      scene.pbDisplay(_INTL("It cannot be fused with that fainted Pokémon."))
+      scene.pbDisplay(_INTL("Não pode ser fundido com esse Pokémon desmaiado."))
       next false
     elsif !poke2.isSpecies?(:LUNALA)
-      scene.pbDisplay(_INTL("It cannot be fused with that Pokémon."))
+      scene.pbDisplay(_INTL("Não pode ser fundido com esse Pokémon."))
       next false
     end
     pkmn.setForm(2) {
       pkmn.fused = poke2
       $Trainer.remove_pokemon_at_index(chosen)
       scene.pbHardRefresh
-      scene.pbDisplay(_INTL("{1} changed Forme!", pkmn.name))
+      scene.pbDisplay(_INTL("{1} mudou de forma!", pkmn.name))
     }
     next true
   end
   # Unfusing
   if $Trainer.party_full?
-    scene.pbDisplay(_INTL("You have no room to separate the Pokémon."))
+    scene.pbDisplay(_INTL("Você não tem espaço para separar os Pokémon."))
     next false
   end
   pkmn.setForm(0) {
     $Trainer.party[$Trainer.party.length] = pkmn.fused
     pkmn.fused = nil
     scene.pbHardRefresh
-    scene.pbDisplay(_INTL("{1} changed Forme!", pkmn.name))
+    scene.pbDisplay(_INTL("{1} mudou de forma!", pkmn.name))
   }
   next true
 })
@@ -1069,7 +1069,7 @@ ItemHandlers::UseOnPokemon.add(:ABILITYCAPSULE, proc { |item, pkmn, scene|
     abil2 = i[0] if i[1] == 1
   end
   if abil1.nil? || abil2.nil? || pkmn.hasHiddenAbility? || pkmn.isSpecies?(:ZYGARDE)
-    scene.pbDisplay(_INTL("It won't have any effect."))
+    scene.pbDisplay(_INTL("Isso não terá efeito."))
     next false
   end
   newabil = (pkmn.ability_index + 1) % 2

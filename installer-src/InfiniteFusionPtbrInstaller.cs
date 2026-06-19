@@ -457,18 +457,12 @@ namespace InfiniteFusionPtbrInstaller
             var copied = CopyDirectFiles(packageRoot, gameRoot, backupRoot, backupEnabled, backupEntries, backedUp);
             progress(25);
 
-            log("Loading text patch...");
+            log("Loading outfit text patch...");
             var patch = DeserializeDictionary(File.ReadAllText(patchPath, Encoding.UTF8));
-            var entryMap = BuildMap((object[])patch["entry_translations"]);
             progress(40);
 
-            log("Patching Data\\pokedex\\dex.json...");
-            var dexChanged = ApplyEntryPatch(gameRoot, backupRoot, backupEnabled, backupEntries, backedUp, entryMap, Path.Combine("Data", "pokedex", "dex.json"));
+            log("Skipping Pokedex descriptions in v1.1.0. They are planned as future work.");
             progress(62);
-
-            log("Patching Data\\dex.json...");
-            var baseDexChanged = ApplyEntryPatch(gameRoot, backupRoot, backupEnabled, backupEntries, backedUp, entryMap, Path.Combine("Data", "dex.json"));
-            progress(74);
 
             log("Patching outfit descriptions...");
             var descriptionChanged = 0;
@@ -497,8 +491,7 @@ namespace InfiniteFusionPtbrInstaller
 
             return "PT-BR translation installed.\n\n" +
                    "Files copied: " + copied + "\n" +
-                   "Pokedex entries patched: " + dexChanged + "\n" +
-                   "Base dex entries patched: " + baseDexChanged + "\n" +
+                   "Pokedex descriptions: skipped for v1.1.0 future work\n" +
                    "Outfit descriptions patched: " + descriptionChanged + "\n" +
                    "Backup: " + backupRoot;
         }

@@ -27,7 +27,7 @@
 # choose "No".
 #
 # 'PokemonSelection.hasValidTeam?(min, max, canCancel, acceptFainted)' returns
-# if your team is valid. If you try to use a invalid team (like putting the
+# if sua equipe is valid. If you try to use a invalid team (like putting the
 # minimum pokémon number as 3, but only having 2 pokémon), the selection is
 # treats as canceled. If the canCancel=false, the game goes in an infinite loop.
 #

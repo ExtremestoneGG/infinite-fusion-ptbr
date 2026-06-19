@@ -294,16 +294,16 @@ def pbBerryPlant
     if Settings::NEW_BERRY_PLANTS
       # Gen 4 planting mechanics
       if !berryData[7] || berryData[7] == 0 # No mulch used yet
-        cmd_fertilize = _INTL("Fertilize")
-        cmd_plant = _INTL("Plant")
-        cmd_cancel = _INTL("Exit")
+        cmd_fertilize = _INTL("Fertilizar")
+        cmd_plant = _INTL("Plantar")
+        cmd_cancel = _INTL("Sair")
 
         commands = []
         commands << cmd_fertilize if canFertilize?
         commands << cmd_plant
         commands << cmd_cancel
 
-        cmd = pbMessage(_INTL("It's soft, earthy soil."), commands, -1)
+        cmd = pbMessage(_INTL("É um solo macio e terroso."), commands, -1)
         if commands[cmd] == cmd_fertilize # Fertilize
           ret = 0
           pbFadeOutIn {
@@ -337,7 +337,7 @@ def pbBerryPlant
               end
               interp.setVariable(berryData)
             else
-              pbMessage(_INTL("That won't fertilize the soil!"))
+              pbMessage(_INTL("Isso não fertiliza o solo!"))
             end
             return
           end
@@ -406,7 +406,7 @@ def pbBerryPlant
           berryData[5] = 0 # number of replants
           berryData[6] = nil; berryData[7] = nil; berryData.compact! # for compatibility
           $PokemonBag.pbDeleteItem(berry, 1)
-          pbMessage(_INTL("{1} planted a {2} in the soft loamy soil.",
+          pbMessage(_INTL("{1} plantou uma {2} no solo macio e fértil.",
                           $Trainer.name, GameData::Item.get(berry).name))
           interp.setVariable(berryData)
         end
@@ -416,24 +416,24 @@ def pbBerryPlant
   when 1 # X planted
     pbMessage(_INTL("Uma {1} foi plantada aqui.", GameData::Item.get(berry).name))
   when 2 # X sprouted
-    pbMessage(_INTL("The {1} has sprouted.", GameData::Item.get(berry).name))
+    pbMessage(_INTL("{1} brotou.", GameData::Item.get(berry).name))
   when 3 # X taller
-    pbMessage(_INTL("The {1} plant is growing bigger.", GameData::Item.get(berry).name))
+    pbMessage(_INTL("A planta de {1} está crescendo.", GameData::Item.get(berry).name))
   when 4 # X flowering
     if Settings::NEW_BERRY_PLANTS
-      pbMessage(_INTL("This {1} plant is in bloom!", GameData::Item.get(berry).name))
+      pbMessage(_INTL("Esta planta de {1} está florescendo!", GameData::Item.get(berry).name))
     else
       case berryData[4]
       when 4
-        pbMessage(_INTL("This {1} plant is in fabulous bloom!", GameData::Item.get(berry).name))
+        pbMessage(_INTL("Esta planta de {1} está florescendo de forma fabulosa!", GameData::Item.get(berry).name))
       when 3
-        pbMessage(_INTL("This {1} plant is blooming very beautifully!", GameData::Item.get(berry).name))
+        pbMessage(_INTL("Esta planta de {1} está florescendo muito belamente!", GameData::Item.get(berry).name))
       when 2
-        pbMessage(_INTL("This {1} plant is blooming prettily!", GameData::Item.get(berry).name))
+        pbMessage(_INTL("Esta planta de {1} está florescendo lindamente!", GameData::Item.get(berry).name))
       when 1
-        pbMessage(_INTL("This {1} plant is blooming cutely!", GameData::Item.get(berry).name))
+        pbMessage(_INTL("Esta planta de {1} está florescendo de um jeito adorável!", GameData::Item.get(berry).name))
       else
-        pbMessage(_INTL("This {1} plant is in bloom!", GameData::Item.get(berry).name))
+        pbMessage(_INTL("Esta planta de {1} está florescendo!", GameData::Item.get(berry).name))
       end
     end
   when 5 # X berries
@@ -457,30 +457,30 @@ def pbBerryPlant
     itemname = (berrycount > 1) ? item.name_plural : item.name
     pocket = item.pocket
     if berrycount > 1
-      message = _INTL("There are {1} \\c[1]{2}\\c[0]!\nWant to pick them?", berrycount, itemname)
+      message = _INTL("Há {1} \\c[1]{2}\\c[0]!\nQuer colhê-las?", berrycount, itemname)
     else
-      message = _INTL("There is 1 \\c[1]{1}\\c[0]!\nWant to pick it?", itemname)
+      message = _INTL("Há 1 \\c[1]{1}\\c[0]!\nQuer colhê-la?", itemname)
     end
     if pbConfirmMessage(message)
       if !$PokemonBag.pbCanStore?(berry, berrycount)
-        pbMessage(_INTL("Too bad...\nThe Bag is full..."))
+        pbMessage(_INTL("Que pena...\nA Bag está cheia..."))
         return
       end
 
       pbMEPlay("Berry Obtained")
       $PokemonBag.pbStoreItem(berry, berrycount)
       if berrycount > 1
-        pbMessage(_INTL("You picked the {1} \\c[1]{2}\\c[0].\\wtnp[10]", berrycount, itemname))
+        pbMessage(_INTL("Você colheu {1} \\c[1]{2}\\c[0].\\wtnp[10]", berrycount, itemname))
       else
-        pbMessage(_INTL("You picked the \\c[1]{1}\\c[0].\\wtnp[10]", itemname))
+        pbMessage(_INTL("Você colheu \\c[1]{1}\\c[0].\\wtnp[10]", itemname))
       end
-      pbMessage(_INTL("{1} put the \\c[1]{2}\\c[0] in the <icon=bagPocket{3}>\\c[1]{4}\\c[0] Pocket.\1",
+      pbMessage(_INTL("{1} guardou \\c[1]{2}\\c[0] no bolso <icon=bagPocket{3}>\\c[1]{4}\\c[0].\1",
                       $Trainer.name, itemname, pocket, PokemonBag.pocketNames()[pocket]))
       if Settings::NEW_BERRY_PLANTS
-        pbMessage(_INTL("The soil returned to its soft and earthy state."))
+        pbMessage(_INTL("O solo voltou ao seu estado macio e terroso."))
         berryData = [0, nil, 0, 0, 0, 0, 0, 0]
       else
-        pbMessage(_INTL("The soil returned to its soft and loamy state."))
+        pbMessage(_INTL("O solo voltou ao seu estado macio e fértil."))
         berryData = [0, nil, false, 0, 0, 0]
       end
       interp.setVariable(berryData)
@@ -502,11 +502,11 @@ def pbBerryPlant
           end
         end
         interp.setVariable(berryData)
-        pbMessage(_INTL("{1} watered the plant.\\wtnp[40]", $Trainer.name))
+        pbMessage(_INTL("{1} regou a planta.\\wtnp[40]", $Trainer.name))
         if Settings::NEW_BERRY_PLANTS
-          pbMessage(_INTL("There! All happy!"))
+          pbMessage(_INTL("Pronto! Tudo feliz!"))
         else
-          pbMessage(_INTL("The plant seemed to be delighted."))
+          pbMessage(_INTL("A planta pareceu ficar encantada."))
         end
       end
       break
@@ -521,30 +521,30 @@ def pbPickBerry(berry, qty = 1)
   berry = GameData::Item.get(berry)
   itemname = (qty > 1) ? berry.name_plural : berry.name
   if qty > 1
-    message = _INTL("There are {1} \\c[1]{2}\\c[0]!\nWant to pick them?", qty, itemname)
+    message = _INTL("Há {1} \\c[1]{2}\\c[0]!\nQuer colhê-las?", qty, itemname)
   else
-    message = _INTL("There is 1 \\c[1]{1}\\c[0]!\nWant to pick it?", itemname)
+    message = _INTL("Há 1 \\c[1]{1}\\c[0]!\nQuer colhê-la?", itemname)
   end
   if pbConfirmMessage(message)
     if !$PokemonBag.pbCanStore?(berry, qty)
-      pbMessage(_INTL("Too bad...\nThe Bag is full..."))
+      pbMessage(_INTL("Que pena...\nA Bag está cheia..."))
       return
     end
     $PokemonBag.pbStoreItem(berry, qty)
     pbMEPlay("Berry Obtained")
     if qty > 1
-      pbMessage(_INTL("You picked the {1} \\c[1]{2}\\c[0].\\wtnp[10]", qty, itemname))
+      pbMessage(_INTL("Você colheu {1} \\c[1]{2}\\c[0].\\wtnp[10]", qty, itemname))
     else
-      pbMessage(_INTL("You picked the \\c[1]{1}\\c[0].\\wtnp[10]", itemname))
+      pbMessage(_INTL("Você colheu \\c[1]{1}\\c[0].\\wtnp[10]", itemname))
     end
     pocket = berry.pocket
-    pbMessage(_INTL("{1} put the \\c[1]{2}\\c[0] in the <icon=bagPocket{3}>\\c[1]{4}\\c[0] Pocket.\1",
+    pbMessage(_INTL("{1} guardou \\c[1]{2}\\c[0] no bolso <icon=bagPocket{3}>\\c[1]{4}\\c[0].\1",
                     $Trainer.name, itemname, pocket, PokemonBag.pocketNames()[pocket]))
     if Settings::NEW_BERRY_PLANTS
-      pbMessage(_INTL("The soil returned to its soft and earthy state."))
+      pbMessage(_INTL("O solo voltou ao seu estado macio e terroso."))
       berryData = [0, nil, 0, 0, 0, 0, 0, 0]
     else
-      pbMessage(_INTL("The soil returned to its soft and loamy state."))
+      pbMessage(_INTL("O solo voltou ao seu estado macio e fértil."))
       berryData = [0, nil, false, 0, 0, 0]
     end
     interp.setVariable(berryData)

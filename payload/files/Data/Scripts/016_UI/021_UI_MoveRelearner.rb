@@ -73,7 +73,7 @@ class MoveRelearner_Scene
       end
     end
 
-    text = @pokemon ? "Teach which move?" : "Moves list"
+    text = @pokemon ? "Ensinar qual golpe?" : "Lista de golpes"
     textpos=[
        [_INTL(text),16,2,0,Color.new(88,88,80),Color.new(168,184,184)]
     ]
@@ -104,11 +104,11 @@ class MoveRelearner_Scene
     basedamage=selMoveData.base_damage
     category=selMoveData.category
     accuracy=selMoveData.accuracy
-    textpos.push([_INTL("CATEGORY"),272,108,0,Color.new(248,248,248),Color.new(0,0,0)])
-    textpos.push([_INTL("POWER"),272,140,0,Color.new(248,248,248),Color.new(0,0,0)])
+    textpos.push([_INTL("CATEGORIA"),272,108,0,Color.new(248,248,248),Color.new(0,0,0)])
+    textpos.push([_INTL("PODER"),272,140,0,Color.new(248,248,248),Color.new(0,0,0)])
     textpos.push([basedamage<=1 ? basedamage==1 ? "???" : "---" : sprintf("%d",basedamage),
           468,140,2,Color.new(64,64,64),Color.new(176,176,176)])
-    textpos.push([_INTL("ACCURACY"),272,172,0,Color.new(248,248,248),Color.new(0,0,0)])
+    textpos.push([_INTL("PRECISÃO"),272,172,0,Color.new(248,248,248),Color.new(0,0,0)])
     textpos.push([accuracy==0 ? "---" : "#{accuracy}%",
           468,172,2,Color.new(64,64,64),Color.new(176,176,176)])
     pbDrawTextPositions(overlay,textpos)

@@ -18,12 +18,18 @@ The main `.exe` release asset is a single file with the PT-BR payload embedded i
 
 The selected game folder should contain `Game.exe` and `Data`.
 
+## After Updating The Game
+
+If you run the official Pokemon Infinite Fusion updater `.bat`, run the PT-BR installer again before opening your save. Choose the same `Game.exe` and click `Install / Update PT-BR`.
+
+This matters because the official update can restore original English script files. A save that was last used while the PT-BR translation was installed can crash if it is opened while those translated files are missing.
+
 It performs four actions:
 
 1. Validates that the selected folder contains `Data` and `Data/Scripts`.
 2. Creates a required timestamped backup under `PTBR_BACKUPS` inside the selected game folder.
 3. Copies the translated language/script files from `payload/files`.
-4. Applies `payload/patches/text_patches.json` to JSON text fields only.
+4. Applies `payload/patches/text_patches.json` to text-only JSON fields for outfit descriptions, with Pokedex species/fusion mappings excluded and planned as future work.
 
 The `.exe` installer does not download files, does not contact the internet, does not include the game, and does not require administrator permissions.
 
@@ -36,7 +42,7 @@ The BAT/PowerShell method is shipped separately as `PTBR-Translation-BAT-v1.1.0.
 - `installer-src/ModernInstaller.cs`: source code for the modern WPF graphical installer.
 - `installer-src/InfiniteFusionPtbrInstaller.cs`: shared installer core and legacy WinForms UI source.
 - `payload/files`: translated language data and script-level UI files.
-- `payload/patches/text_patches.json`: Pokedex and outfit description text mappings.
+- `payload/patches/text_patches.json`: outfit description text mappings with Pokedex species/fusion mappings excluded from the v1.1.0 active payload.
 
 ## Restore Tutorial
 
@@ -48,6 +54,22 @@ The BAT/PowerShell method is shipped separately as `PTBR-Translation-BAT-v1.1.0.
 Fallback option: if you installed through the separate BAT package, run `installer/Restore-Latest-Backup.bat`.
 
 Use this if the game update overwrites files, if you want to test another version, or if anything feels wrong after installation.
+
+## Known Issue: Save Crash After Official Update
+
+Known crash message:
+
+`Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass`
+
+Workaround:
+
+1. Close the game.
+2. Open `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
+3. Select the same `Game.exe`.
+4. Click `Install / Update PT-BR`.
+5. Open the game again.
+
+For extra safety before official game updates, manually copy `%APPDATA%\infinitefusion` somewhere safe. v1.1.0 does not automatically edit or repair save files.
 
 ## Português
 
@@ -67,12 +89,18 @@ O arquivo principal `.exe` da release é um arquivo único com o pacote PT-BR em
 
 A pasta escolhida deve conter `Game.exe` e `Data`.
 
+## Depois De Atualizar O Jogo
+
+Se você rodar o updater oficial `.bat` do Pokemon Infinite Fusion, rode o instalador PT-BR de novo antes de abrir seu save. Escolha o mesmo `Game.exe` e clique em `Instalar / Atualizar PT-BR`.
+
+Isso importa porque o update oficial pode restaurar scripts originais em inglês. Um save usado pela última vez com a tradução PT-BR instalada pode crashar se for aberto quando esses arquivos traduzidos estiverem ausentes.
+
 Ele faz quatro coisas:
 
 1. Verifica se a pasta escolhida contém `Data` e `Data/Scripts`.
 2. Cria um backup obrigatório com data e hora dentro de `PTBR_BACKUPS`, na pasta escolhida do jogo.
 3. Copia os arquivos traduzidos de idioma/scripts a partir de `payload/files`.
-4. Aplica `payload/patches/text_patches.json` apenas em campos de texto dos JSONs.
+4. Aplica `payload/patches/text_patches.json` apenas em campos de texto dos JSONs para descrições de roupas, com descrições da Pokédex documentadas como trabalho futuro.
 
 O instalador `.exe` não baixa arquivos, não acessa a internet, não inclui o jogo e não precisa de permissões de administrador.
 
@@ -85,7 +113,7 @@ O método BAT/PowerShell é distribuído separadamente como `PTBR-Translation-BA
 - `installer-src/ModernInstaller.cs`: código-fonte do instalador gráfico WPF moderno.
 - `installer-src/InfiniteFusionPtbrInstaller.cs`: núcleo compartilhado do instalador e código da interface WinForms legada.
 - `payload/files`: dados de idioma e scripts de interface traduzidos.
-- `payload/patches/text_patches.json`: mapeamentos de texto da Pokédex e descrições de roupas.
+- `payload/patches/text_patches.json`: mapeamentos de descrições de roupas. As descrições da Pokédex não contam como concluídas na v1.1.0.
 
 ## Tutorial De Restauração
 
@@ -97,3 +125,19 @@ O método BAT/PowerShell é distribuído separadamente como `PTBR-Translation-BA
 Alternativa: se você instalou pelo pacote BAT separado, execute `installer/Restore-Latest-Backup.bat`.
 
 Use isso se uma atualização do jogo sobrescrever arquivos, se você quiser testar outra versão ou se algo parecer errado depois da instalação.
+
+## Erro Conhecido: Crash De Save Depois De Update Oficial
+
+Mensagem conhecida do crash:
+
+`Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass`
+
+Como resolver:
+
+1. Feche o jogo.
+2. Abra `InfiniteFusionPTBRInstaller-v1.1.0.exe`.
+3. Selecione o mesmo `Game.exe`.
+4. Clique em `Instalar / Atualizar PT-BR`.
+5. Abra o jogo novamente.
+
+Por segurança, antes de updates oficiais do jogo, copie manualmente `%APPDATA%\infinitefusion` para outro lugar. A v1.1.0 não edita nem repara saves automaticamente.

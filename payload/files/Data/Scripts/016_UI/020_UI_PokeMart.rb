@@ -470,7 +470,7 @@ class PokemonMart_Scene
     dw.text = msg
     dw.visible = true
     pbBottomLeftLines(dw, 2)
-    commands = [_INTL("Yes"), _INTL("No")]
+    commands = [_INTL("Sim"), _INTL("Não")]
     cw = Window_CommandPokemon.new(commands)
     cw.viewport = @viewport
     pbBottomRight(cw)
@@ -672,7 +672,7 @@ class PokemonMartScreen
       if added != quantity
         added.times do
           if !@adapter.removeItem(item)
-            raise _INTL("Failed to delete stored items")
+            raise _INTL("Falha ao apagar itens armazenados")
           end
         end
         pbDisplayPaused("Você não tem mais espaço na Bag.")

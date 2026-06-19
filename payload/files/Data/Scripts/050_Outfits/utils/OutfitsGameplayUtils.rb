@@ -153,14 +153,14 @@ end
 def obtainOutfitMessage(outfit)
   pictureViewport = showOutfitPicture(outfit)
   musical_effect = _INTL("Key item get")
-  pbMessage(_INTL("\\me[{1}]You obtained a \\c[1]{2}\\c[0]!\\wtnp[30]", musical_effect, outfit.name))
+  pbMessage(_INTL("\\me[{1}]Você obteve \\c[1]{2}\\c[0]!\\wtnp[30]", musical_effect, outfit.name))
   pictureViewport.dispose if pictureViewport
 end
 
 def putOnOutfitMessage(outfit)
   playOutfitChangeAnimation()
   outfitName = outfit.name == "" ? outfit.id : outfit.name
-  pbMessage(_INTL("You put on the \\c[1]{1}\\c[0]!\\wtnp[30]", outfitName))
+  pbMessage(_INTL("Você colocou \\c[1]{1}\\c[0]!\\wtnp[30]", outfitName))
 end
 
 def refreshPlayerOutfit()

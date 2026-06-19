@@ -362,7 +362,7 @@ class PokeBattle_Battle
       pbPlayer.money += tMoney
       moneyGained = pbPlayer.money-oldMoney
       if moneyGained>0
-        pbDisplayPaused(_INTL("You got ${1} for winning!",moneyGained.to_s_formatted))
+        pbDisplayPaused(_INTL("Você recebeu ${1} pela vitória!",moneyGained.to_s_formatted))
       end
     end
     # Pick up money scattered by Pay Day
@@ -373,7 +373,7 @@ class PokeBattle_Battle
       pbPlayer.money += @field.effects[PBEffects::PayDay]
       moneyGained = pbPlayer.money-oldMoney
       if moneyGained>0
-        pbDisplayPaused(_INTL("You picked up ${1}!",moneyGained.to_s_formatted))
+        pbDisplayPaused(_INTL("Você recolheu ${1}!",moneyGained.to_s_formatted))
       end
     end
   end
@@ -391,9 +391,9 @@ class PokeBattle_Battle
     moneyLost = oldMoney-pbPlayer.money
     if moneyLost>0
       if trainerBattle?
-        pbDisplayPaused(_INTL("You gave ${1} to the winner...",moneyLost.to_s_formatted))
+        pbDisplayPaused(_INTL("Você entregou ${1} ao vencedor...",moneyLost.to_s_formatted))
       else
-        pbDisplayPaused(_INTL("You panicked and dropped ${1}...",moneyLost.to_s_formatted))
+        pbDisplayPaused(_INTL("Você entrou em pânico e deixou cair ${1}...",moneyLost.to_s_formatted))
       end
     end
   end
@@ -438,22 +438,22 @@ class PokeBattle_Battle
       PBDebug.log("***Player lost***") if @decision==2
       PBDebug.log("***Player drew with opponent***") if @decision==5
       if @internalBattle
-        pbDisplayPaused(_INTL("You have no more Pokémon that can fight!"))
+        pbDisplayPaused(_INTL("Você não tem mais Pokémon que possam lutar!"))
         if trainerBattle?
           case @opponent.length
           when 1
-            pbDisplayPaused(_INTL("You lost against {1}!",@opponent[0].full_name))
+            pbDisplayPaused(_INTL("Você perdeu contra {1}!",@opponent[0].full_name))
           when 2
-            pbDisplayPaused(_INTL("You lost against {1} and {2}!",
+            pbDisplayPaused(_INTL("Você perdeu contra {1} e {2}!",
                @opponent[0].full_name,@opponent[1].full_name))
           when 3
-            pbDisplayPaused(_INTL("You lost against {1}, {2} and {3}!",
+            pbDisplayPaused(_INTL("Você perdeu contra {1}, {2} e {3}!",
                @opponent[0].full_name,@opponent[1].full_name,@opponent[2].full_name))
           end
         end
         # Lose money from losing a battle
         pbLoseMoney
-        pbDisplayPaused(_INTL("You blacked out!")) if !@canLose
+        pbDisplayPaused(_INTL("Você desmaiou!")) if !@canLose
       elsif @decision==2
         if @opponent
           @opponent.each_with_index do |_t,i|

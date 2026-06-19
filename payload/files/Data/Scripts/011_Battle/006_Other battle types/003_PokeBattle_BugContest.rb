@@ -47,10 +47,10 @@ class PokeBattle_BugContestBattle < PokeBattle_Battle
   def pbCommandMenu(idxBattler,_firstAction)
     return @scene.pbCommandMenuEx(idxBattler,[
        _INTL("Sport Balls: {1}",@ballCount),
-       _INTL("Fight"),
+       _INTL("Lutar"),
        _INTL("Ball"),
        _INTL("Pokémon"),
-       _INTL("Run")
+       _INTL("Fugir")
     ],4)
   end
 
@@ -77,7 +77,7 @@ class PokeBattle_BugContestBattle < PokeBattle_Battle
     else
       pbBugContestState.lastPokemon = pkmn
     end
-    pbDisplay(_INTL("Caught {1}!",pkmn.name))
+    pbDisplay(_INTL("{1} foi capturado!",pkmn.name))
   end
 
   def pbEndOfRoundPhase

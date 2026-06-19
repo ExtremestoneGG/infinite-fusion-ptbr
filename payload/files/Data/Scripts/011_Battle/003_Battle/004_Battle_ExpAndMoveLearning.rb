@@ -44,7 +44,7 @@ class PokeBattle_Battle
           eachInTeam(0, 0) do |pkmn, i|
             next if !pkmn.able?
             next if b.participants.include?(i) || expShare.include?(i)
-            pbDisplayPaused(_INTL("Your party Pokémon in waiting also got Exp. Points!")) if showMessage
+            pbDisplayPaused(_INTL("Os Pokémon da sua equipe que estavam aguardando também ganharam Pontos Exp.!")) if showMessage
             showMessage = false
             pbGainEVsOne(i, b)
             pbGainExpOne(i, b, numPartic, expShare, expAll, false)
@@ -167,9 +167,9 @@ class PokeBattle_Battle
     # "Exp gained" message
     if showMessages
       if isOutsider
-        pbDisplayPaused(_INTL("{1} got a boosted {2} Exp. Points!", pkmn.name, expGained))
+        pbDisplayPaused(_INTL("{1} ganhou {2} Pontos Exp. com bônus!", pkmn.name, expGained))
       else
-        pbDisplayPaused(_INTL("{1} got {2} Exp. Points!", pkmn.name, expGained))
+        pbDisplayPaused(_INTL("{1} ganhou {2} Pontos Exp.!", pkmn.name, expGained))
       end
     end
     curLevel = pkmn.level
@@ -181,7 +181,7 @@ class PokeBattle_Battle
       # raise RuntimeError.new(
       #   echoln  "{1}'s new level is less than its\r\ncurrent level, which shouldn't happen.\r\n[Debug: {2}]",
       #         pkmn.name, debugInfo)
-      pbDisplayPaused(_INTL("{1}'s growth rate has changed to '{2}''. Its level will be adjusted to reflect its current exp.", pkmn.name, pkmn.growth_rate.real_name))
+      pbDisplayPaused(_INTL("A taxa de crescimento de {1} mudou para '{2}'. O nível será ajustado conforme a Exp. atual.", pkmn.name, pkmn.growth_rate.real_name))
     end
     # Give Exp
     if pkmn.shadowPokemon?
@@ -234,7 +234,7 @@ class PokeBattle_Battle
       pkmn.calc_stats
       battler.pbUpdate(false) if battler
       @scene.pbRefreshOne(battler.index) if battler
-      pbDisplayPaused(_INTL("{1} grew to Lv. {2}!", pkmn.name, curLevel))
+      pbDisplayPaused(_INTL("{1} subiu para Lv. {2}!", pkmn.name, curLevel))
       if !$game_switches[SWITCH_NO_LEVELS_MODE]
         @scene.pbLevelUp(pkmn, battler, oldTotalHP, oldAttack, oldDefense,
                          oldSpAtk, oldSpDef, oldSpeed)

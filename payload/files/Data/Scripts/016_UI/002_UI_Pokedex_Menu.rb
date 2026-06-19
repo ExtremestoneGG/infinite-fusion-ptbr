@@ -113,7 +113,7 @@ class PokemonPokedexMenuScreen
     @scene.pbStartScene(commands,commands2)
     loop do
       cmd = @scene.pbScene
-      break if cmd<0 || cmd>1   # Cancel/Exit
+      break if cmd<0 || cmd>1   # Cancelar/Exit
       $PokemonGlobal.pokedexDex = $Trainer.pokedex.accessible_dexes[0]
       only_owned = cmd == 1
       pbFadeOutIn {

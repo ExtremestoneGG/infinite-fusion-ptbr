@@ -6,7 +6,7 @@ class PokeBattle_Scene
 
   #=============================================================================
   # The player chooses a main command for a Pokémon
-  # Return values: -1=Cancel, 0=Fight, 1=Bag, 2=Pokémon, 3=Run, 4=Call
+  # Return values: -1=Cancelar, 0=Fight, 1=Bag, 2=Pokémon, 3=Run, 4=Call
   #=============================================================================
   def pbCommandMenu(idxBattler,firstAction)
     shadowTrainer = (GameData::Type.exists?(:SHADOW) && @battle.trainerBattle?)
@@ -19,12 +19,12 @@ class PokeBattle_Scene
     ]
     ret = pbCommandMenuEx(idxBattler,cmds,(shadowTrainer) ? 2 : (firstAction) ? 0 : 1)
     ret = 4 if ret==3 && shadowTrainer   # Convert "Run" to "Call"
-    ret = -1 if ret==3 && !firstAction   # Convert "Run" to "Cancel"
+    ret = -1 if ret==3 && !firstAction   # Convert "Run" to "Cancelar"
     return ret
   end
 
   # Mode: 0 = regular battle with "Run" (first choosable action in the round only)
-  #       1 = regular battle with "Cancel"
+  #       1 = regular battle with "Cancelar"
   #       2 = regular battle with "Call" (for Shadow Pokémon battles)
   #       3 = Safari Zone
   #       4 = Bug Catching Contest
@@ -55,7 +55,7 @@ class PokeBattle_Scene
         ret = cw.index
         @lastCmd[idxBattler] = ret
         break
-      elsif Input.trigger?(Input::BACK) && mode==1   # Cancel
+      elsif Input.trigger?(Input::BACK) && mode==1   # Cancelar
         pbPlayCancelSE
         break
       elsif Input.trigger?(Input::F9) && $DEBUG    # Debug menu
@@ -120,7 +120,7 @@ class PokeBattle_Scene
         break if yield cw.index
         needFullRefresh = true
         needRefresh = true
-      elsif Input.trigger?(Input::BACK) || Input.trigger?(Input::ACTION)  # Cancel fight menu
+      elsif Input.trigger?(Input::BACK) || Input.trigger?(Input::ACTION)  # Cancelar fight menu
         pbPlayCancelSE
         break if yield -1
         needRefresh = true
@@ -169,10 +169,10 @@ class PokeBattle_Scene
       cmdSwitch  = -1
       cmdSummary = -1
       commands = []
-      commands[cmdSwitch  = commands.length] = _INTL("Switch In") if modParty[idxParty].able?
-      commands[cmdSummary = commands.length] = _INTL("Summary")
-      commands[commands.length]              = _INTL("Cancel")
-      command = scene.pbShowCommands(_INTL("Do what with {1}?",modParty[idxParty].name),commands)
+      commands[cmdSwitch  = commands.length] = _INTL("Entrar") if modParty[idxParty].able?
+      commands[cmdSummary = commands.length] = _INTL("Resumo")
+      commands[commands.length]              = _INTL("Cancelar")
+      command = scene.pbShowCommands(_INTL("O que fazer com {1}?",modParty[idxParty].name),commands)
       if cmdSwitch>=0 && command==cmdSwitch        # Switch In
         idxPartyRet = -1
         partyPos.each_with_index do |pos,i|
@@ -220,9 +220,9 @@ class PokeBattle_Scene
       useType = item.battle_use
       cmdUse = -1
       commands = []
-      commands[cmdUse = commands.length] = _INTL("Use") if useType && useType!=0
-      commands[commands.length]          = _INTL("Cancel")
-      command = itemScene.pbShowCommands(_INTL("{1} is selected.",itemName),commands)
+      commands[cmdUse = commands.length] = _INTL("Usar") if useType && useType!=0
+      commands[commands.length]          = _INTL("Cancelar")
+      command = itemScene.pbShowCommands(_INTL("{1} foi selecionado.",itemName),commands)
       next unless cmdUse>=0 && command==cmdUse   # Use
       # Use types:
       # 0 = not usable in battle
@@ -260,12 +260,12 @@ class PokeBattle_Scene
         # Start party screen
         pkmnScene = PokemonParty_Scene.new
         pkmnScreen = PokemonPartyScreen.new(pkmnScene,modParty)
-        pkmnScreen.pbStartScene(_INTL("Use on which Pokémon?"),@battle.pbNumPositions(0,0))
+        pkmnScreen.pbStartScene(_INTL("Usar em qual Pokémon?"),@battle.pbNumPositions(0,0))
         idxParty = -1
         # Loop while in party screen
         loop do
           # Select a Pokémon
-          pkmnScene.pbSetHelpText(_INTL("Use on which Pokémon?"))
+          pkmnScene.pbSetHelpText(_INTL("Usar em qual Pokémon?"))
           idxParty = pkmnScreen.pbChoosePokemon
           break if idxParty<0
           idxPartyRet = -1
@@ -279,7 +279,7 @@ class PokeBattle_Scene
           next if !pkmn || pkmn.egg?
           idxMove = -1
           if useType==2 || useType==7   # Use on Pokémon's move
-            idxMove = pkmnScreen.pbChooseMove(pkmn,_INTL("Restore which move?"))
+            idxMove = pkmnScreen.pbChooseMove(pkmn,_INTL("Restaurar qual golpe?"))
             next if idxMove<0
           end
           break if yield item.id, useType, idxPartyRet, idxMove, pkmnScene
@@ -429,7 +429,7 @@ class PokeBattle_Scene
         ret = cw.index
         pbPlayDecisionSE
         break
-      elsif Input.trigger?(Input::BACK)   # Cancel
+      elsif Input.trigger?(Input::BACK)   # Cancelar
         ret = -1
         pbPlayCancelSE
         break

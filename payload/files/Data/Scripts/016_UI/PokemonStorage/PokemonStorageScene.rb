@@ -809,7 +809,7 @@ class PokemonStorageScene
         if index == 6 # OK
           pokemon.markings = markings
           break
-        elsif index == 7 # Cancel
+        elsif index == 7 # Cancelar
           break
         else
           mask = (1 << index)
@@ -856,7 +856,7 @@ class PokemonStorageScene
     buttonbase = Color.new(248, 248, 248)
     buttonshadow = Color.new(80, 80, 80)
     pbDrawTextPositions(overlay, [
-      [_INTL("Party: {1}", (@storage.party.length rescue 0)), 270, 326, 2, buttonbase, buttonshadow, 1],
+      [_INTL("Equipe: {1}", (@storage.party.length rescue 0)), 270, 326, 2, buttonbase, buttonshadow, 1],
       [_INTL("Sair"), 446, 326, 2, buttonbase, buttonshadow, 1],
     ])
     pokemon = nil
@@ -890,12 +890,12 @@ class PokemonStorageScene
       if pokemon.ability
         textstrings.push([pokemon.ability.name, 86, 300, 2, base, shadow])
       else
-        textstrings.push([_INTL("No ability"), 86, 300, 2, nonbase, nonshadow])
+        textstrings.push([_INTL("Sem Ability"), 86, 300, 2, nonbase, nonshadow])
       end
       if pokemon.item
         textstrings.push([pokemon.item.name, 86, 336, 2, base, shadow])
       else
-        textstrings.push([_INTL("No item"), 86, 336, 2, nonbase, nonshadow])
+        textstrings.push([_INTL("Sem item"), 86, 336, 2, nonbase, nonshadow])
       end
       if pokemon.shiny?
         addShinyStarsToGraphicsArray(imagepos, 156, 198, pokemon.bodyShiny?, pokemon.headShiny?, pokemon.debugShiny?, nil, nil, nil, nil, false, true)

@@ -12,22 +12,22 @@ class PokeBattle_Battle
     return false if idxParty >= party.length
     return false if !party[idxParty]
     if party[idxParty].egg?
-      partyScene.pbDisplay(_INTL("An Egg can't battle!")) if partyScene
+      partyScene.pbDisplay(_INTL("Um Egg não pode batalhar!")) if partyScene
       return false
     end
     if !pbIsOwner?(idxBattler, idxParty)
       owner = pbGetOwnerFromPartyIndex(idxBattler, idxParty)
-      partyScene.pbDisplay(_INTL("You can't switch {1}'s Pokémon with one of yours!",
+      partyScene.pbDisplay(_INTL("Você não pode trocar o Pokémon de {1} por um dos seus!",
                                  owner.name)) if partyScene
       return false
     end
     if party[idxParty].fainted?
-      partyScene.pbDisplay(_INTL("{1} has no energy left to battle!",
+      partyScene.pbDisplay(_INTL("{1} não tem mais energia para batalhar!",
                                  party[idxParty].name)) if partyScene
       return false
     end
     if pbFindBattler(idxParty, idxBattler)
-      partyScene.pbDisplay(_INTL("{1} is already in battle!",
+      partyScene.pbDisplay(_INTL("{1} já está em batalha!",
                                  party[idxParty].name)) if partyScene
       return false
     end
@@ -45,7 +45,7 @@ class PokeBattle_Battle
     # Pokémon
     eachSameSideBattler(idxBattler) do |b|
       next if choices[b.index][0] != :SwitchOut || choices[b.index][1] != idxParty
-      partyScene.pbDisplay(_INTL("{1} has already been selected.",
+      partyScene.pbDisplay(_INTL("{1} já foi selecionado.",
                                  pbParty(idxBattler)[idxParty].name)) if partyScene
       return false
     end
@@ -70,7 +70,7 @@ class PokeBattle_Battle
       battler.effects[PBEffects::MeanLook] >= 0 ||
       battler.effects[PBEffects::Ingrain] ||
       @field.effects[PBEffects::FairyLock] > 0
-      partyScene.pbDisplay(_INTL("{1} can't be switched out!", battler.pbThis)) if partyScene
+      partyScene.pbDisplay(_INTL("{1} não pode ser retirado da batalha!", battler.pbThis)) if partyScene
       return false
     end
     # Trapping abilities/items
@@ -238,19 +238,19 @@ class PokeBattle_Battle
   def pbMessageOnRecall(battler)
     if battler.pbOwnedByPlayer?
       if battler.hp <= battler.totalhp / 4
-        pbDisplayBrief(_INTL("Good job, {1}! Come back!", battler.name))
+        pbDisplayBrief(_INTL("Bom trabalho, {1}! Volte!", battler.name))
       elsif battler.hp <= battler.totalhp / 2
-        pbDisplayBrief(_INTL("OK, {1}! Come back!", battler.name))
+        pbDisplayBrief(_INTL("OK, {1}! Volte!", battler.name))
       elsif battler.turnCount >= 5
-        pbDisplayBrief(_INTL("{1}, that's enough! Come back!", battler.name))
+        pbDisplayBrief(_INTL("{1}, já chega! Volte!", battler.name))
       elsif battler.turnCount >= 2
-        pbDisplayBrief(_INTL("{1}, come back!", battler.name))
+        pbDisplayBrief(_INTL("{1}, volte!", battler.name))
       else
-        pbDisplayBrief(_INTL("{1}, switch out! Come back!", battler.name))
+        pbDisplayBrief(_INTL("{1}, troque! Volte!", battler.name))
       end
     else
       owner = pbGetOwnerName(battler.index)
-      pbDisplayBrief(_INTL("{1} withdrew {2}!", owner, battler.name))
+      pbDisplayBrief(_INTL("{1} retirou {2}!", owner, battler.name))
     end
   end
 
@@ -265,13 +265,13 @@ class PokeBattle_Battle
     if pbOwnedByPlayer?(idxBattler)
       opposing = @battlers[idxBattler].pbDirectOpposing
       if opposing.fainted? || opposing.hp == opposing.totalhp
-        pbDisplayBrief(_INTL("You're in charge, {1}!", newPkmnName))
+        pbDisplayBrief(_INTL("Você está no comando, {1}!", newPkmnName))
       elsif opposing.hp >= opposing.totalhp / 2
-        pbDisplayBrief(_INTL("Go for it, {1}!", newPkmnName))
+        pbDisplayBrief(_INTL("Vai com tudo, {1}!", newPkmnName))
       elsif opposing.hp >= opposing.totalhp / 4
-        pbDisplayBrief(_INTL("Just a little more! Hang in there, {1}!", newPkmnName))
+        pbDisplayBrief(_INTL("Só mais um pouco! Aguente firme, {1}!", newPkmnName))
       else
-        pbDisplayBrief(_INTL("Your opponent's weak! Get 'em, {1}!", newPkmnName))
+        pbDisplayBrief(_INTL("Seu oponente está fraco! Pegue-o, {1}!", newPkmnName))
       end
     else
       owner = pbGetOwnerFromBattlerIndex(idxBattler)
@@ -336,7 +336,7 @@ class PokeBattle_Battle
     # Healing Wish
     if @positions[battler.index].effects[PBEffects::HealingWish]
       pbCommonAnimation("HealingWish", battler)
-      pbDisplay(_INTL("The healing wish came true for {1}!", battler.pbThis(true)))
+      pbDisplay(_INTL("O desejo de cura se realizou para {1}!", battler.pbThis(true)))
       battler.pbRecoverHP(battler.totalhp)
       battler.pbCureStatus(false)
       @positions[battler.index].effects[PBEffects::HealingWish] = false
@@ -344,7 +344,7 @@ class PokeBattle_Battle
     # Lunar Dance
     if @positions[battler.index].effects[PBEffects::LunarDance]
       pbCommonAnimation("LunarDance", battler)
-      pbDisplay(_INTL("{1} became cloaked in mystical moonlight!", battler.pbThis))
+      pbDisplay(_INTL("{1} foi envolvido por um luar místico!", battler.pbThis))
       battler.pbRecoverHP(battler.totalhp)
       battler.pbCureStatus(false)
       battler.eachMove { |m| m.pp = m.total_pp }
@@ -360,7 +360,7 @@ class PokeBattle_Battle
         eff = eff.to_f / Effectiveness::NORMAL_EFFECTIVE
         oldHP = battler.hp
         battler.pbReduceHP(battler.totalhp * eff / 8, false)
-        pbDisplay(_INTL("Pointed stones dug into {1}!", battler.pbThis))
+        pbDisplay(_INTL("Pedras pontiagudas feriram {1}!", battler.pbThis))
         battler.pbItemHPHealCheck
         if battler.pbAbilitiesOnDamageTaken(oldHP) # Switched out
           return pbOnActiveOne(battler) # For replacement battler
@@ -373,7 +373,7 @@ class PokeBattle_Battle
       spikesDiv = [8, 6, 4][battler.pbOwnSide.effects[PBEffects::Spikes] - 1]
       oldHP = battler.hp
       battler.pbReduceHP(battler.totalhp / spikesDiv, false)
-      pbDisplay(_INTL("{1} is hurt by the spikes!", battler.pbThis))
+      pbDisplay(_INTL("{1} se feriu nos Spikes!", battler.pbThis))
       battler.pbItemHPHealCheck
       if battler.pbAbilitiesOnDamageTaken(oldHP) # Switched out
         return pbOnActiveOne(battler) # For replacement battler
@@ -384,19 +384,19 @@ class PokeBattle_Battle
       !battler.airborne?
       if battler.pbHasType?(:POISON)
         battler.pbOwnSide.effects[PBEffects::ToxicSpikes] = 0
-        pbDisplay(_INTL("{1} absorbed the poison spikes!", battler.pbThis))
+        pbDisplay(_INTL("{1} absorveu os espinhos venenosos!", battler.pbThis))
       elsif battler.pbCanPoison?(nil, false)
         if battler.pbOwnSide.effects[PBEffects::ToxicSpikes] == 2
-          battler.pbPoison(nil, _INTL("{1} was badly poisoned by the poison spikes!", battler.pbThis), true)
+          battler.pbPoison(nil, _INTL("{1} foi gravemente envenenado pelos espinhos venenosos!", battler.pbThis), true)
         else
-          battler.pbPoison(nil, _INTL("{1} was poisoned by the poison spikes!", battler.pbThis))
+          battler.pbPoison(nil, _INTL("{1} foi envenenado pelos espinhos venenosos!", battler.pbThis))
         end
       end
     end
     # Sticky Web
     if battler.pbOwnSide.effects[PBEffects::StickyWeb] && !battler.fainted? &&
       !battler.airborne?
-      pbDisplay(_INTL("{1} was caught in a sticky web!", battler.pbThis))
+      pbDisplay(_INTL("{1} ficou preso em uma teia grudenta!", battler.pbThis))
       if battler.pbCanLowerStatStage?(:SPEED)
         battler.pbLowerStatStage(:SPEED, 1, nil)
         battler.pbItemStatRestoreCheck

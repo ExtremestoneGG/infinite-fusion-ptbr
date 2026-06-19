@@ -6,7 +6,7 @@ module PokeBattle_BattleCommon
     # Nickname the Pokémon (unless it's a Shadow Pokémon)
     if !pkmn.shadowPokemon?
       if pbDisplayConfirm(_INTL("Gostaria de dar um apelido a {1}?", pkmn.name))
-        nickname = @scene.pbNameEntry(_INTL("{1}'s nickname?", pkmn.speciesName), pkmn)
+        nickname = @scene.pbNameEntry(_INTL("Apelido de {1}?", pkmn.speciesName), pkmn)
         pkmn.name = nickname
       end
     end
@@ -14,7 +14,7 @@ module PokeBattle_BattleCommon
     currentBox = @peer.pbCurrentBox
     storedBox = @peer.pbStorePokemon(pbPlayer, pkmn)
     if storedBox < 0
-      pbDisplayPaused(_INTL("{1} has been added to your party.", pkmn.name))
+      pbDisplayPaused(_INTL("{1} entrou para a sua equipe.", pkmn.name))
       @initialItems[0][pbPlayer.party.length - 1] = pkmn.item_id if @initialItems
       return
     end
@@ -24,18 +24,18 @@ module PokeBattle_BattleCommon
     boxName = @peer.pbBoxName(storedBox)
     if storedBox != currentBox
       if creator
-        pbDisplayPaused(_INTL("Box \"{1}\" on {2}'s PC was full.", curBoxName, creator))
+        pbDisplayPaused(_INTL("A Box \"{1}\" no PC de {2} estava cheia.", curBoxName, creator))
       else
-        pbDisplayPaused(_INTL("Box \"{1}\" on someone's PC was full.", curBoxName))
+        pbDisplayPaused(_INTL("A Box \"{1}\" no PC de alguém estava cheia.", curBoxName))
       end
-      pbDisplayPaused(_INTL("{1} was transferred to box \"{2}\".", pkmn.name, boxName))
+      pbDisplayPaused(_INTL("{1} foi transferido para a Box \"{2}\".", pkmn.name, boxName))
     else
       if creator
-        pbDisplayPaused(_INTL("{1} was transferred to {2}'s PC.", pkmn.name, creator))
+        pbDisplayPaused(_INTL("{1} foi transferido para o PC de {2}.", pkmn.name, creator))
       else
-        pbDisplayPaused(_INTL("{1} was transferred to someone's PC.", pkmn.name))
+        pbDisplayPaused(_INTL("{1} foi transferido para o PC de alguém.", pkmn.name))
       end
-      pbDisplayPaused(_INTL("It was stored in box \"{1}\".", boxName))
+      pbDisplayPaused(_INTL("Foi guardado na Box \"{1}\".", boxName))
     end
   end
 
@@ -62,7 +62,7 @@ module PokeBattle_BattleCommon
       if !pbPlayer.owned?(pkmn.species)
         pbPlayer.pokedex.set_owned(pkmn.species)
         if $Trainer.has_pokedex
-          pbDisplayPaused(_INTL("{1}'s data was added to the Pokédex.", pkmn.name))
+          pbDisplayPaused(_INTL("Os dados de {1} foram adicionados à Pokédex.", pkmn.name))
           pbPlayer.pokedex.register_last_seen(pkmn)
           @scene.pbShowPokedex(pkmn.species)
         end
@@ -87,7 +87,7 @@ module PokeBattle_BattleCommon
   #   return pbStorePokemon(pokemon) if !$Trainer.party_full?
   #
   #   while !pickedOption
-  #     command = pbMessage("\\ts[]Your team is full!"),
+  #     command = pbMessage("\\ts[]Sua equipe is full!"),
   #                         ["Add to your party", "Store to PC",], 2)
   #     echoln ("command " + command.to_s)
   #     case command
@@ -127,27 +127,27 @@ module PokeBattle_BattleCommon
     itemName = GameData::Item.get(ball).name
     if battler.fainted?
       if itemName.starts_with_vowel?
-        pbDisplay(_INTL("{1} threw an {2}!", pbPlayer.name, itemName))
+        pbDisplay(_INTL("{1} arremessou {2}!", pbPlayer.name, itemName))
       else
-        pbDisplay(_INTL("{1} threw a {2}!", pbPlayer.name, itemName))
+        pbDisplay(_INTL("{1} arremessou {2}!", pbPlayer.name, itemName))
       end
-      pbDisplay(_INTL("But there was no target..."))
+      pbDisplay(_INTL("Mas não havia alvo..."))
       return
     end
     if itemName.starts_with_vowel?
-      pbDisplayBrief(_INTL("{1} threw an {2}!", pbPlayer.name, itemName))
+      pbDisplayBrief(_INTL("{1} arremessou {2}!", pbPlayer.name, itemName))
     else
-      pbDisplayBrief(_INTL("{1} threw a {2}!", pbPlayer.name, itemName))
+      pbDisplayBrief(_INTL("{1} arremessou {2}!", pbPlayer.name, itemName))
     end
     # Animation of opposing trainer blocking Poké Balls (unless it's a Snag Ball
     # at a Shadow Pokémon)
     if trainerBattle? && !(GameData::Item.get(ball).is_snag_ball? && battler.shadowPokemon?)
       @scene.pbThrowAndDeflect(ball, 1)
-      pbDisplay(_INTL("The Trainer blocked your Poké Ball! Don't be a thief!"))
+      pbDisplay(_INTL("O Treinador bloqueou sua Poké Ball! Não roube!"))
       return
     elsif $game_switches[SWITCH_CANNOT_CATCH_POKEMON]
       @scene.pbThrowAndDeflect(ball, 1)
-      pbDisplay(_INTL("The Pokémon is impossible to catch!"))
+      pbDisplay(_INTL("É impossível capturar esse Pokémon!"))
       return
     end
     # Calculate the number of shakes (4=capture)
@@ -160,23 +160,23 @@ module PokeBattle_BattleCommon
     # Outcome message
     case numShakes
     when 0
-      pbDisplay(_INTL("Oh no! The Pokémon broke free!"))
+      pbDisplay(_INTL("Ah não! O Pokémon escapou!"))
       BallHandlers.onFailCatch(ball, self, battler)
     when 1
-      pbDisplay(_INTL("Aww! It appeared to be caught!"))
+      pbDisplay(_INTL("Ahh! Parecia que tinha sido capturado!"))
       BallHandlers.onFailCatch(ball, self, battler)
     when 2
-      pbDisplay(_INTL("Aargh! Almost had it!"))
+      pbDisplay(_INTL("Argh! Foi quase!"))
       BallHandlers.onFailCatch(ball, self, battler)
     when 3
-      pbDisplay(_INTL("Gah! It was so close, too!"))
+      pbDisplay(_INTL("Ugh! Chegou tão perto!"))
       BallHandlers.onFailCatch(ball, self, battler)
     when 4
       if $game_switches[SWITCH_SILVERBOSS_BATTLE]
         pkmn.species = :PALDIATINA
         pkmn.name = "Paldiatina"
       end
-      pbDisplayBrief(_INTL("Gotcha! {1} was caught!", pkmn.name))
+      pbDisplayBrief(_INTL("Pegou! {1} foi capturado!", pkmn.name))
       @scene.pbThrowSuccess # Play capture success jingle
       pbRemoveFromParty(battler.index, battler.pokemonIndex)
       # Gain Exp

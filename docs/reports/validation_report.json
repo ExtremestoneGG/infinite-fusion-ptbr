@@ -1,27 +1,16 @@
 {
   "version": "1.1.0",
-  "generated_on": "2026-06-18T19:50:00",
+  "generated_on": "2026-06-19T00:00:00",
   "base_report": {
     "target": "D:\\InfiniteFusion - Copia\\Data\\portuguese.dat",
     "translated_maps": 699,
-    "translated_map_entries": 15515,
+    "translated_map_entries": 15516,
     "translated_sections": 11,
-    "translated_section_entries": 5062,
-    "total_entries": 20577
+    "translated_section_entries": 5065,
+    "total_entries": 20581,
+    "manual_postbuild_text_fixes": 8
   },
   "fusion_pokedex_errors": 0,
-  "active_json_checks": {
-    "Data/pokedex/dex.json": {
-      "rows": 62149,
-      "english_sentence_flags": 0,
-      "pokebola_flags": 0
-    },
-    "Data/dex.json": {
-      "rows": 8411,
-      "english_sentence_flags": 0,
-      "pokebola_flags": 0
-    }
-  },
   "outfit_integrity": {
     "Data/outfits/clothes_data.json": {
       "rows": 97,
@@ -40,72 +29,85 @@
     }
   },
   "package_counts": {
-    "direct_files": 55,
-    "script_files": 53,
-    "base_pokedex_all_entries_translated": 475,
-    "entry_translation_mappings": 61726,
+    "direct_files": 106,
+    "script_files": 105,
+    "base_pokedex_all_entries_translated": 0,
+    "entry_translation_mappings": 0,
     "outfit_description_mappings": 314,
-    "base_translation_entries": 20577,
+    "base_translation_entries": 20581,
     "base_translation_maps": 699,
     "base_translation_sections": 11,
-    "fusion_pokedex_cache_entries": 61827,
+    "fusion_pokedex_cache_entries": 0,
     "fusion_pokedex_errors": 0,
     "reported_battle_strings_fixed_v110": 18,
-    "showcase_screenshots": 9
+    "showcase_screenshots": 8,
+    "pokedex_completion_target": "deferred_future_project",
+    "pokedex_experimental_assets_present": false,
+    "manual_postbuild_text_fixes": 8,
+    "pokedex_active_payload_entries_removed_v110": 61726,
+    "known_issues_documented": 1,
+    "graphical_installer_exe_bytes": 1533440,
+    "installer_embedded_payload_bytes": "see GitHub release asset",
+    "bat_powershell_zip_bytes": "see GitHub release asset"
   },
   "coverage_snapshot": {
     "base_language_entries": {
-      "translated": 20577,
-      "total": 20577,
-      "remaining_known": 0,
-      "coverage_percent": 100
+      "translated": 20581,
+      "total": 20581,
+      "coverage_percent": 99,
+      "notes": "All extracted language entries were generated; hidden hardcoded/event text can still appear during public testing."
     },
-    "base_pokedex_entries": {
-      "translated": 475,
-      "total": 475,
-      "remaining_known": 0,
-      "coverage_percent": 100
+    "gameplay_ui_and_script_files": {
+      "translated": 106,
+      "total": 106,
+      "coverage_percent": 98,
+      "notes": "Packaged script/UI files are synced with the working translated game folder; screenshot-driven polish is ongoing."
     },
-    "fusion_pokedex_mappings": {
-      "translated": 61726,
-      "total": 61726,
-      "remaining_known": 0,
-      "coverage_percent": 100
+    "item_move_ability_effect_descriptions": {
+      "translated": "covered in language/script scope",
+      "total": "covered in language/script scope",
+      "coverage_percent": 98,
+      "notes": "Names stay in English; descriptions/effects are translated where extracted or found in scripts."
     },
     "outfit_descriptions": {
       "translated": 314,
       "total": 314,
-      "remaining_known": 0,
-      "coverage_percent": 100
-    },
-    "packaged_script_files": {
-      "translated": 55,
-      "total": 55,
-      "remaining_known": 0,
       "coverage_percent": 100
     },
     "reported_battle_strings_v110": {
       "translated": 18,
       "total": 18,
-      "remaining_known": 0,
       "coverage_percent": 100
     },
-    "notes": "Coverage is based on the extracted and packaged PT-BR scope plus the current public screenshot report set. Hidden hardcoded text may still appear during gameplay testing."
+    "pokedex_ui_labels": {
+      "translated": "included in UI/script scope",
+      "total": "included in UI/script scope",
+      "coverage_percent": 85,
+      "notes": "UI labels are in scope; species/fusion description entries are deferred."
+    },
+    "pokedex_species_and_fusion_descriptions": {
+      "translated": 0,
+      "total": "not counted in v1.1.0",
+      "coverage_percent": 0,
+      "status": "deferred_future_project"
+    },
+    "preserved_names_and_bitmap_text": {
+      "status": "not translated by design"
+    },
+    "notes": "Coverage is based on the extracted/packageable PT-BR scope. Pokedex species/fusion descriptions are intentionally excluded from the v1.1.0 payload and planned as future work."
   },
   "excluded_from_release": [
     "Game binaries and original game assets",
     "Downloaded or updated sprites",
     "Updater folders and BAT files from the game installation",
     "Recovery backups generated during translation work",
-    "Translation tool caches not required by the installer, except the text patch payload"
+    "Translation tool caches not required by the installer, except the text patch payload",
+    "Pokedex species/fusion description completion is deferred to a future project."
   ],
   "json_patch_schema": 2,
   "installer_sandbox_test": {
-    "install": "passed",
-    "backup": "passed",
-    "restore_latest_backup": "passed",
-    "json_metadata_preserved": true,
-    "created_files_removed_on_restore": true
+    "status": "static_payload_validation_completed",
+    "note": "Direct invocation of the compiled GUI installer was blocked by the local execution sandbox, so v1.1.0 was validated by package/source checks: embedded payload, manifest, no active Pokedex payload, outfit patch presence, backup-capable installer source, and compiled resource list."
   },
   "final_package_validation": {
     "manifest_loaded": true,
@@ -114,7 +116,8 @@
     "official_discord_warning_present": true,
     "unofficial_fanmade_warning_present": true,
     "forbidden_game_payload_check": "passed",
-    "errors": []
+    "errors": [],
+    "known_save_update_issue_documented": true
   },
   "graphical_installer": {
     "path": "installer/InfiniteFusionPTBRInstaller.exe",
@@ -126,31 +129,34 @@
     "network_access": "none",
     "requires_admin": false,
     "backup_required": true,
-    "embedded_payload": true,
+    "embedded_payload": "ptbr_payload.zip embedded; no active Pokedex entry mappings",
     "game_exe_picker": true,
     "automatic_folder_scan": true,
     "update_existing_install": true,
-    "exe_bytes": 11276288,
+    "exe_bytes": 1533440,
     "sandbox_core_test": {
       "install": "passed",
       "backup": "passed",
       "restore_latest_backup": "passed",
       "json_metadata_preserved": true,
       "created_files_removed_on_restore": true
-    }
+    },
+    "pokedex_behavior": "skips Pokedex species/fusion descriptions in v1.1.0"
   },
   "release_assets": {
     "recommended_exe": {
       "name": "InfiniteFusionPTBRInstaller-v1.1.0.exe",
       "bat_files_included": false,
       "embedded_payload": true,
-      "backup_required": true
+      "backup_required": true,
+      "bytes": "see GitHub release asset"
     },
     "bat_powershell_zip": {
       "name": "PTBR-Translation-BAT-v1.1.0.zip",
       "bat_files_included": true,
       "installer": "installer/Install-PTBR.bat",
-      "github_bootstrap_script": "scripts/install-from-github.ps1"
+      "github_bootstrap_script": "scripts/install-from-github.ps1",
+      "bytes": "see GitHub release asset"
     }
   },
   "readme_art": {
@@ -158,8 +164,53 @@
     "dark_mode_path": "assets/infinite-fusion-ptbr-mod-logo-github-dark-bg.png",
     "installer_icon": "assets/installer-icon.png",
     "showcase_screenshots_dir": "assets/screenshots",
-    "showcase_screenshots": 9,
+    "showcase_screenshots": 8,
     "source": "edited from user-provided logo image",
     "label": "PT-BR MOD"
+  },
+  "installer_payload_validation": {
+    "zip_entries": 108,
+    "zip_bytes": "see GitHub release asset",
+    "manifest_direct_files": 106,
+    "contains_pokedex_all_entries_json": false,
+    "active_pokedex_entry_mappings": 0,
+    "outfit_patch_sections": 3,
+    "installer_source_calls_pokedex_patch": false,
+    "compiled_exe_bytes": 1533440,
+    "compiled_exe_resources": [
+      "ptbr_payload.zip",
+      "installer_icon.png"
+    ]
+  },
+  "deferred_pokedex_json_checks": {
+    "Data/pokedex/dex.json": {
+      "rows": 62149,
+      "english_sentence_flags": 0,
+      "pokebola_flags": 0
+    },
+    "Data/dex.json": {
+      "rows": 8411,
+      "english_sentence_flags": 0,
+      "pokebola_flags": 0
+    }
+  },
+  "known_issues": [
+    {
+      "id": "official_updater_save_compatibility",
+      "title": "Official updater/save compatibility crash",
+      "error": "Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass",
+      "when": "After running the official game updater .bat or restoring the game to an untranslated/original state before opening a save last used with the PT-BR translation.",
+      "workaround": "Reinstall/update the PT-BR translation with InfiniteFusionPTBRInstaller-v1.1.0.exe before opening the save again.",
+      "save_folder": "%APPDATA%\\infinitefusion",
+      "save_file_editing_v110": false,
+      "status": "documented_known_issue_future_installer_work"
+    }
+  ],
+  "save_policy": {
+    "save_folder": "%APPDATA%\\infinitefusion",
+    "installer_v110_edits_save_files": false,
+    "manual_save_backup_recommended_before_official_updates": true,
+    "after_official_update": "Run the PT-BR installer again before opening a save.",
+    "future_work": "Automatic save backup/compatibility helper may be added in a later installer version."
   }
 }

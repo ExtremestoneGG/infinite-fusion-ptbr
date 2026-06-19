@@ -64,7 +64,7 @@ def pbCheckHiddenMoveBadge(badge = -1, showmsg = true)
   if (Settings::FIELD_MOVES_COUNT_BADGES) ? $Trainer.badge_count >= badge : $Trainer.badges[badge]
     return true
   end
-  pbMessage(_INTL("Sorry, a new Badge is required.")) if showmsg
+  pbMessage(_INTL("Desculpe, uma nova Badge é necessária.")) if showmsg
   return false
 end
 
@@ -211,7 +211,7 @@ HiddenMoveHandlers::CanUseMove.add(:CUT, proc { |move, pkmn, showmsg|
   next false if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_CUT, showmsg)
   facingEvent = $game_player.pbFacingEvent
   if !facingEvent || !facingEvent.name[/cuttree/i]
-    pbMessage(_INTL("Can't use that here.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
     next false
   end
   next true
@@ -219,7 +219,7 @@ HiddenMoveHandlers::CanUseMove.add(:CUT, proc { |move, pkmn, showmsg|
 
 HiddenMoveHandlers::UseMove.add(:CUT, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   facingEvent = $game_player.pbFacingEvent
   if facingEvent
@@ -257,11 +257,11 @@ end
 HiddenMoveHandlers::CanUseMove.add(:DIG, proc { |move, pkmn, showmsg|
   escape = ($PokemonGlobal.escapePoint rescue nil)
   if !escape || escape == []
-    pbMessage(_INTL("Can't use that here.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
     next false
   end
   if $game_player.pbHasDependentEvents?
-    pbMessage(_INTL("It can't be used when you have someone with you.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso quando há alguém com você.")) if showmsg
     next false
   end
   next true
@@ -278,7 +278,7 @@ HiddenMoveHandlers::UseMove.add(:DIG, proc { |move, pokemon|
   escape = ($PokemonGlobal.escapePoint rescue nil)
   if escape
     if !pbHiddenMoveAnimation(pokemon)
-      pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+      pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
     end
     pbFadeOutIn {
       $game_temp.player_new_map_id = escape[0]
@@ -332,7 +332,7 @@ def pbDive
   movefinder = $Trainer.get_pokemon_with_move(move)
   if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_DIVE, false) || (!$DEBUG && !movefinder)
     if $PokemonBag.pbQuantity(:SCUBAGEAR) <= 0
-      pbMessage(_INTL("The sea is deep here. A Pokémon may be able to go underwater."))
+      pbMessage(_INTL("O mar é profundo aqui. Um Pokémon talvez consiga mergulhar."))
       return false
     end
   end
@@ -450,17 +450,17 @@ HiddenMoveHandlers::CanUseMove.add(:DIVE, proc { |move, pkmn, showmsg|
     end
     if !surface_map_id ||
       !$MapFactory.getTerrainTag(surface_map_id, $game_player.x, $game_player.y).can_dive
-      pbMessage(_INTL("Can't use that here.")) if showmsg
+      pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
       next false
     end
   else
     if !GameData::MapMetadata.exists?($game_map.map_id) ||
       !GameData::MapMetadata.get($game_map.map_id).dive_map_id
-      pbMessage(_INTL("Can't use that here.")) if showmsg
+      pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
       next false
     end
     if !$game_player.terrain_tag.can_dive
-      pbMessage(_INTL("Can't use that here.")) if showmsg
+      pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
       next false
     end
   end
@@ -482,7 +482,7 @@ HiddenMoveHandlers::UseMove.add(:DIVE, proc { |move, pokemon|
   end
   next false if !dive_map_id
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   pbFadeOutIn {
     $game_temp.player_new_map_id = dive_map_id
@@ -506,11 +506,11 @@ HiddenMoveHandlers::CanUseMove.add(:FLASH, proc { |move, pkmn, showmsg|
   next false if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_FLASH, showmsg)
   if !GameData::MapMetadata.exists?($game_map.map_id) ||
     !(GameData::MapMetadata.get($game_map.map_id).dark_map || darknessEffectOnCurrentMap())
-    pbMessage(_INTL("Can't use that here.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
     next false
   end
   if $PokemonGlobal.flashUsed
-    pbMessage(_INTL("Flash is already being used.")) if showmsg
+    pbMessage(_INTL("Flash já está sendo usado.")) if showmsg
     next false
   end
   next true
@@ -520,7 +520,7 @@ HiddenMoveHandlers::UseMove.add(:FLASH, proc { |move, pokemon|
   darkness = $PokemonTemp.darknessSprite
   next false if !darkness || darkness.disposed?
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   $PokemonGlobal.flashUsed = true
   radiusDiff = 8 * 20 / Graphics.frame_rate
@@ -554,12 +554,12 @@ HiddenMoveHandlers::UseMove.add(:TELEPORT, proc { |move, pokemon|
 def pbCanUseFly(showmsg)
   return false if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_TELEPORT, showmsg)
   if $game_player.pbHasDependentEvents?
-    pbMessage(_INTL("It can't be used when you have someone with you.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso quando há alguém com você.")) if showmsg
     return false
   end
   if !GameData::MapMetadata.exists?($game_map.map_id) ||
     !GameData::MapMetadata.get($game_map.map_id).outdoor_map
-    pbMessage(_INTL("Can't use that here.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
     return false
   end
   return true
@@ -567,11 +567,11 @@ end
 
 def pbFly(move, pokemon)
   if !$PokemonTemp.flydata
-    pbMessage(_INTL("Can't use that here."))
+    pbMessage(_INTL("Não dá para usar isso aqui."))
     return false
   end
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   pbFadeOutIn {
     $game_temp.player_new_map_id = $PokemonTemp.flydata[0]
@@ -607,7 +607,7 @@ def pbSecretPower(terrain)
   baseLayoutType = pickSecretBaseLayout(biomeType)
 
   if biomeType && baseLayoutType
-    pbMessage(_INTL("{1} used {2}!", speciesname, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", speciesname, GameData::Move.get(move).name))
     pbHiddenMoveAnimation(movefinder)
     pbSecretBase(biomeType,baseLayoutType)
   end
@@ -631,11 +631,11 @@ def pbHeadbuttEffect(event = nil)
     chance = 5 # ~9.7%
   end
   if rand(10) >= chance
-    pbMessage(_INTL("Nope. Nothing..."))
+    pbMessage(_INTL("Não. Nada..."))
   else
     enctype = (chance == 1) ? :HeadbuttLow : :HeadbuttHigh
     if !pbEncounter(enctype)
-      pbMessage(_INTL("Nope. Nothing..."))
+      pbMessage(_INTL("Não. Nada..."))
     end
   end
 end
@@ -660,7 +660,7 @@ end
 HiddenMoveHandlers::CanUseMove.add(:HEADBUTT, proc { |move, pkmn, showmsg|
   facingEvent = $game_player.pbFacingEvent
   if !facingEvent || !facingEvent.name[/headbutttree/i]
-    pbMessage(_INTL("Can't use that here.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
     next false
   end
   next true
@@ -668,7 +668,7 @@ HiddenMoveHandlers::CanUseMove.add(:HEADBUTT, proc { |move, pkmn, showmsg|
 
 HiddenMoveHandlers::UseMove.add(:HEADBUTT, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   facingEvent = $game_player.pbFacingEvent
   pbHeadbuttEffect(facingEvent)
@@ -676,14 +676,14 @@ HiddenMoveHandlers::UseMove.add(:HEADBUTT, proc { |move, pokemon|
 
 HiddenMoveHandlers::UseMove.add(:SECRETPOWER, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
 })
 
 
 HiddenMoveHandlers::CanUseMove.add(:RELICSONG, proc { |move, pokemon, showmsg|
   if  !(pokemon.isFusionOf(:MELOETTA_A) || pokemon.isFusionOf(:MELOETTA_P))
-    pbMessage(_INTL("It won't have any effect")) if showmsg
+    pbMessage(_INTL("Não terá efeito.")) if showmsg
     next false
   end
   next true
@@ -691,7 +691,7 @@ HiddenMoveHandlers::CanUseMove.add(:RELICSONG, proc { |move, pokemon, showmsg|
 
 HiddenMoveHandlers::UseMove.add(:RELICSONG, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   changeMeloettaForm(pokemon)
 })
@@ -702,11 +702,11 @@ def changeMeloettaForm(pokemon)
   if !pokemon.isFusion?
     if is_meloetta_A
       changeSpeciesSpecific(pokemon, :MELOETTA_P)
-      pbMessage(_INTL("{1} changed to the Pirouette form!", pokemon.name))
+      pbMessage(_INTL("{1} mudou para a Pirouette form!", pokemon.name))
     end
     if is_meloetta_P
       changeSpeciesSpecific(pokemon, :MELOETTA_A)
-      pbMessage(_INTL("{1} changed to the Aria form!", pokemon.name))
+      pbMessage(_INTL("{1} mudou para a Aria form!", pokemon.name))
     end
     return
   end
@@ -718,15 +718,15 @@ def changeMeloettaForm(pokemon)
     else
       changeSpeciesSpecific(pokemon, :B466H467)
     end
-    pbMessage(_INTL("{1} changed form!", pokemon.name))
+    pbMessage(_INTL("{1} mudou de forma!", pokemon.name))
   else
     if is_meloetta_P
     replaceFusionSpecies(pokemon, :MELOETTA_P, :MELOETTA_A)
-    pbMessage(_INTL("{1} changed to the Aria form!", pokemon.name))
+    pbMessage(_INTL("{1} mudou para a Aria form!", pokemon.name))
     end
     if is_meloetta_A
       replaceFusionSpecies(pokemon, :MELOETTA_A, :MELOETTA_P)
-      pbMessage(_INTL("{1} changed to the Pirouette form!", pokemon.name))
+      pbMessage(_INTL("{1} mudou para a Pirouette form!", pokemon.name))
     end
   end
 end
@@ -751,7 +751,7 @@ def pbRockSmash
   end
   if pbConfirmMessage(_INTL("Esta rocha parece quebrável. Gostaria de usar Rock Smash?"))
     speciesname = (movefinder) ? movefinder.name : $Trainer.name
-    pbMessage(_INTL("{1} used {2}!", speciesname, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", speciesname, GameData::Move.get(move).name))
     pbHiddenMoveAnimation(movefinder)
     facingEvent = $game_player.pbFacingEvent(true)
     pbSEPlay("Rock Smash", 80)
@@ -765,7 +765,7 @@ HiddenMoveHandlers::CanUseMove.add(:ROCKSMASH, proc { |move, pkmn, showmsg|
   next false if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_ROCKSMASH, showmsg)
   facingEvent = $game_player.pbFacingEvent
   if !facingEvent || !facingEvent.name[/smashrock/i]
-    pbMessage(_INTL("Can't use that here.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
     next false
   end
   next true
@@ -773,7 +773,7 @@ HiddenMoveHandlers::CanUseMove.add(:ROCKSMASH, proc { |move, pkmn, showmsg|
 
 HiddenMoveHandlers::UseMove.add(:ROCKSMASH, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   facingEvent = $game_player.pbFacingEvent
   if facingEvent
@@ -795,7 +795,7 @@ def pbStrength
   movefinder = $Trainer.get_pokemon_with_move(move)
   if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_STRENGTH, false) || (!$DEBUG && !movefinder)
     if $PokemonBag.pbQuantity(:LEVER) <= 0
-      pbMessage(_INTL("It looks heavy, but a Pokémon may be able to push it aside."))
+      pbMessage(_INTL("Parece pesado, mas talvez um Pokémon consiga empurrar para o lado."))
       return false
     end
   end
@@ -972,13 +972,13 @@ Events.onAction += proc { |_sender, _e|
       obtainHat(HAT_CARDBOARD_BOX)
       $PokemonGlobal.stepcount += 1
     else
-      pbMessage(_INTL("Woah! A Pokémon jumped out of the trashcan!"))
+      pbMessage(_INTL("Uau! Um Pokémon pulou para fora da lixeira!"))
       pbWildBattle(:TRUBBISH, 10)
       $PokemonGlobal.stepcount += 1
     end
   else
     if Settings::GAME_ID == :IF_HOENN
-      pbMessage(_INTL("There's nothing but trash..."))
+      pbMessage(_INTL("Não há nada além de lixo..."))
     end
   end
 }
@@ -986,21 +986,21 @@ Events.onAction += proc { |_sender, _e|
 HiddenMoveHandlers::CanUseMove.add(:SURF, proc { |move, pkmn, showmsg|
   next false if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_SURF, showmsg)
   if $PokemonGlobal.surfing
-    pbMessage(_INTL("You're already surfing.")) if showmsg
+    pbMessage(_INTL("Você já está surfando.")) if showmsg
     next false
   end
   if $game_player.pbHasDependentEvents?
-    pbMessage(_INTL("It can't be used when you have someone with you.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso quando há alguém com você.")) if showmsg
     next false
   end
   if GameData::MapMetadata.exists?($game_map.map_id) &&
     GameData::MapMetadata.get($game_map.map_id).always_bicycle
-    pbMessage(_INTL("Let's enjoy cycling!")) if showmsg
+    pbMessage(_INTL("Vamos pedalar!")) if showmsg
     next false
   end
   if !$game_player.pbFacingTerrainTag.can_surf_freely ||
     !$game_map.passable?($game_player.x, $game_player.y, $game_player.direction, $game_player)
-    pbMessage(_INTL("No surfing here!")) if showmsg
+    pbMessage(_INTL("Nada de surfar aqui!")) if showmsg
     next false
   end
   next true
@@ -1010,7 +1010,7 @@ HiddenMoveHandlers::UseMove.add(:SURF, proc { |move, pokemon|
   $game_temp.in_menu = false
   pbCancelVehicles
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   surfbgm = GameData::Metadata.get.surf_BGM
   pbCueBGM(surfbgm, 0.5) if surfbgm
@@ -1024,7 +1024,7 @@ HiddenMoveHandlers::UseMove.add(:SURF, proc { |move, pokemon|
 #===============================================================================
 def pbSweetScent
   if $game_screen.weather_type != :None
-    pbMessage(_INTL("The sweet scent faded for some reason..."))
+    pbMessage(_INTL("O aroma doce desapareceu por algum motivo..."))
     return
   end
   viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
@@ -1052,7 +1052,7 @@ def pbSweetScent
   enctype = $PokemonEncounters.encounter_type
   if enctype || !$PokemonEncounters.encounter_possible_here? ||
     !pbEncounter(enctype)
-    pbMessage(_INTL("There appears to be nothing here..."))
+    pbMessage(_INTL("Parece não haver nada aqui..."))
   end
 end
 
@@ -1062,7 +1062,7 @@ HiddenMoveHandlers::CanUseMove.add(:SWEETSCENT, proc { |move, pkmn, showmsg|
 
 HiddenMoveHandlers::UseMove.add(:SWEETSCENT, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   pbSweetScent
   next true
@@ -1075,7 +1075,7 @@ HiddenMoveHandlers::CanUseMove.add(:RAINDANCE, proc { |move, pkmn, showmsg|
 
 HiddenMoveHandlers::UseMove.add(:RAINDANCE, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   changeCurrentWeather(:Rain,1)
   next true
@@ -1086,7 +1086,7 @@ HiddenMoveHandlers::CanUseMove.add(:SUNNYDAY, proc { |move, pkmn, showmsg|
 })
 HiddenMoveHandlers::UseMove.add(:SUNNYDAY, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   changeCurrentWeather(:Sunny,1)
   next true
@@ -1097,7 +1097,7 @@ HiddenMoveHandlers::CanUseMove.add(:WHIRLWIND, proc { |move, pkmn, showmsg|
 })
 HiddenMoveHandlers::UseMove.add(:WHIRLWIND, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   changeCurrentWeather(:Wind,1)
   next true
@@ -1109,17 +1109,17 @@ HiddenMoveHandlers::UseMove.add(:WHIRLWIND, proc { |move, pokemon|
 # HiddenMoveHandlers::CanUseMove.add(:TELEPORT,proc { |move,pkmn,showmsg|
 #   if !GameData::MapMetadata.exists?($game_map.map_id) ||
 #      !GameData::MapMetadata.get($game_map.map_id).outdoor_map
-#     pbMessage("Can't use that here.") if showmsg
+#     pbMessage("Não dá para usar isso aqui.") if showmsg
 #     next false
 #   end
 #   healing = $PokemonGlobal.healingSpot
 #   healing = GameData::Metadata.get.home if !healing   # Home
 #   if !healing
-#     pbMessage("Can't use that here.") if showmsg
+#     pbMessage("Não dá para usar isso aqui.") if showmsg
 #     next false
 #   end
 #   if $game_player.pbHasDependentEvents?
-#     pbMessage("It can't be used when you have someone with you.") if showmsg
+#     pbMessage("Não dá para usar isso quando há alguém com você.") if showmsg
 #     next false
 #   end
 #   next true
@@ -1138,7 +1138,7 @@ HiddenMoveHandlers::UseMove.add(:WHIRLWIND, proc { |move, pokemon|
 #   healing = GameData::Metadata.get.home if !healing   # Home
 #   next false if !healing
 #   if !pbHiddenMoveAnimation(pokemon)
-#     pbMessage("{1} used {2}!",pokemon.name,GameData::Move.get(move).name)
+#     pbMessage("{1} usou {2}!",pokemon.name,GameData::Move.get(move).name)
 #   end
 #   pbFadeOutIn {
 #     $game_temp.player_new_map_id    = healing[0]
@@ -1214,7 +1214,7 @@ Events.onAction += proc { |_sender, _e|
   if terrain.waterfall || isFacingTempWaterfall()
     pbWaterfall
   elsif terrain.waterfall_crest
-    pbMessage(_INTL("A wall of water is crashing down with a mighty roar."))
+    pbMessage(_INTL("Uma muralha de água cai com um rugido poderoso."))
   end
 }
 
@@ -1228,7 +1228,7 @@ end
 HiddenMoveHandlers::CanUseMove.add(:WATERFALL, proc { |move, pkmn, showmsg|
   next false if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_WATERFALL, showmsg)
   if !$game_player.pbFacingTerrainTag.waterfall
-    pbMessage(_INTL("Can't use that here.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
     next false
   end
   next true
@@ -1236,7 +1236,7 @@ HiddenMoveHandlers::CanUseMove.add(:WATERFALL, proc { |move, pkmn, showmsg|
 
 HiddenMoveHandlers::UseMove.add(:WATERFALL, proc { |move, pokemon|
   if !pbHiddenMoveAnimation(pokemon)
-    pbMessage(_INTL("{1} used {2}!", pokemon.name, GameData::Move.get(move).name))
+    pbMessage(_INTL("{1} usou {2}!", pokemon.name, GameData::Move.get(move).name))
   end
   pbAscendWaterfall
   next true
@@ -1245,7 +1245,7 @@ HiddenMoveHandlers::UseMove.add(:WATERFALL, proc { |move, pokemon|
 HiddenMoveHandlers::CanUseMove.add(:ROCKCLIMB, proc { |move, pkmn, showmsg|
   next false if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_ROCKCLIMB, showmsg)
   if !$game_player.pbFacingTerrainTag.ledge
-    pbMessage(_INTL("Can't use that here.")) if showmsg
+    pbMessage(_INTL("Não dá para usar isso aqui.")) if showmsg
     next false
   end
   next true

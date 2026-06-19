@@ -80,7 +80,7 @@ end
 #===============================================================================
 class PokemonPartyCancelSprite < PokemonPartyConfirmCancelSprite
   def initialize(viewport = nil)
-    super(_INTL("CANCEL"), 398, 328, false, viewport)
+    super(_INTL("VOLTAR"), 398, 328, false, viewport)
   end
 end
 
@@ -89,7 +89,7 @@ end
 #===============================================================================
 class PokemonPartyConfirmSprite < PokemonPartyConfirmCancelSprite
   def initialize(viewport = nil)
-    super(_INTL("CONFIRM"), 398, 308, true, viewport)
+    super(_INTL("OK"), 398, 308, true, viewport)
   end
 end
 
@@ -98,7 +98,7 @@ end
 #===============================================================================
 class PokemonPartyCancelSprite2 < PokemonPartyConfirmCancelSprite
   def initialize(viewport = nil)
-    super(_INTL("CANCEL"), 398, 346, true, viewport)
+    super(_INTL("VOLTAR"), 398, 346, true, viewport)
   end
 end
 
@@ -541,7 +541,7 @@ class PokemonParty_Scene
     @sprites["messagebox"].text = text
     @sprites["messagebox"].visible = true
     @sprites["helpwindow"].visible = false
-    using(cmdwindow = Window_CommandPokemon.new([_INTL("Yes"), _INTL("No")])) {
+    using(cmdwindow = Window_CommandPokemon.new([_INTL("Sim"), _INTL("Não")])) {
       cmdwindow.visible = false
       pbBottomRight(cmdwindow)
       cmdwindow.y -= @sprites["messagebox"].height
@@ -908,11 +908,11 @@ class PokemonPartyScreen
     if pkmnid >= 0
       pkmn = @party[pkmnid]
       if pkmn.hasItem? || pkmn.mail
-        pbDisplay(_INTL("This Pokémon is holding an item. It can't hold mail."))
+        pbDisplay(_INTL("Este Pokémon está segurando um item. Ele não pode segurar Mail."))
       elsif pkmn.egg?
-        pbDisplay(_INTL("Eggs can't hold mail."))
+        pbDisplay(_INTL("Eggs não podem segurar Mail."))
       else
-        pbDisplay(_INTL("Mail was transferred from the Mailbox."))
+        pbDisplay(_INTL("O Mail foi transferido da Mailbox."))
         pkmn.mail = $PokemonGlobal.mailbox[mailIndex]
         pkmn.item = pkmn.mail.item
         $PokemonGlobal.mailbox.delete_at(mailIndex)
@@ -1018,7 +1018,7 @@ class PokemonPartyScreen
   def pbPokemonMultipleEntryScreenEx(ruleset,ableProc=nil)
     annot = []
     statuses = []
-    ordinals = [_INTL("INELIGIBLE"), _INTL("NOT ENTERED"), _INTL("BANNED")]
+    ordinals = [_INTL("INELEGÍVEL"), _INTL("NÃO INSCRITO"), _INTL("BANIDO")]
     positions = [_INTL("FIRST"), _INTL("SECOND"), _INTL("THIRD"), _INTL("FOURTH"),
                  _INTL("FIFTH"), _INTL("SIXTH"), _INTL("SEVENTH"), _INTL("EIGHTH"),
                  _INTL("NINTH"), _INTL("TENTH"), _INTL("ELEVENTH"), _INTL("TWELFTH")]
@@ -1041,7 +1041,7 @@ class PokemonPartyScreen
     for i in 0...@party.length
       annot[i] = ordinals[statuses[i]]
     end
-    @scene.pbStartScene(@party, _INTL("Choose Pokémon and confirm."), annot, true)
+    @scene.pbStartScene(@party, _INTL("Escolha o Pokémon e confirme."), annot, true)
     loop do
       realorder = []
       for i in 0...@party.length
@@ -1062,7 +1062,7 @@ class PokemonPartyScreen
       if realorder.length == ruleset.number && addedEntry
         @scene.pbSelect(Settings::MAX_PARTY_SIZE)
       end
-      @scene.pbSetHelpText(_INTL("Choose Pokémon and confirm."))
+      @scene.pbSetHelpText(_INTL("Escolha Pokémon e confirme."))
       pkmnid = @scene.pbChoosePokemon
       addedEntry = false
       if pkmnid == Settings::MAX_PARTY_SIZE # Confirm was chosen
@@ -1081,9 +1081,9 @@ class PokemonPartyScreen
       cmdSummary = -1
       commands = []
       if (statuses[pkmnid] || 0) == 1
-        commands[cmdEntry = commands.length] = _INTL("Entry")
+        commands[cmdEntry = commands.length] = _INTL("Entrar")
       elsif (statuses[pkmnid] || 0) > 2
-        commands[cmdNoEntry = commands.length] = _INTL("No Entry")
+        commands[cmdNoEntry = commands.length] = _INTL("Remover")
       end
       pkmn = @party[pkmnid]
       commands[cmdSummary = commands.length] = _INTL("Resumo")
@@ -1091,7 +1091,7 @@ class PokemonPartyScreen
       command = @scene.pbShowCommands(_INTL("O que fazer com {1}?", pkmn.name), commands) if pkmn
       if cmdEntry >= 0 && command == cmdEntry
         if realorder.length >= ruleset.number && ruleset.number > 0
-          pbDisplay(_INTL("No more than {1} Pokémon may enter.", ruleset.number))
+          pbDisplay(_INTL("No máximo {1} Pokémon podem entrar.", ruleset.number))
         else
           statuses[pkmnid] = realorder.length + 3
           addedEntry = true
@@ -1127,7 +1127,7 @@ class PokemonPartyScreen
       pkmnid = @scene.pbChoosePokemon
       break if pkmnid < 0
       if !eligibility[pkmnid] && !allowIneligible
-        pbDisplay(_INTL("This Pokémon can't be chosen."))
+        pbDisplay(_INTL("Este Pokémon não pode ser escolhido."))
       else
         ret = pkmnid
         break
@@ -1155,7 +1155,7 @@ class PokemonPartyScreen
       pkmnid = @scene.pbChoosePokemon
       break if pkmnid < 0
       if !eligibility[pkmnid] && !allowIneligible
-        pbDisplay(_INTL("This Pokémon can't be chosen."))
+        pbDisplay(_INTL("Este Pokémon não pode ser escolhido."))
       else
         ret = pkmnid
         break
@@ -1168,21 +1168,21 @@ class PokemonPartyScreen
 
   def pbPokemonHat(pokemon)
     cmd = 0
-    msg = "What should you do?"
+    msg = _INTL("O que você quer fazer?")
     loop do
       cmd = @scene.pbShowCommands(msg, [
-        _INTL("Put on hat"),
-        _INTL("Remove hat"),
-        _INTL("Back")], cmd)
+        _INTL("Colocar chapéu"),
+        _INTL("Remover chapéu"),
+        _INTL("Voltar")], cmd)
       echoln cmd
       break if cmd == -1
       if cmd == 0   #Put on hat
         @scene.pbOpenHatScreen(pokemon)
-        pbDisplay(_INTL("{1} put on a hat!",pokemon.name))
+        pbDisplay(_INTL("{1} colocou um chapéu!",pokemon.name))
       elsif cmd == 1 #remove hat
         if pbConfirm(_INTL("Remover o chapéu de {1}?",pokemon.name))
           pokemon.hat=nil
-          pbDisplay(_INTL("{1}'s hat was removed",pokemon.name))
+          pbDisplay(_INTL("O chapéu de {1} foi removido.",pokemon.name))
         end
       else
         break
@@ -1208,7 +1208,7 @@ class PokemonPartyScreen
     end
 
     if move_ids.empty?
-      pbMessage(_INTL("{1} has no moves to remember!",pokemon.name))
+      pbMessage(_INTL("{1} não tem golpes para relembrar!",pokemon.name))
       return false
     end
 
@@ -1249,17 +1249,17 @@ class PokemonPartyScreen
     cmd = 0
     loop do
       speciesname = pkmn.speciesName
-      msg = [_INTL("{1} has the nickname {2}.", speciesname, pkmn.name),
-             _INTL("{1} has no nickname.", speciesname)][pkmn.name == speciesname ? 1 : 0]
+      msg = [_INTL("{1} tem o apelido {2}.", speciesname, pkmn.name),
+             _INTL("{1} não tem apelido.", speciesname)][pkmn.name == speciesname ? 1 : 0]
       cmd = @scene.pbShowCommands(msg, [
-        _INTL("Rename"),
-        _INTL("Back")], cmd)
+        _INTL("Renomear"),
+        _INTL("Voltar")], cmd)
       # Break
       if cmd == -1
         break
         # Rename
       elsif cmd == 0
-        newname = pbEnterPokemonName(_INTL("{1}'s nickname?", speciesname), 0, Pokemon::MAX_NAME_SIZE, "", pkmn)
+        newname = pbEnterPokemonName(_INTL("Apelido de {1}?", speciesname), 0, Pokemon::MAX_NAME_SIZE, "", pkmn)
         pkmn.name = (newname == "") ? speciesname : newname
         pbRefreshSingle(pkmnid)
         # Erase name
@@ -1313,7 +1313,7 @@ class PokemonPartyScreen
         end
       end
       commands[cmdSwitch = commands.length] = _INTL("Trocar") if @party.length > 1
-      commands[cmdHat = commands.length] = _INTL("Hat") if canPutHatOnPokemon(pkmn)
+      commands[cmdHat = commands.length] = _INTL("Chapéu") if canPutHatOnPokemon(pkmn)
       if !pkmn.egg?
         if pkmn.mail
           commands[cmdMail = commands.length] = _INTL("Mail")
@@ -1328,7 +1328,7 @@ class PokemonPartyScreen
         if pkmn.isFusion?
           commands[cmdUnfuse = commands.length] = _INTL("Desfundir")
         else
-          commands[cmdFuse = commands.length] = _INTL("Fuse")
+          commands[cmdFuse = commands.length] = _INTL("Fundir")
         end
       end
 
@@ -1342,7 +1342,7 @@ class PokemonPartyScreen
         if [:MILKDRINK, :SOFTBOILED].include?(pkmn.moves[i].id)
           amt = [(pkmn.totalhp / 5).floor, 1].max
           if pkmn.hp <= amt
-            pbDisplay(_INTL("Not enough HP..."))
+            pbDisplay(_INTL("HP insuficiente..."))
             break
           end
           @scene.pbSetHelpText(_INTL("Usar em qual Pokémon?"))
@@ -1354,15 +1354,15 @@ class PokemonPartyScreen
             newpkmn = @party[pkmnid]
             movename = pkmn.moves[i].name
             if pkmnid == oldpkmnid
-              pbDisplay(_INTL("{1} can't use {2} on itself!", pkmn.name, movename))
+              pbDisplay(_INTL("{1} não pode usar {2} em si mesmo!", pkmn.name, movename))
             elsif newpkmn.egg?
-              pbDisplay(_INTL("{1} can't be used on an Egg!", movename))
+              pbDisplay(_INTL("{1} não pode ser usado em um Egg!", movename))
             elsif newpkmn.hp == 0 || newpkmn.hp == newpkmn.totalhp
-              pbDisplay(_INTL("{1} can't be used on that Pokémon.", movename))
+              pbDisplay(_INTL("Não dá para usar {1} nesse Pokémon.", movename))
             else
               pkmn.hp -= amt
               hpgain = pbItemRestoreHP(newpkmn, amt)
-              @scene.pbDisplay(_INTL("{1}'s HP was restored by {2} points.", newpkmn.name, hpgain))
+              @scene.pbDisplay(_INTL("O HP de {1} foi restaurado em {2} pontos.", newpkmn.name, hpgain))
               pbRefresh
             end
             break if pkmn.hp <= amt
@@ -1463,7 +1463,7 @@ class PokemonPartyScreen
         elsif cmdMoveItem >= 0 && command == cmdMoveItem # Move
           item = pkmn.item
           itemname = item.name
-          @scene.pbSetHelpText(_INTL("Move {1} to where?", itemname))
+          @scene.pbSetHelpText(_INTL("Mover {1} para onde?", itemname))
           oldpkmnid = pkmnid
           loop do
             @scene.pbPreSelect(oldpkmnid)
@@ -1472,33 +1472,33 @@ class PokemonPartyScreen
             newpkmn = @party[pkmnid]
             break if pkmnid == oldpkmnid
             if newpkmn.egg?
-              pbDisplay(_INTL("Eggs can't hold items."))
+              pbDisplay(_INTL("Eggs não podem segurar itens."))
             elsif !newpkmn.hasItem?
               newpkmn.item = item
               pkmn.item = nil
               @scene.pbClearSwitching
               pbRefresh
-              pbDisplay(_INTL("{1} was given the {2} to hold.", newpkmn.name, itemname))
+              pbDisplay(_INTL("{1} recebeu {2} para segurar.", newpkmn.name, itemname))
               break
             elsif GameData::Item.get(newpkmn.item).is_mail?
-              pbDisplay(_INTL("{1}'s mail must be removed before giving it an item.", newpkmn.name))
+              pbDisplay(_INTL("A Mail de {1} precisa ser removida antes de dar um item.", newpkmn.name))
             else
               newitem = newpkmn.item
               newitemname = newitem.name
               if newitem == :LEFTOVERS
-                pbDisplay(_INTL("{1} is already holding some {2}.\1", newpkmn.name, newitemname))
+                pbDisplay(_INTL("{1} já está segurando {2}.\1", newpkmn.name, newitemname))
               elsif newitemname.starts_with_vowel?
-                pbDisplay(_INTL("{1} is already holding an {2}.\1", newpkmn.name, newitemname))
+                pbDisplay(_INTL("{1} já está segurando {2}.\1", newpkmn.name, newitemname))
               else
-                pbDisplay(_INTL("{1} is already holding a {2}.\1", newpkmn.name, newitemname))
+                pbDisplay(_INTL("{1} já está segurando {2}.\1", newpkmn.name, newitemname))
               end
               if pbConfirm(_INTL("Gostaria de trocar os dois itens?"))
                 newpkmn.item = item
                 pkmn.item = newitem
                 @scene.pbClearSwitching
                 pbRefresh
-                pbDisplay(_INTL("{1} was given the {2} to hold.", newpkmn.name, itemname))
-                pbDisplay(_INTL("{1} was given the {2} to hold.", pkmn.name, newitemname))
+                pbDisplay(_INTL("{1} recebeu {2} para segurar.", newpkmn.name, itemname))
+                pbDisplay(_INTL("{1} recebeu {2} para segurar.", pkmn.name, newitemname))
                 break
               end
             end

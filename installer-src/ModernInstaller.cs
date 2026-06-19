@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,6 +38,7 @@ namespace InfiniteFusionPtbrInstaller
         private TextBlock statusDetails;
         private TextBox logBox;
         private readonly List<Control> actionControls = new List<Control>();
+        private CancellationTokenSource scanCancellation;
 
         private static readonly Brush PageBackground = BrushFromRgb(13, 17, 23);
         private static readonly Brush CardBackground = BrushFromRgb(22, 27, 34);
@@ -103,7 +105,6 @@ namespace InfiniteFusionPtbrInstaller
             var grid = new Grid();
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             card.Child = grid;
 
             var icon = new Image
@@ -140,19 +141,8 @@ namespace InfiniteFusionPtbrInstaller
             badges.Children.Add(CreateBadge("Backup obrigatório", BrushFromRgb(191, 135, 0)));
             badges.Children.Add(CreateBadge("Fan-made", Purple));
             badges.Children.Add(CreateBadge("Sem download do jogo", BrushFromRgb(218, 54, 51)));
+            badges.Children.Add(CreateBadge("Pokédex futura", GrayButton));
             textStack.Children.Add(badges);
-
-            var logo = new Image
-            {
-                Source = LoadImage("readme_logo.png"),
-                Width = 260,
-                Height = 132,
-                Stretch = Stretch.Uniform,
-                Opacity = 0.95,
-                Margin = new Thickness(24, 0, 0, 0)
-            };
-            Grid.SetColumn(logo, 2);
-            grid.Children.Add(logo);
             return card;
         }
 
@@ -169,7 +159,7 @@ namespace InfiniteFusionPtbrInstaller
             };
             border.Child = new TextBlock
             {
-                Text = "Este instalador não inclui e não baixa o jogo. Baixe Pokemon Infinite Fusion somente pelo Discord oficial do projeto.",
+                Text = "Este instalador não inclui e não baixa o jogo. Baixe Pokemon Infinite Fusion somente pelo Discord oficial do projeto. Depois de atualizar o jogo pelo updater oficial, rode este instalador de novo antes de abrir seu save.",
                 TextWrapping = TextWrapping.Wrap,
                 Foreground = WarningText,
                 FontSize = 13.5
@@ -230,7 +220,15 @@ namespace InfiniteFusionPtbrInstaller
 
             scanButton = CreateButton("Escanear", GrayButton);
             scanButton.Margin = new Thickness(8, 0, 0, 0);
-            scanButton.Click += async delegate { await ScanForGameFolder(); };
+            scanButton.Click += async delegate
+            {
+                if (scanCancellation != null)
+                {
+                    scanCancellation.Cancel();
+                    return;
+                }
+                await ScanForGameFolder();
+            };
             Grid.SetColumn(scanButton, 2);
             pathGrid.Children.Add(scanButton);
 
@@ -430,13 +428,17 @@ namespace InfiniteFusionPtbrInstaller
 
         private async Task ScanForGameFolder()
         {
+            scanCancellation = new CancellationTokenSource();
             SetBusy(true);
+            scanButton.IsEnabled = true;
+            scanButton.Content = "Cancelar scan";
             progressBar.IsIndeterminate = true;
             SetResult("Escaneando pastas comuns...", "Procurando Game.exe junto de Data\\Scripts. Isso pode levar um pouco.");
             Log("Escaneando pastas comuns em busca do Pokemon Infinite Fusion.");
             try
             {
-                var found = await Task.Run(delegate { return FindGameFolders(); });
+                var token = scanCancellation.Token;
+                var found = await Task.Run(delegate { return FindGameFolders(token); }, token);
                 progressBar.IsIndeterminate = false;
                 progressBar.Value = 0;
                 if (found.Count == 0)
@@ -468,22 +470,37 @@ namespace InfiniteFusionPtbrInstaller
             catch (Exception ex)
             {
                 progressBar.IsIndeterminate = false;
-                SetResult("Erro no escaneamento", ex.Message);
-                Log("Erro no escaneamento: " + ex.Message);
+                if (ex is OperationCanceledException)
+                {
+                    SetResult("Escaneamento cancelado", "Você pode escolher o Game.exe manualmente ou tentar escanear de novo.");
+                    Log("Escaneamento cancelado pelo usuário.");
+                }
+                else
+                {
+                    SetResult("Erro no escaneamento", ex.Message);
+                    Log("Erro no escaneamento: " + ex.Message);
+                }
             }
             finally
             {
+                if (scanCancellation != null)
+                {
+                    scanCancellation.Dispose();
+                    scanCancellation = null;
+                }
+                scanButton.Content = "Escanear";
                 SetBusy(false);
             }
         }
 
-        private List<string> FindGameFolders()
+        private List<string> FindGameFolders(CancellationToken token)
         {
             var results = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             var roots = BuildSearchRoots();
             foreach (var root in roots)
             {
-                ScanRoot(root, results, 5, 22000);
+                token.ThrowIfCancellationRequested();
+                ScanRoot(root, results, 5, 22000, token);
                 if (results.Count >= 20) break;
             }
             return results.OrderBy(x => x).ToList();
@@ -523,7 +540,7 @@ namespace InfiniteFusionPtbrInstaller
             }
         }
 
-        private void ScanRoot(string root, HashSet<string> results, int maxDepth, int maxDirectories)
+        private void ScanRoot(string root, HashSet<string> results, int maxDepth, int maxDirectories, CancellationToken token)
         {
             var queue = new Queue<Tuple<string, int>>();
             queue.Enqueue(Tuple.Create(root, 0));
@@ -531,6 +548,7 @@ namespace InfiniteFusionPtbrInstaller
             var scanned = 0;
             while (queue.Count > 0 && scanned < maxDirectories && results.Count < 20)
             {
+                token.ThrowIfCancellationRequested();
                 var item = queue.Dequeue();
                 var dir = item.Item1;
                 var depth = item.Item2;

@@ -23,6 +23,16 @@ Download the BAT package from the Releases page:
 
 To restore, run `installer/Restore-Latest-Backup.bat` and select the same game folder.
 
+### After Official Game Updates
+
+If you update Pokemon Infinite Fusion with the official updater `.bat`, run the PT-BR installer again before opening your save. For the BAT method, run `installer/Install-PTBR.bat` again from the extracted package or use the one-line PowerShell command below from the game folder.
+
+Known crash if the translation is missing after an update:
+
+`Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass`
+
+If this happens, close the game and reinstall/update the PT-BR translation. For extra safety before official updates, manually copy `%APPDATA%\infinitefusion`.
+
 ### One-Line PowerShell Install
 
 Advanced users can open PowerShell inside the game folder and run:
@@ -57,6 +67,16 @@ Baixe o pacote BAT pela página de Releases:
 8. Abra o jogo e selecione `Português`.
 
 Para restaurar, execute `installer/Restore-Latest-Backup.bat` e selecione a mesma pasta do jogo.
+
+### Depois De Updates Oficiais
+
+Se você atualizar Pokemon Infinite Fusion pelo updater oficial `.bat`, rode o instalador PT-BR de novo antes de abrir seu save. No método BAT, execute `installer/Install-PTBR.bat` de novo a partir do pacote extraído ou use o comando PowerShell abaixo dentro da pasta do jogo.
+
+Crash conhecido quando a tradução está ausente depois de um update:
+
+`Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass`
+
+Se isso acontecer, feche o jogo e reinstale/atualize a tradução PT-BR. Por segurança, antes de updates oficiais, copie manualmente `%APPDATA%\infinitefusion`.
 
 ### Instalação Por Uma Linha No PowerShell
 

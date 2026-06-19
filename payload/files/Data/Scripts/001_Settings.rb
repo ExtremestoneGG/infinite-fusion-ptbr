@@ -319,14 +319,14 @@ module Settings
   # The names of each pocket of the Bag. Ignore the first entry ("").
   def self.bag_pocket_names
     return ["",
-            _INTL("Items"),
+            _INTL("Itens"),
             _INTL("Medicine"),
             _INTL("Poké Balls"),
             _INTL("TMs & HMs"),
             _INTL("Berries"),
             _INTL("Mail"),
-            _INTL("Battle Items"),
-            _INTL("Key Items")
+            _INTL("Itens de batalha"),
+            _INTL("Itens-chave")
     ]
   end
 

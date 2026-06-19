@@ -265,13 +265,13 @@ class PokemonGameOption_Scene < PokemonOption_Scene
       $Trainer.lowest_difficulty = $Trainer.selected_difficulty
       echoln "lowered difficulty (#{$Trainer.selected_difficulty})"
       if @manually_changed_difficulty
-        pbMessage(_INTL("The savefile's lowest selected difficulty was changed to #{getDisplayDifficulty()}."))
+        pbMessage(_INTL("A menor dificuldade selecionada deste save foi alterada para #{getDisplayDifficulty()}."))
         @manually_changed_difficulty = false
       end
     end
 
     if getTrainersDataMode != @current_game_mode
-      pbMessage(_INTL("The game was mode changed - Reshuffling trainers."))
+      pbMessage(_INTL("O modo do jogo foi alterado - reorganizando trainers."))
       Kernel.pbShuffleTrainers
       @manually_changed_gamemode = false
     end

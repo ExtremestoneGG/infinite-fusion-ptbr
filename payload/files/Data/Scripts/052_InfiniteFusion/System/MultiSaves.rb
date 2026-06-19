@@ -361,8 +361,8 @@ class PokemonLoadScreen
     end
 
     pbMessage(_INTL(
-                "The save file is corrupt. The most recent backup will be loaded instead.\n" +
-                  "\\C[2]{1}\\C[0]\nBackup date: \\C[3]{2}",
+                "O arquivo de save está corrompido. O backup mais recente será carregado no lugar dele.\n" +
+                  "\\C[2]{1}\\C[0]\nData do backup: \\C[3]{2}",
                 latest, formatted_time
               ))
 
@@ -384,9 +384,9 @@ class PokemonLoadScreen
   # Called if save file is invalid.
   # Prompts the player to delete the save files.
   def prompt_save_deletion(file_path)
-    pbMessage(_INTL("A save file is corrupt, or is incompatible with this game."))
+    pbMessage(_INTL("Um arquivo de save está corrompido ou é incompatível com este jogo."))
     self.delete_save_data(file_path) if pbConfirmMessageSerious(
-      _INTL("No backup was found. Do you want to delete that save file? The game will exit afterwards either way.")
+      _INTL("Nenhum backup foi encontrado. Quer excluir esse arquivo de save? O jogo será fechado depois de qualquer forma.")
     )
     exit
   end
@@ -395,9 +395,9 @@ class PokemonLoadScreen
   def delete_save_data(file_path = nil)
     begin
       SaveData.delete_file(file_path)
-      pbMessage(_INTL("The save data was deleted."))
+      pbMessage(_INTL("Os dados de save foram excluídos."))
     rescue SystemCallError
-      pbMessage(_INTL("The save data could not be deleted."))
+      pbMessage(_INTL("Não foi possível excluir os dados de save."))
     end
   end
 
@@ -427,7 +427,7 @@ class PokemonLoadScreen
     updateCustomDexFile
     newer_version = find_newer_available_version
     if newer_version
-      pbMessage(_INTL("Version {1} is now available! Please use the game's installer to download the newest version. Check the Discord for more information.", newer_version))
+      pbMessage(_INTL("A versão {1} já está disponível! Use o instalador do jogo para baixar a versão mais nova. Confira o Discord para mais informações.", newer_version))
     end
 
     if Settings::STARTUP_MESSAGES != ""
@@ -437,7 +437,7 @@ class PokemonLoadScreen
       handleReplaceExistingSprites()
     end
     if ($game_temp.nb_imported_sprites && $game_temp.nb_imported_sprites > 0)
-      pbMessage(_INTL("{1} new custom sprites were imported into the game", $game_temp.nb_imported_sprites.to_s))
+      pbMessage(_INTL("{1} novos sprites personalizados foram importados para o jogo", $game_temp.nb_imported_sprites.to_s))
     end
     checkEnableSpritesDownload
 
@@ -466,20 +466,20 @@ class PokemonLoadScreen
       if show_continue
         commands[cmd_continue = commands.length] = "#{@selected_file}"
         if @save_data[:player].mystery_gift_unlocked
-          commands[cmd_mystery_gift = commands.length] = _INTL('Mystery Gift') # Honestly I have no idea how to make Mystery Gift work well with this.
+          commands[cmd_mystery_gift = commands.length] = _INTL('Presente Misterioso') # Honestly I have no idea how to make Mystery Gift work well with this.
         end
       end
 
-      commands[cmd_new_game = commands.length] = _INTL('New Game')
+      commands[cmd_new_game = commands.length] = _INTL('Novo jogo')
       if new_game_plus
-        commands[cmd_new_game_plus = commands.length] = _INTL('New Game +')
+        commands[cmd_new_game_plus = commands.length] = _INTL('Novo jogo +')
       end
-      commands[cmd_options = commands.length] = _INTL('Options')
-      commands[cmd_language = commands.length] = _INTL('Language') if Settings::LANGUAGES.length >= 2
+      commands[cmd_options = commands.length] = _INTL('Opções')
+      commands[cmd_language = commands.length] = _INTL('Idioma') if Settings::LANGUAGES.length >= 2
       commands[cmd_discord = commands.length] = _INTL('Discord')
       commands[cmd_wiki = commands.length] = _INTL('Wiki')
       commands[cmd_debug = commands.length] = _INTL('Debug') if $DEBUG
-      commands[cmd_quit = commands.length] = _INTL('Quit Game')
+      commands[cmd_quit = commands.length] = _INTL('Sair do jogo')
       cmd_left = -3
       cmd_right = -2
 
@@ -589,10 +589,10 @@ end
 class PokemonSaveScreen
   def doSave(slot)
     if Game.save(slot)
-      pbMessage(_INTL("\\se[]{1} saved the game.\\me[GUI save game]\\wtnp[30]", $Trainer.name))
+      pbMessage(_INTL("\\se[]{1} salvou o jogo.\\me[GUI save game]\\wtnp[30]", $Trainer.name))
       return true
     else
-      pbMessage(_INTL("\\se[]Save failed.\\wtnp[30]"))
+      pbMessage(_INTL("\\se[]Falha ao salvar.\\wtnp[30]"))
       return false
     end
   end
@@ -636,7 +636,7 @@ class PokemonSaveScreen
       slot = SaveData::MANUAL_SLOTS[index]
       # Confirm if slot not empty
       if !File.file?(SaveData.get_full_path(slot)) ||
-        pbConfirmMessageSerious(_INTL("Are you sure you want to overwrite the save in {1}?",slot)) # If the slot names were changed this grammar might need adjustment.
+        pbConfirmMessageSerious(_INTL("Tem certeza de que quer sobrescrever o save em {1}?",slot)) # If the slot names were changed this grammar might need adjustment.
         pbSEPlay('GUI save choice')
         ret = doSave(slot)
       end
@@ -648,7 +648,7 @@ class PokemonSaveScreen
   # Handles the UI for the save slot select screen. Returns the index of the chosen slot, or -1.
   # Based on pbShowCommands
   def slotSelectCommands(choices, choice_info, defaultCmd = 0)
-    msgwindow = Window_AdvancedTextPokemon.new(_INTL("Which slot to save in?"))
+    msgwindow = Window_AdvancedTextPokemon.new(_INTL("Salvar em qual slot?"))
     msgwindow.z = 99999
     msgwindow.visible = true
     msgwindow.letterbyletter = true
@@ -693,7 +693,7 @@ class PokemonSaveScreen
   def getSaveInfoBoxContents(slot)
     full_path = SaveData.get_full_path(slot)
     if !File.file?(full_path)
-      return _INTL("<ac><c3=3050C8,D0D0C8>(empty)</c3></ac>")
+      return _INTL("<ac><c3=3050C8,D0D0C8>(vazio)</c3></ac>")
     end
     temp_save_data = SaveData.read_from_file(full_path)
 
@@ -704,7 +704,7 @@ class PokemonSaveScreen
       time_str = time.strftime(_INTL("%I:%M%p"))
       datetime_str = "#{date_str}<r>#{time_str}<br>"
     else
-      datetime_str = _INTL("<ac>(old save)</ac>")
+      datetime_str = _INTL("<ac>(save antigo)</ac>")
     end
 
     # Map name
@@ -715,9 +715,9 @@ class PokemonSaveScreen
     hour = totalsec / 60 / 60
     min = totalsec / 60 % 60
     if hour > 0
-      elapsed_str = _INTL("Time<r>{1}h {2}m<br>", hour, min)
+      elapsed_str = _INTL("Tempo<r>{1}h {2}m<br>", hour, min)
     else
-      elapsed_str = _INTL("Time<r>{1}m<br>", min)
+      elapsed_str = _INTL("Tempo<r>{1}m<br>", min)
     end
 
     return "<c3=3050C8,D0D0C8>#{datetime_str}</c3>" + # blue
@@ -898,16 +898,16 @@ end
 def pbEmergencySave
   oldscene = $scene
   $scene = nil
-  pbMessage(_INTL("The script is taking too long. The game will restart."))
+  pbMessage(_INTL("O script está demorando demais. O jogo será reiniciado."))
   return if !$Trainer
   return if !$Trainer.save_slot
   current_file = SaveData.get_full_path($Trainer.save_slot)
   backup_file = SaveData.get_backup_file_path
   file_copy(current_file, backup_file)
   if Game.save
-    pbMessage(_INTL("\\se[]The game was saved.\\me[GUI save game] The previous save file has been backed up.\\wtnp[30]"))
+    pbMessage(_INTL("\\se[]O jogo foi salvo.\\me[GUI save game] O arquivo de save anterior recebeu backup.\\wtnp[30]"))
   else
-    pbMessage(_INTL("\\se[]Save failed.\\wtnp[30]"))
+    pbMessage(_INTL("\\se[]Falha ao salvar.\\wtnp[30]"))
   end
   $scene = oldscene
 end

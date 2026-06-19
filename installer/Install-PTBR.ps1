@@ -224,18 +224,13 @@ function Install-Translation {
     New-Item -ItemType Directory -Force -Path $backupRoot | Out-Null
 
     $copied = 0
-    $dexChanged = 0
-    $baseDexChanged = 0
     $descriptionChanged = 0
     try {
         Show-Info "Copying translated language and script files..."
         $copied = Copy-DirectFiles $packageRoot $GameRoot $backupRoot $BackupEnabled
 
-        Show-Info "Applying JSON text patches. This can take a few minutes on older machines..."
+        Show-Info "Applying outfit description text patches. Pokedex descriptions are skipped in v1.1.0."
         $patch = Read-JsonFile $patchPath
-        $entryMap = Convert-PairsToDictionary $patch.entry_translations
-        $dexChanged = Apply-EntryPatch $GameRoot $backupRoot $entryMap "Data\pokedex\dex.json" $BackupEnabled
-        $baseDexChanged = Apply-EntryPatch $GameRoot $backupRoot $entryMap "Data\dex.json" $BackupEnabled
 
         foreach ($section in $patch.outfit_description_translations) {
             $relative = ([string]$section.path) -replace "/", "\"
@@ -259,8 +254,7 @@ function Install-Translation {
 PT-BR translation installed.
 
 Files copied: $copied
-Pokedex entries patched: $dexChanged
-Base dex entries patched: $baseDexChanged
+Pokedex descriptions: skipped for v1.1.0 future work
 Outfit descriptions patched: $descriptionChanged
 Backup: $backupRoot
 "@

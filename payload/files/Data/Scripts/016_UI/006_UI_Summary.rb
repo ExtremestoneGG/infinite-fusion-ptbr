@@ -237,7 +237,7 @@ class PokemonSummary_Scene
     ret = -1
     @sprites["messagebox"].text = text
     @sprites["messagebox"].visible = true
-    using(cmdwindow = Window_CommandPokemon.new([_INTL("Yes"), _INTL("No")])) {
+    using(cmdwindow = Window_CommandPokemon.new([_INTL("Sim"), _INTL("Não")])) {
       cmdwindow.z = @viewport.z + 1
       cmdwindow.visible = false
       pbBottomRight(cmdwindow)
@@ -592,7 +592,7 @@ class PokemonSummary_Scene
     showNature = !@pokemon.shadowPokemon? || @pokemon.heartStage > 3
     if showNature
       natureName = @pokemon.nature.name
-      memo += _INTL("<c3=404040,B0B0B0>Nature <c3=F83820,E09890>{1}<c3=404040,B0B0B0>.\n", natureName)
+      memo += _INTL("<c3=404040,B0B0B0>Natureza <c3=F83820,E09890>{1}<c3=404040,B0B0B0>.\n", natureName)
     end
     # Write date received
     if @pokemon.timeReceived
@@ -814,10 +814,10 @@ class PokemonSummary_Scene
     end
     # Write various bits of text
     textpos = [
-      [_INTL("MOVES"), 26, 10, 0, base, shadow],
-      [_INTL("CATEGORY"), 20, 116, 0, base, shadow],
-      [_INTL("POWER"), 20, 148, 0, base, shadow],
-      [_INTL("ACCURACY"), 20, 180, 0, base, shadow]
+      [_INTL("GOLPES"), 26, 10, 0, base, shadow],
+      [_INTL("CATEGORIA"), 20, 116, 0, base, shadow],
+      [_INTL("PODER"), 20, 148, 0, base, shadow],
+      [_INTL("PRECISÃO"), 20, 180, 0, base, shadow]
     ]
     imagepos = []
     # Write move names, types and PP amounts for each known move
@@ -1180,7 +1180,7 @@ class PokemonSummary_Scene
           @sprites["markingoverlay"].bitmap.blt(300 + 58 * (i % 3), 154 + 50 * (i / 3), @markingbitmap.bitmap, markrect)
         end
         textpos = [
-          [_INTL("Mark {1}", pokemon.name), 366, 90, 2, base, shadow],
+          [_INTL("Marcar {1}", pokemon.name), 366, 90, 2, base, shadow],
           [_INTL("OK"), 366, 242, 2, base, shadow],
           [_INTL("Cancelar"), 366, 292, 2, base, shadow]
         ]
@@ -1194,7 +1194,7 @@ class PokemonSummary_Scene
         @sprites["markingsel"].x = 284
         @sprites["markingsel"].y = 244
         @sprites["markingsel"].src_rect.y = @sprites["markingsel"].bitmap.height / 2
-      elsif index == 7 # Cancel
+      elsif index == 7 # Cancelar
         @sprites["markingsel"].x = 284
         @sprites["markingsel"].y = 294
         @sprites["markingsel"].src_rect.y = @sprites["markingsel"].bitmap.height / 2
@@ -1212,7 +1212,7 @@ class PokemonSummary_Scene
         if index == 6 # OK
           ret = markings
           break
-        elsif index == 7 # Cancel
+        elsif index == 7 # Cancelar
           break
         else
           mask = (1 << index)
@@ -1336,21 +1336,21 @@ class PokemonSummary_Scene
     msg = "What should you do?"
     loop do
       cmd = pbShowCommands([
-        _INTL("Put on hat"),
-        _INTL("Remove hat"),
-        _INTL("Back")])
+        _INTL("Colocar chapéu"),
+        _INTL("Remover chapéu"),
+        _INTL("Voltar")])
       break if cmd == -1
       if cmd == 0   #Put on hat
         @sprites["pokemon"].visible=false
         pbOpenHatScreenSummary(pokemon)
         @sprites["pokemon"].visible=true
-        pbDisplay(_INTL("{1} put on a hat!",pokemon.name))
+        pbDisplay(_INTL("{1} colocou um chapéu!",pokemon.name))
         #@sprites["pokemon"].visible=false
 
       elsif cmd == 1 #remove hat
         if pbConfirm(_INTL("Remover o chapéu de {1}?",pokemon.name))
           pokemon.hat=nil
-          pbDisplay(_INTL("{1}'s hat was removed",pokemon.name))
+          pbDisplay(_INTL("O chapéu de {1} foi removido.",pokemon.name))
         end
       else
         break
@@ -1509,7 +1509,7 @@ class PokemonSummaryScreen
     loop do
       ret = @scene.pbChooseMoveToForget(nil)
       break if ret >= 0
-      pbMessage(_INTL("You must choose a move!")) { @scene.pbUpdate }
+      pbMessage(_INTL("Você precisa escolher um golpe!")) { @scene.pbUpdate }
     end
     @scene.pbEndScene
     return ret

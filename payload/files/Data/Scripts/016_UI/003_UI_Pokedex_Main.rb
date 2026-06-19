@@ -164,7 +164,7 @@ class PokedexSearchSelectionSprite < SpriteWrapper
       end
     else   # Parameter screen
       case @index
-      when -2,-3   # OK, Cancel
+      when -2,-3   # OK, Cancelar
         self.src_rect.y = 244; self.src_rect.height = 40
       else
         case @mode
@@ -191,7 +191,7 @@ class PokedexSearchSelectionSprite < SpriteWrapper
         end
       when -2   # OK
         self.x = 4; self.y = 334
-      when -3   # Cancel
+      when -3   # Cancelar
         self.x = 356; self.y = 334
       else
         case @mode
@@ -899,7 +899,7 @@ class PokemonPokedex_Scene
       Input.update
       if mode==3 || mode==4
         if Input.trigger?(Input::UP)
-          if index<-1; minmax = 0; index = selindex[minmax]   # From OK/Cancel
+          if index<-1; minmax = 0; index = selindex[minmax]   # From OK/Cancelar
           elsif minmax==0; minmax = 1; index = selindex[minmax]
           end
           if index!=oldindex || minmax!=oldminmax
@@ -950,8 +950,8 @@ class PokemonPokedex_Scene
         if Input.trigger?(Input::UP)
           if index==-1; index = cmds.length-1-(cmds.length-1)%cols-1   # From blank
           elsif index==-2; index = ((cmds.length-1)/cols).floor*cols   # From OK
-          elsif index==-3 && mode==0; index = cmds.length-1   # From Cancel
-          elsif index==-3; index = -1   # From Cancel
+          elsif index==-3 && mode==0; index = cmds.length-1   # From Cancelar
+          elsif index==-3; index = -1   # From Cancelar
           elsif index>=cols; index -= cols
           end
           pbPlayCursorSE if index!=oldindex
@@ -992,7 +992,7 @@ class PokemonPokedex_Scene
           pbPlayDecisionSE
           ret = selindex
           break
-        elsif index==-3   # Cancel
+        elsif index==-3   # Cancelar
           pbPlayCloseMenuSE
           ret = nil
           break
@@ -1149,7 +1149,7 @@ class PokemonPokedex_Scene
         when 8   # Start search (filter)
           dexlist = pbSearchDexList(params)
           if dexlist.length==0
-            pbMessage(_INTL("No matching Pokémon were found."))
+            pbMessage(_INTL("Nenhum Pokémon correspondente foi encontrado."))
           else
             @dexlist = dexlist
             @sprites["pokedex"].commands = @dexlist
@@ -1159,7 +1159,7 @@ class PokemonPokedex_Scene
             @searchParams = params
             break
           end
-        when 9   # Cancel
+        when 9   # Cancelar
           pbPlayCloseMenuSE
           break
         end

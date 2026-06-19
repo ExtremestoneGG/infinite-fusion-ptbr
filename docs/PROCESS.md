@@ -12,7 +12,7 @@ The process was:
 4. Preserve names that Brazilian players usually keep in English: Pokemon names, item names, move names, ability names, NPC names, location names, organization names, and type names.
 5. Add `Português` to the language list in `Data/Scripts/001_Settings.rb`.
 6. Patch script-level UI strings that do not reliably change through the language file alone.
-7. Translate Pokedex entries and outfit descriptions through text-only JSON mappings.
+7. Translate outfit descriptions through text-only JSON mappings and keep Pokedex species/fusion descriptions documented as future work.
 8. Run validation scans for JSON validity, known exception rules, and obvious English leftovers.
 9. Package only the translation patch, not the full game.
 
@@ -30,7 +30,7 @@ O processo foi:
 4. Preservar nomes que jogadores brasileiros normalmente mantêm em inglês: nomes de Pokemon, itens, golpes, habilidades, NPCs, lugares, organizações e tipos.
 5. Adicionar `Português` à lista de idiomas em `Data/Scripts/001_Settings.rb`.
 6. Ajustar textos de interface em scripts quando eles não mudavam de forma confiável apenas pelo arquivo de idioma.
-7. Traduzir entradas da Pokédex e descrições de roupas usando mapeamentos apenas de texto.
+7. Traduzir descrições de roupas usando mapeamentos apenas de texto e manter as descrições de espécies/fusões da Pokédex documentadas como trabalho futuro.
 8. Rodar varreduras de validação para JSON, regras de exceção e restos óbvios em inglês.
 9. Empacotar somente o patch de tradução, não o jogo completo.
 

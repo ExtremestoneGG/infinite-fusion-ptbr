@@ -166,7 +166,7 @@ class HatsMartAdapter < OutfitsMartAdapter
     @worn_clothes2 = $Trainer.hat2
 
     playOutfitChangeAnimation()
-    pbMessage(_INTL("You put on the hat(s)!\\wtnp[30]"))
+    pbMessage(_INTL("Voce colocou o(s) chapeu(s)!\\wtnp[30]"))
   end
 
   def putOnOutfit(item)
@@ -212,8 +212,8 @@ class HatsMartAdapter < OutfitsMartAdapter
   end
 
   def getSpecialItemDescription(specialType)
-    hair_situation = !$Trainer.hair || getSimplifiedHairIdFromFullID($Trainer.hair) == HAIR_BALD ? "bald head" : "fabulous hair"
-    return "Go without a hat and show off your #{hair_situation}!"
+    hair_situation = !$Trainer.hair || getSimplifiedHairIdFromFullID($Trainer.hair) == HAIR_BALD ? "sua cabeça careca" : "seu cabelo estiloso"
+    return "Fique sem chapéu e mostre #{hair_situation}!"
   end
 
   def doSpecialItemAction(specialType,item=nil)

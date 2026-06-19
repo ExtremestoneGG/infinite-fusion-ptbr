@@ -51,7 +51,7 @@ class PokeBattle_FakeBattler
   end
 
   def pbThis(lowerCase=false)
-    return (lowerCase) ? _INTL("the wild {1}",name) : _INTL("The wild {1}",name)
+    return (lowerCase) ? _INTL("o {1} selvagem",name) : _INTL("O {1} selvagem",name)
   end
 
   def opposes?(i)
@@ -443,7 +443,7 @@ class PokeBattle_SafariZone
         case cmd
         when 0   # Ball
           if pbBoxesFull?
-            pbDisplay(_INTL("The boxes are full! You can't catch any more Pokémon!"))
+            pbDisplay(_INTL("As Boxes estão cheias! Você não pode capturar mais Pokémon!"))
             next
           end
           @ballCount -= 1
@@ -457,18 +457,18 @@ class PokeBattle_SafariZone
             end
           end
         when 1   # Bait
-          pbDisplayBrief(_INTL("{1} threw some bait at the {2}!",self.pbPlayer.name,pkmn.name))
+          pbDisplayBrief(_INTL("{1} jogou uma isca para {2}!",self.pbPlayer.name,pkmn.name))
           @scene.pbThrowBait
           catchFactor  /= 2 if pbRandom(100)<90   # Harder to catch
           escapeFactor /= 2                       # Less likely to escape
         when 2   # Rock
-          pbDisplayBrief(_INTL("{1} threw a rock at the {2}!",self.pbPlayer.name,pkmn.name))
+          pbDisplayBrief(_INTL("{1} jogou uma pedra em {2}!",self.pbPlayer.name,pkmn.name))
           @scene.pbThrowRock
           catchFactor  *= 2                       # Easier to catch
           escapeFactor *= 2 if pbRandom(100)<90   # More likely to escape
         when 3   # Run
           pbSEPlay("Battle flee")
-          pbDisplayPaused(_INTL("You got away safely!"))
+          pbDisplayPaused(_INTL("Você fugiu em segurança!"))
           @decision = 3
         end
         catchFactor  = [[catchFactor,3].max,20].min
@@ -476,18 +476,18 @@ class PokeBattle_SafariZone
         # End of round
         if @decision==0
           if @ballCount<=0
-            pbDisplay(_INTL("PA: You have no Safari Balls left! Game over!"))
+            pbDisplay(_INTL("PA: Você não tem mais Safari Balls! Fim de jogo!"))
             @decision = 2
           elsif can_escape(pkmn, escapeFactor)
             pbSEPlay("Battle flee")
-            pbDisplay(_INTL("{1} fled!",pkmn.name))
+            pbDisplay(_INTL("{1} fugiu!",pkmn.name))
             @decision = 3
           elsif cmd==1   # Bait
-            pbDisplay(_INTL("{1} is eating!",pkmn.name))
+            pbDisplay(_INTL("{1} está comendo!",pkmn.name))
           elsif cmd==2   # Rock
-            pbDisplay(_INTL("{1} is angry!",pkmn.name))
+            pbDisplay(_INTL("{1} está irritado!",pkmn.name))
           else
-            pbDisplay(_INTL("{1} is watching carefully!",pkmn.name))
+            pbDisplay(_INTL("{1} está observando com atenção!",pkmn.name))
           end
           # Weather continues
           weather_data = GameData::BattleWeather.try_get(@weather)

@@ -38,14 +38,14 @@ class PokemonStorageScreen
       selected = @scene.pbSelectBox(@storage.party)
       if selected == nil
         if pbHeldPokemon
-          pbDisplay(_INTL("You're holding a Pokémon!"))
+          pbDisplay(_INTL("Você está segurando um Pokémon!"))
           next
         end
         next if pbConfirm(_INTL("Continuar operações da Box?"))
         break
       elsif selected[0] == -3 # Close box
         if pbHeldPokemon
-          pbDisplay(_INTL("You're holding a Pokémon!"))
+          pbDisplay(_INTL("Você está segurando um Pokémon!"))
           next
         end
         if pbConfirm(_INTL("Sair da Box?"))
@@ -84,16 +84,16 @@ class PokemonStorageScreen
     cmdReverse = -1
     cmdRelease = -1
     cmdDebug = -1
-    cmdCancel = -1
+    cmdCancelar = -1
     cmdNickname = -1
 
 
     echoln selected
     if heldpoke
-      helptext = _INTL("{1} is selected.", heldpoke.name)
+      helptext = _INTL("{1} foi selecionado.", heldpoke.name)
       commands[cmdMove = commands.length] = (pokemon) ? _INTL("Trocar") : _INTL("Colocar")
     elsif pokemon
-      helptext = _INTL("{1} is selected.", pokemon.name)
+      helptext = _INTL("{1} foi selecionado.", pokemon.name)
       commands[cmdMove = commands.length] = _INTL("Mover")
     end
     commands[cmdSummary = commands.length] = _INTL("Resumo")
@@ -102,7 +102,7 @@ class PokemonStorageScreen
         commands[cmdUnfuse = commands.length] = _INTL("Desfundir")
         commands[cmdReverse = commands.length] = _INTL("Inverter") if $PokemonBag.pbQuantity(:DNAREVERSER) > 0 || $PokemonBag.pbQuantity(:INFINITEREVERSERS) > 0
       else
-        commands[cmdFuse = commands.length] = _INTL("Fuse") if !@heldpkmn
+        commands[cmdFuse = commands.length] = _INTL("Fundir") if !@heldpkmn
       end
     end
     commands[cmdNickname = commands.length] = _INTL("Apelido") if !@heldpkmn && !isTransferBox
@@ -111,7 +111,7 @@ class PokemonStorageScreen
 
     commands[cmdRelease = commands.length] = _INTL("Soltar") if !isTransferBox
     commands[cmdDebug = commands.length] = _INTL("Debug") if $DEBUG
-    commands[cmdCancel = commands.length] = _INTL("Cancelar")
+    commands[cmdCancelar = commands.length] = _INTL("Cancelar")
     command = pbShowCommands(helptext, commands)
     if cmdMove >= 0 && command == cmdMove # Move/Shift/Place
       #@scene.pbSetCursorMode("default")
@@ -180,7 +180,7 @@ class PokemonStorageScreen
         else
           pokemon = @storage[selected[0], selected[1]]
           next if !pokemon
-          command = pbShowCommands(_INTL("{1} is selected.", pokemon.name), [
+          command = pbShowCommands(_INTL("{1} foi selecionado.", pokemon.name), [
             _INTL("Retirar"),
             _INTL("Resumo"),
             _INTL("Soltar"),
@@ -218,7 +218,7 @@ class PokemonStorageScreen
       else
         pokemon = @storage[-1, selected]
         next if !pokemon
-        command = pbShowCommands(_INTL("{1} is selected.", pokemon.name), [
+        command = pbShowCommands(_INTL("{1} foi selecionado.", pokemon.name), [
           _INTL("Guardar"),
           _INTL("Resumo"),
           _INTL("Marcar"),
@@ -246,28 +246,28 @@ class PokemonStorageScreen
     pokemon = @storage[box, index]
 
     if pokemon.egg?
-      pbDisplay(_INTL("You cannot rename an egg!"))
+      pbDisplay(_INTL("Você não pode renomear um Egg!"))
       return
     end
 
     speciesname = PBSpecies.getName(pokemon.species)
     hasNickname = speciesname == pokemon.name
     if hasNickname
-      pbDisplay(_INTL("{1} has no nickname.", speciesname))
+      pbDisplay(_INTL("{1} não tem apelido.", speciesname))
     else
-      pbDisplay(_INTL("{1} has the nickname {2}.", speciesname, pokemon.name))
+      pbDisplay(_INTL("{1} tem o apelido {2}.", speciesname, pokemon.name))
     end
     commands = [
-      _INTL("Rename"),
-      _INTL("Quit")
+      _INTL("Renomear"),
+      _INTL("Sair")
     ]
     command = pbShowCommands(
-      _INTL("What do you want to do?"), commands)
+      _INTL("O que você quer fazer?"), commands)
     case command
     when 0
-      newname = pbEnterPokemonName(_INTL("{1}'s nickname?", speciesname), 0, Pokemon::MAX_NAME_SIZE, "", pokemon)
+      newname = pbEnterPokemonName(_INTL("Apelido de {1}?", speciesname), 0, Pokemon::MAX_NAME_SIZE, "", pokemon)
       pokemon.name = (newname == "") ? speciesname : newname
-      pbDisplay(_INTL("{1} is now named {2}!", speciesname, pokemon.name))
+      pbDisplay(_INTL("{1} agora se chama {2}!", speciesname, pokemon.name))
     when 1
       return
     end
@@ -292,7 +292,7 @@ class PokemonStorageScreen
   end
 
   def pbConfirm(str)
-    return pbShowCommands(str, [_INTL("Yes"), _INTL("No")]) == 0
+    return pbShowCommands(str, [_INTL("Sim"), _INTL("Não")]) == 0
   end
 
   def pbShowCommands(msg, commands, index = 0)
@@ -319,10 +319,10 @@ class PokemonStorageScreen
     box = selected[0]
     index = selected[1]
     if box == -1
-      raise _INTL("Can't withdraw from party...");
+      raise _INTL("Não dá para retirar da equipe...");
     end
     if @storage.party_full?
-      pbDisplay(_INTL("Your party's full!"))
+      pbDisplay(_INTL("Sua equipe está cheia!"))
       return false
     end
 
@@ -347,22 +347,22 @@ class PokemonStorageScreen
     box = selected[0]
     index = selected[1]
     if box != -1
-      raise _INTL("Can't deposit from box...")
+      raise _INTL("Não dá para guardar a partir da Box...")
     end
     if pbAbleCount <= 1 && pbAble?(@storage[box, index]) && !heldpoke
       pbPlayBuzzerSE
-      pbDisplay(_INTL("That's your last Pokémon!"))
+      pbDisplay(_INTL("Esse é seu último Pokémon!"))
     elsif heldpoke && heldpoke.mail
-      pbDisplay(_INTL("Please remove the Mail."))
+      pbDisplay(_INTL("Remova a Mail."))
     elsif !heldpoke && @storage[box, index].mail
-      pbDisplay(_INTL("Please remove the Mail."))
+      pbDisplay(_INTL("Remova a Mail."))
     else
       loop do
     destbox = @scene.pbChooseBox(_INTL("Depositar em qual Box?"))
         if destbox >= 0
           firstfree = @storage.pbFirstFreePos(destbox)
           if firstfree < 0
-            pbDisplay(_INTL("The Box is full."))
+            pbDisplay(_INTL("A Box está cheia."))
             next
           end
           if heldpoke || selected[0] == -1
@@ -397,7 +397,7 @@ class PokemonStorageScreen
 
     if box == -1 && pbAble?(@storage[box, index]) && pbAbleCount <= 1
       pbPlayBuzzerSE
-      pbDisplay(_INTL("That's your last Pokémon!"))
+      pbDisplay(_INTL("Esse é seu último Pokémon!"))
       return
     end
     @scene.pbHold(selected)
@@ -412,7 +412,7 @@ class PokemonStorageScreen
 
     if @storage[box].is_a?(StorageTransferBox)
       if @heldpkmn.owner.name == "RENTAL"
-        pbMessage(_INTL("This Pokémon cannot be transferred."))
+        pbMessage(_INTL("Este Pokémon não pode ser transferido."))
         return
       end
       unless verifyTransferBoxAutosave
@@ -421,16 +421,16 @@ class PokemonStorageScreen
     end
 
     if @storage[box, index]
-      pbDisplay(_INTL("Can't place that there."))
+      pbDisplay(_INTL("Não dá para colocar isso aí."))
       return
       echoln _INTL("Position {1},{2} is not empty...", box, index)
     end
     if box != -1 && index >= @storage.maxPokemon(box)
-      pbDisplay(_INTL("Can't place that there."))
+      pbDisplay(_INTL("Não dá para colocar isso aí."))
       return
     end
     if box != -1 && @heldpkmn.mail
-      pbDisplay(_INTL("Please remove the mail."))
+      pbDisplay(_INTL("Remova a Mail."))
       return
     end
     if box >= 0
@@ -457,7 +457,7 @@ class PokemonStorageScreen
 
     if @storage[box].is_a?(StorageTransferBox)
       if @heldpkmn.owner.name == "RENTAL"
-        pbMessage(_INTL("This Pokémon cannot be transferred."))
+        pbMessage(_INTL("Este Pokémon não pode ser transferido."))
         return
       end
       unless verifyTransferBoxAutosave
@@ -467,11 +467,11 @@ class PokemonStorageScreen
 
     if box == -1 && pbAble?(@storage[box, index]) && pbAbleCount <= 1 && !pbAble?(@heldpkmn)
       pbPlayBuzzerSE
-      pbDisplay(_INTL("That's your last Pokémon!"))
+      pbDisplay(_INTL("Esse é seu último Pokémon!"))
       return false
     end
     if box != -1 && @heldpkmn.mail
-      pbDisplay(_INTL("Please remove the mail."))
+      pbDisplay(_INTL("Remova a Mail."))
       return false
     end
     if box >= 0
@@ -609,11 +609,11 @@ class PokemonStorageScreen
   end
 
   def boxCommandTransferInfo
-    pbMessage(_INTL("This is the Transfer Box. It's used to transfer Pokémon between savefiles!"))
-    pbMessage(_INTL("Any Pokémon that is placed in this box will be shared between all savefiles of Pokémon Infinite Fusion 1 and Pokémon Infinite Fusion 2."))
+    pbMessage(_INTL("Esta é a Transfer Box. Ela é usada para transferir Pokémon entre savefiles!"))
+    pbMessage(_INTL("Qualquer Pokémon colocado nesta Box será compartilhado entre todos os savefiles de Pokémon Infinite Fusion 1 e Pokémon Infinite Fusion 2."))
   end
   def boxCommandName
-    @scene.pbBoxName(_INTL("Box name?"), 0, 20)
+    @scene.pbBoxName(_INTL("Nome da Box?"), 0, 20)
   end
   def boxCommandJump
     destbox = @scene.pbChooseBox(_INTL("Ir para qual Box?"))
@@ -629,7 +629,7 @@ class PokemonStorageScreen
         index = i; break
       end
     end
-    wpaper = pbShowCommands(_INTL("Pick the wallpaper."), papers[0], index)
+    wpaper = pbShowCommands(_INTL("Escolha o papel de parede."), papers[0], index)
     if wpaper >= 0
       @scene.pbChangeBackground(papers[1][wpaper])
     end
@@ -665,7 +665,7 @@ class PokemonStorageScreen
         ]
         commands.push(_INTL("Cancelar"))
         commands[2] = _INTL("Guardar") if selected[0] == -1
-        helptext = _INTL("{1} is selected.", pokemon.name)
+        helptext = _INTL("{1} foi selecionado.", pokemon.name)
         command = pbShowCommands(helptext, commands)
         case command
         when 0 # Select
@@ -704,11 +704,11 @@ class PokemonStorageScreen
     poke_head = heldpoke
     if heldpoke
       if dexNum(heldpoke.species) > NB_POKEMON
-        pbDisplay(_INTL("{1} is already fused!", heldpoke.name))
+        pbDisplay(_INTL("{1} já está fundido!", heldpoke.name))
         return
       end
       if (heldpoke.egg?)
-        pbDisplay(_INTL("It's impossible to fuse an egg!"))
+        pbDisplay(_INTL("É impossível fundir um Egg!"))
         return
       end
     end
@@ -724,12 +724,12 @@ class PokemonStorageScreen
       @fusionItem = splicerItem
       @scene.setFusing(true, @fusionItem)
       pbHold(selected)
-      pbDisplay(_INTL("Select a Pokémon to fuse it with"))
+      pbDisplay(_INTL("Escolha um Pokémon para fundir com ele."))
       @scene.sprites["box"].disableFusions()
       return
     end
     if !poke_body
-      pbDisplay(_INTL("Select a Pokémon to fuse it with"))
+      pbDisplay(_INTL("Escolha um Pokémon para fundir com ele."))
       @fusionMode = true
       @fusionItem = splicerItem
       @scene.setFusing(true, @fusionItem)
@@ -767,18 +767,18 @@ class PokemonStorageScreen
     pokemon = @storage[selected[0], selected[1]]
 
     if !pokemon
-      command = pbShowCommands(_INTL("Select an action"), [_INTL("Continue fusing"), _INTL("Stop fusing")])
+      command = pbShowCommands(_INTL("Escolha uma ação"), [_INTL("Continuar fundindo"), _INTL("Parar de fundir")])
       case command
       when 1 # stop
         cancelFusion()
       end
     else
       commands = [
-        _INTL("Fuse"),
-        _INTL("Swap")
+        _INTL("Fundir"),
+        _INTL("Trocar")
       ]
-      commands.push(_INTL("Stop fusing"))
-      commands.push(_INTL("Continue fusing"))
+      commands.push(_INTL("Parar de fundir"))
+      commands.push(_INTL("Continuar fundindo"))
 
       if !heldpoke
         pbPlace(selected)
@@ -786,15 +786,15 @@ class PokemonStorageScreen
         @scene.setFusing(false)
         return
       end
-      command = pbShowCommands(_INTL("Select an action"), commands)
+      command = pbShowCommands(_INTL("Escolha uma ação"), commands)
       case command
       when 0 # Fuse
         if !pokemon
-          pbDisplay(_INTL("No Pokémon selected!"))
+          pbDisplay(_INTL("Nenhum Pokémon selecionado!"))
           return
         else
           if dexNum(pokemon.species) > NB_POKEMON
-            pbDisplay(_INTL("This Pokémon is already fused!"))
+            pbDisplay(_INTL("Este Pokémon já está fundido!"))
             return
           end
         end
@@ -802,7 +802,7 @@ class PokemonStorageScreen
 
         selectedHead = selectFusion(pokemon, heldpoke, isSuperSplicer)
         if selectedHead == nil
-          pbDisplay(_INTL("It won't have any effect."))
+          pbDisplay(_INTL("Isso não terá efeito."))
           return false
         end
         if selectedHead == -1 # cancelled out
@@ -838,10 +838,10 @@ class PokemonStorageScreen
           if dexNum(pokemon.species) <= NB_POKEMON
             pbSwap(selected)
           else
-            pbDisplay(_INTL("This Pokémon is already fused!"))
+            pbDisplay(_INTL("Este Pokémon já está fundido!"))
           end
         else
-          pbDisplay(_INTL("Select a Pokémon!"))
+          pbDisplay(_INTL("Escolha um Pokémon!"))
         end
       when 2 # cancel
         cancelFusion()
@@ -856,7 +856,7 @@ class PokemonStorageScreen
     pokemon = @storage[box, index]
 
     if !pokemon.isFusion?
-      scene.pbDisplay(_INTL("It won't have any effect."))
+      scene.pbDisplay(_INTL("Isso não terá efeito."))
       return
     end
     if Kernel.pbConfirmMessageSerious(_INTL("{1} deve ser invertido?", pokemon.name))

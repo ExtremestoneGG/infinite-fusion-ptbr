@@ -12,11 +12,11 @@ class PokemonStorageScreen
     poke_head = heldpoke
     if heldpoke
       if dexNum(heldpoke.species) > NB_POKEMON
-        pbDisplay(_INTL("{1} is already fused!", heldpoke.name))
+        pbDisplay(_INTL("{1} já está fundido!", heldpoke.name))
         return
       end
       if (heldpoke.egg?)
-        pbDisplay(_INTL("It's impossible to fuse an egg!"))
+        pbDisplay(_INTL("É impossível fundir um Egg!"))
         return
       end
     end
@@ -32,12 +32,12 @@ class PokemonStorageScreen
       @fusionItem = splicerItem
       @scene.setFusing(true, @fusionItem)
       pbHold(selected)
-      pbDisplay(_INTL("Select a Pokémon to fuse it with"))
+      pbDisplay(_INTL("Escolha um Pokémon para fundir com ele."))
       @scene.sprites["box"].disableFusions()
       return
     end
     if !poke_body
-      pbDisplay(_INTL("Select a Pokémon to fuse it with"))
+      pbDisplay(_INTL("Escolha um Pokémon para fundir com ele."))
       @fusionMode = true
       @fusionItem = splicerItem
       @scene.setFusing(true, @fusionItem)
@@ -76,17 +76,17 @@ class PokemonStorageScreen
     pokemon = @storage[selected[0], selected[1]]
 
     if !pokemon
-      command = pbShowCommands(_INTL("Select an action"), [_INTL("Continue fusing"), _INTL("Stop fusing")])
+      command = pbShowCommands(_INTL("Escolha uma ação"), [_INTL("Continuar fundindo"), _INTL("Parar de fundir")])
       case command
       when 1 # stop
         cancelFusion
       end
     else
       commands = [
-        _INTL("Fuse"),
-        _INTL("Swap")
+        _INTL("Fundir"),
+        _INTL("Trocar")
       ]
-      commands.push(_INTL("Stop fusing"))
+      commands.push(_INTL("Parar de fundir"))
       commands.push(_INTL("Cancelar"))
 
       if !heldpoke
@@ -95,15 +95,15 @@ class PokemonStorageScreen
         @scene.setFusing(false)
         return
       end
-      command = pbShowCommands(_INTL("Select an action"), commands)
+      command = pbShowCommands(_INTL("Escolha uma ação"), commands)
       case command
       when 0 # Fuse
         if !pokemon
-          pbDisplay(_INTL("No Pokémon selected!"))
+          pbDisplay(_INTL("Nenhum Pokémon selecionado!"))
           return
         else
           if dexNum(pokemon.species) > NB_POKEMON
-            pbDisplay(_INTL("This Pokémon is already fused!"))
+            pbDisplay(_INTL("Este Pokémon já está fundido!"))
             return
           end
         end
@@ -111,7 +111,7 @@ class PokemonStorageScreen
 
         selectedHead = selectFusion(pokemon, heldpoke, isSuperSplicer)
         if selectedHead == nil
-          pbDisplay(_INTL("It won't have any effect."))
+          pbDisplay(_INTL("Isso não terá efeito."))
           return false
         end
         if selectedHead == -1 # cancelled out
@@ -147,10 +147,10 @@ class PokemonStorageScreen
           if dexNum(pokemon.species) <= NB_POKEMON
             pbSwap(selected)
           else
-            pbDisplay(_INTL("This Pokémon is already fused!"))
+            pbDisplay(_INTL("Este Pokémon já está fundido!"))
           end
         else
-          pbDisplay(_INTL("Select a Pokémon!"))
+          pbDisplay(_INTL("Escolha um Pokémon!"))
         end
       when 2 # cancel
         cancelFusion()
@@ -165,7 +165,7 @@ class PokemonStorageScreen
     pokemon = @storage[box, index]
 
     if !pokemon.isFusion?
-      scene.pbDisplay(_INTL("It won't have any effect."))
+      scene.pbDisplay(_INTL("Isso não terá efeito."))
       return
     end
     if Kernel.pbConfirmMessageSerious(_INTL("{1} deve ser invertido?", pokemon.name))

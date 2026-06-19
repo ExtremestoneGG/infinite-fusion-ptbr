@@ -53,7 +53,7 @@ Events.onMapUpdate += proc { |_sender, _e|
       !$game_player.move_route_forcing && !$game_temp.message_window_showing &&
       !pbMapInterpreterRunning?
       if pbGetTimeNow.sec == 0
-        pbMessage(_INTL("The game has detected that the battery is low. You should save soon to avoid losing your progress."))
+        pbMessage(_INTL("O jogo detectou que a bateria está fraca. Salve em breve para evitar perder seu progresso."))
         $PokemonTemp.batterywarning = true
       end
     end
@@ -100,12 +100,12 @@ Events.onStepTakenTransferPossible += proc { |_sender, e|
         i.hp -= 1 if i.hp > 1 || Settings::POISON_FAINT_IN_FIELD
         if i.hp == 1 && !Settings::POISON_FAINT_IN_FIELD
           i.status = :NONE
-          pbMessage(_INTL("{1} survived the poisoning.\\nThe poison faded away!\1", i.name))
+          pbMessage(_INTL("{1} resistiu ao envenenamento.\\nO veneno desapareceu!\1", i.name))
           next
         elsif i.hp == 0
           i.changeHappiness("faint")
           i.status = :NONE
-          pbMessage(_INTL("{1} fainted...", i.name))
+          pbMessage(_INTL("{1} desmaiou...", i.name))
         end
         if $Trainer.able_pokemon_count == 0
           handled[0] = true
@@ -118,8 +118,8 @@ Events.onStepTakenTransferPossible += proc { |_sender, e|
 
 def pbCheckAllFainted
   if $Trainer.able_pokemon_count == 0
-    pbMessage(_INTL("You have no more Pokémon that can fight!\1"))
-    pbMessage(_INTL("You blacked out!"))
+    pbMessage(_INTL("Você não tem mais Pokémon que possam lutar!\1"))
+    pbMessage(_INTL("Você apagou!"))
     pbBGMFade(1.0)
     pbBGSFade(1.0)
     pbFadeOutIn { pbStartOver }
@@ -934,9 +934,9 @@ end
 
 def promptRegisterItem(item)
   if item.is_key_item? && pbCanRegisterItem?(item)
-    if pbConfirmMessage(_INTL("Would you like to register the \\c[3]{1}\\c[0] in the quick actions menu?",item.name))
+    if pbConfirmMessage(_INTL("Gostaria de registrar \\c[3]{1}\\c[0] no menu de ações rápidas?",item.name))
       $PokemonBag.pbRegisterItem(item)
-      pbMessage(_INTL("\\se[{1}]The \\c[3]{2}\\c[0] was registered!", "GUI trainer card open", item.name))
+      pbMessage(_INTL("\\se[{1}]\\c[3]{2}\\c[0] foi registrado!", "GUI trainer card open", item.name))
     end
   end
 end

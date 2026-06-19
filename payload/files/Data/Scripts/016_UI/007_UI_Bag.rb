@@ -430,7 +430,7 @@ class PokemonBag_Scene
                 pbRefresh
               end
             end
-          elsif Input.trigger?(Input::BACK)   # Cancel the item screen
+          elsif Input.trigger?(Input::BACK)   # Cancelar the item screen
             pbPlayCloseMenuSE
             return nil
           elsif Input.trigger?(Input::USE)   # Choose selected item
@@ -542,7 +542,7 @@ class PokemonBagScreen
           "Cancelar"
         ],0)
         case command
-          ### Cancel ###
+          ### Cancelar ###
         when -1, 3
           next
         when 0
@@ -556,11 +556,11 @@ class PokemonBagScreen
         loop do
           command = @scene.pbShowCommands(_INTL("O que fazer com {1}?",itemname),[
             "Alterar quantidade",
-            "Criar Mystery Gift",
+            "Criar Presente Misterioso",
             "Cancelar"
             ],command)
           case command
-          ### Cancel ###
+          ### Cancelar ###
           when -1, 2
             break
           ### Change quantity ###
