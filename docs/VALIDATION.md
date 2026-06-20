@@ -14,7 +14,7 @@ Release 1.1.5 passed the following checks:
 - Nature-name scan confirmed `0` translated PT-BR Nature names in the active payload after the hotfix.
 - Outfit JSON validation confirmed `0` outfit name changes; only descriptions were translated.
 - v1.1.5 fixes `18/18` battle text strings from the current screenshot report set.
-- README showcase includes `8` in-game PT-BR screenshots.
+- README showcase and language-selection tutorial include `10` in-game PT-BR screenshots.
 - Known official updater/save compatibility crash documented with the reinstall workaround.
 - Graphical uninstall now backs up save files and resets `PokemonSystem.language` to English; the save-language patch routine was tested in memory against a real save and detected `oldLanguage=2`.
 - Quest color-code escape scan: `0` invalid odd-backslash `\C[` entries after the hotfix.
@@ -39,7 +39,7 @@ A versao 1.1.5 passou pelas seguintes checagens:
 - A varredura de nomes de Nature confirmou `0` nomes PT-BR de Nature no payload ativo apos o hotfix.
 - A validacao dos JSONs de roupas confirmou `0` alteracoes em nomes; apenas descricoes foram traduzidas.
 - A v1.1.5 corrige `18/18` textos de batalha do conjunto atual de prints reportados.
-- O README inclui `8` imagens de demonstracao da traducao PT-BR dentro do jogo.
+- O README inclui `10` imagens de demonstracao da traducao PT-BR e do tutorial de idioma dentro do jogo.
 - Crash conhecido de compatibilidade entre updater oficial/save documentado com a solucao de reinstalar a traducao.
 - A desinstalacao pelo `.exe` agora cria backup dos saves e volta `PokemonSystem.language` para ingles; a rotina de patch do save foi testada em memoria com um save real e detectou `oldLanguage=2`.
 - Varredura de escapes de cor em quests: `0` entradas invalidas com `\C[` apos o hotfix.

@@ -117,7 +117,15 @@ This release does **not** include:
 6. Confirm the install message. Backup is required and will be created inside the selected game folder.
 7. Wait while the installer copies the translated files and applies the outfit text patches. Older machines may take a few minutes.
 8. Start the game.
-9. Open the language menu and select `Português`.
+9. If this is a new save, choose `Português` when the game asks for a language.
+10. If you already had a save in English, open the title/load screen, choose `Idioma`, and select `Português`. Existing saves keep their saved language until you change it manually.
+
+<table>
+  <tr>
+    <td><img src="assets/screenshots/09-title-language-menu-ptbr.png" alt="Title screen language menu" width="360"></td>
+    <td><img src="assets/screenshots/10-language-select-portugues.png" alt="Select Portugues in the language menu" width="360"></td>
+  </tr>
+</table>
 
 To undo the patch, open `InfiniteFusionPTBRInstaller-v1.1.5.exe` again and click `Desinstalar tradução`. The installer backs up your save files, resets the saved language to English, and restores the original pre-translation game backup so the game returns to English.
 
@@ -197,7 +205,7 @@ Release 1.1.5 was checked with a final validation sweep:
 - Active Pokedex payload entries in installer: `0`.
 - Outfit names were preserved; only descriptions were translated.
 - v1.1.5 battle text issues from the current screenshot report set fixed: `18/18`
-- README showcase screenshots added: `8`
+- README showcase and language-selection screenshots added: `10`
 
 The full machine-readable validation report is available at [docs/reports/validation_report.json](docs/reports/validation_report.json).
 
@@ -341,7 +349,15 @@ Esta release **não** contém:
 6. Confirme a mensagem de instalação. O backup é obrigatório e será criado dentro da pasta escolhida do jogo.
 7. Aguarde enquanto o instalador copia os arquivos traduzidos e aplica os patches de texto das roupas. Em computadores mais antigos isso pode levar alguns minutos.
 8. Abra o jogo.
-9. Entre no menu de idioma e selecione `Português`.
+9. Se for um save novo, escolha `Português` quando o jogo pedir o idioma.
+10. Se você já tinha um save em inglês, abra a tela inicial/de carregamento, escolha `Idioma` e selecione `Português`. Saves existentes mantêm o idioma salvo até você trocar manualmente.
+
+<table>
+  <tr>
+    <td><img src="assets/screenshots/09-title-language-menu-ptbr.png" alt="Menu de idioma na tela inicial" width="360"></td>
+    <td><img src="assets/screenshots/10-language-select-portugues.png" alt="Selecionar Portugues no menu de idioma" width="360"></td>
+  </tr>
+</table>
 
 Para desfazer a instalação, abra `InfiniteFusionPTBRInstaller-v1.1.5.exe` de novo e clique em `Desinstalar tradução`. O instalador cria backup dos saves, volta o idioma salvo para inglês e restaura o backup original anterior à tradução para o jogo voltar a ficar em inglês.
 
@@ -420,7 +436,7 @@ A versão 1.1.5 passou por uma varredura final:
 - Nomes das Natures ficam preservados em inglês/default, e a tela de Options/configuração mantém identificadores internos em inglês com labels visíveis traduzidos.
 - Nomes de roupas foram preservados; apenas descrições foram traduzidas.
 - Textos de batalha da v1.1.5 reportados no conjunto atual de prints corrigidos: `18/18`
-- Imagens de demonstração adicionadas ao README: `8`
+- Imagens de demonstração e seleção de idioma adicionadas ao README: `10`
 
 O relatório completo em formato de máquina está em [docs/reports/validation_report.json](docs/reports/validation_report.json).
 

@@ -40,7 +40,7 @@
     "fusion_pokedex_cache_entries": 0,
     "fusion_pokedex_errors": 0,
     "reported_battle_strings_fixed_v112": 18,
-    "showcase_screenshots": 8,
+    "showcase_screenshots": 10,
     "pokedex_completion_target": "deferred_future_project",
     "pokedex_experimental_assets_present": false,
     "manual_postbuild_text_fixes": 8,
@@ -176,7 +176,7 @@
     "dark_mode_path": "assets/infinite-fusion-ptbr-mod-logo-github-dark-bg.png",
     "installer_icon": "assets/installer-icon.png",
     "showcase_screenshots_dir": "assets/screenshots",
-    "showcase_screenshots": 8,
+    "showcase_screenshots": 10,
     "source": "edited from user-provided logo image",
     "label": "PT-BR MOD"
   },

@@ -19,7 +19,9 @@ Download the BAT package from the Releases page:
 5. Select your Pokemon Infinite Fusion game folder.
 6. The script creates a required backup inside the selected game folder.
 7. Wait for the install to finish.
-8. Open the game and select `Português`.
+8. Open the game.
+9. For a new save, choose `Português` when the game asks for a language.
+10. For an existing English save, open the title/load screen, choose `Idioma`, and select `Português`.
 
 To restore, run `installer/Restore-Latest-Backup.bat` and select the same game folder. For the safest uninstall flow, use the graphical `.exe` and click `Desinstalar tradução`, because the `.exe` also backs up saves and resets the saved language to English.
 
@@ -64,7 +66,9 @@ Baixe o pacote BAT pela página de Releases:
 5. Selecione a pasta do Pokemon Infinite Fusion.
 6. O script cria um backup obrigatório dentro da pasta escolhida do jogo.
 7. Aguarde a instalação terminar.
-8. Abra o jogo e selecione `Português`.
+8. Abra o jogo.
+9. Em um save novo, escolha `Português` quando o jogo pedir o idioma.
+10. Em um save existente em inglês, abra a tela inicial/de carregamento, escolha `Idioma` e selecione `Português`.
 
 Para restaurar, execute `installer/Restore-Latest-Backup.bat` e selecione a mesma pasta do jogo. Para a desinstalação mais segura, use o `.exe` gráfico e clique em `Desinstalar tradução`, porque o `.exe` também cria backup dos saves e volta o idioma salvo para inglês.
 

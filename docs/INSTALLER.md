@@ -14,7 +14,9 @@ The main `.exe` release asset is a single file with the PT-BR payload embedded i
 4. Click `Choose Game.exe` and select the game's `Game.exe`, or use `Scan` to search common folders automatically.
 5. Confirm the install prompt.
 6. Wait for the copy and patch steps to finish.
-7. Open the game and select `Português` in the language menu.
+7. Open the game.
+8. For a new save, choose `Português` when the game asks for a language.
+9. For an existing English save, open the title/load screen, choose `Idioma`, and select `Português`. Existing saves keep their saved language until you change it manually.
 
 The selected game folder should contain `Game.exe` and `Data`.
 
@@ -87,7 +89,9 @@ O arquivo principal `.exe` da release é um arquivo único com o pacote PT-BR em
 4. Clique em `Escolher Game.exe` e selecione o `Game.exe` do jogo, ou use `Escanear` para procurar pastas comuns automaticamente.
 5. Confirme a janela de instalação.
 6. Aguarde a cópia e os patches terminarem.
-7. Abra o jogo e selecione `Português` no menu de idioma.
+7. Abra o jogo.
+8. Em um save novo, escolha `Português` quando o jogo pedir o idioma.
+9. Em um save existente em inglês, abra a tela inicial/de carregamento, escolha `Idioma` e selecione `Português`. Saves existentes mantêm o idioma salvo até você trocar manualmente.
 
 A pasta escolhida deve conter `Game.exe` e `Data`.
 
