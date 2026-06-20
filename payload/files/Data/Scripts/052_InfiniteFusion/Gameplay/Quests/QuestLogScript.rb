@@ -104,7 +104,7 @@ def showNewQuestMessage(title,description, show_description)
   pbMEPlay("Voltorb Flip Win")
 
   pbCallBub(3)
-  Kernel.pbMessage(_INTL("\\\C[6]NOVA MISSÃO: ") + title)
+  Kernel.pbMessage(_INTL("\\C[6]NOVA MISSÃO: ") + title)
   if show_description
     pbCallBub(3)
     Kernel.pbMessage("\\C[1]" + description)

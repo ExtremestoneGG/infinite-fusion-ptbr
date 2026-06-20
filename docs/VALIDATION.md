@@ -14,6 +14,7 @@ Release 1.1.0 passed the following checks:
 - v1.1.0 fixes `18/18` battle text strings from the current screenshot report set.
 - README showcase includes `8` in-game PT-BR screenshots.
 - Known official updater/save compatibility crash documented with the reinstall workaround.
+- Quest color-code escape scan: `0` invalid odd-backslash `\C[` entries after the hotfix.
 - The installer payload was statically validated: embedded payload, manifest, no active Pokedex payload, outfit patch presence, and compiled resources. Direct GUI invocation was blocked by the local sandbox.
 - The modern WPF `.exe` installer source code is included in `installer-src/ModernInstaller.cs`.
 - Shared installer core code is included in `installer-src/InfiniteFusionPtbrInstaller.cs`.
@@ -35,6 +36,7 @@ A versao 1.1.0 passou pelas seguintes checagens:
 - A v1.1.0 corrige `18/18` textos de batalha do conjunto atual de prints reportados.
 - O README inclui `8` imagens de demonstracao da traducao PT-BR dentro do jogo.
 - Crash conhecido de compatibilidade entre updater oficial/save documentado com a solucao de reinstalar a traducao.
+- Varredura de escapes de cor em quests: `0` entradas invalidas com `\C[` apos o hotfix.
 - O payload do instalador foi validado estaticamente: payload embutido, manifesto, nenhuma Pok?dex ativa, patch de roupas e recursos compilados. A execu??o direta da GUI foi bloqueada pelo sandbox local.
 - O codigo-fonte do instalador WPF moderno esta em `installer-src/ModernInstaller.cs`.
 - O nucleo compartilhado do instalador esta em `installer-src/InfiniteFusionPtbrInstaller.cs`.

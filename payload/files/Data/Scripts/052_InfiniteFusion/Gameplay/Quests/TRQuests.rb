@@ -60,7 +60,7 @@ def showNewTRMissionMessage(title, description, show_description)
   pbMEPlay("rocketQuest", 80, 110)
 
   pbCallBub(3)
-  Kernel.pbMessage(_INTL("\\\C[{1}]NOVA MISSÃO: ",titleColor) + title)
+  Kernel.pbMessage(_INTL("\\C[{1}]NOVA MISSÃO: ",titleColor) + title)
   if show_description
     pbCallBub(3)
     Kernel.pbMessage("\\C[#{textColor}]" + description)

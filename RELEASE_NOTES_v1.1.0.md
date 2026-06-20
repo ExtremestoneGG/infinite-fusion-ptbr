@@ -6,6 +6,7 @@ Quality update for the public fan-made Brazilian Portuguese translation release.
 
 This release includes:
 
+- Hotfix: fixed invalid Ruby escape sequences in quest notification color codes that could crash on startup with `QuestLogScript.rb:107`.
 - Synced active translation payload with the current PT-BR game folder.
 - A rebuilt single-file Windows `.exe` installer with a cleaner WPF interface, GitHub-dark styling, a custom icon, and a smaller embedded payload.
 - Easier game selection through `Game.exe`, automatic scan for likely game folders, scan cancellation, validation, required backup, install/update, restore, and open-backup-folder actions.
@@ -32,6 +33,7 @@ Atualizacao de qualidade da traducao fanmade publica em Portugues do Brasil.
 
 Esta release inclui:
 
+- Hotfix: corrigidas sequências inválidas de escape Ruby nos códigos de cor das notificações de quests, que podiam causar crash ao iniciar com `QuestLogScript.rb:107`.
 - Payload ativo da traducao sincronizado com a pasta atual do jogo em PT-BR.
 - Instalador Windows `.exe` em arquivo unico refeito com interface WPF mais limpa, estilo escuro do GitHub, icone personalizado e payload embutido menor.
 - Selecao mais facil pelo `Game.exe`, busca automatica por possiveis pastas do jogo, cancelamento de busca, validacao, backup obrigatorio, instalacao/atualizacao, restauracao e acao para abrir a pasta de backups.

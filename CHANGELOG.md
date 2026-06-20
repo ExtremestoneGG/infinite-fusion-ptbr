@@ -12,6 +12,7 @@
 - Added a coverage snapshot by translation category for public testing.
 - Documented the official updater/save compatibility crash and the reinstall workaround.
 - Kept Pokedex species/fusion descriptions out of the active v1.1.0 payload; they remain future work.
+- Hotfix: fixed invalid Ruby escape sequences in quest notification color codes that could crash on startup.
 
 ### Português
 
@@ -23,6 +24,7 @@
 - Adicionado resumo de cobertura por categoria para a fase de testes públicos.
 - Documentado o crash conhecido de compatibilidade entre updater oficial/save e a solução de reinstalar a tradução.
 - Descrições de espécies/fusões da Pokédex ficaram fora do payload ativo da v1.1.0; seguem como trabalho futuro.
+- Hotfix: corrigidas sequências inválidas de escape Ruby nos códigos de cor das notificações de quests que podiam causar crash ao iniciar.
 
 ## 1.0.0
 
