@@ -1,5 +1,5 @@
 {
-  "version": "1.1.2",
+  "version": "1.1.3",
   "generated_on": "2026-06-19T00:00:00",
   "base_report": {
     "target": "D:\\InfiniteFusion - Copia\\Data\\portuguese.dat",
@@ -46,7 +46,7 @@
     "manual_postbuild_text_fixes": 8,
     "pokedex_active_payload_entries_removed_v112": 61726,
     "known_issues_documented": 1,
-    "graphical_installer_exe_bytes": 1533440,
+    "graphical_installer_exe_bytes": 1559040,
     "installer_embedded_payload_bytes": "see GitHub release asset",
     "bat_powershell_zip_bytes": "see GitHub release asset"
   },
@@ -87,14 +87,14 @@
     },
     "pokedex_species_and_fusion_descriptions": {
       "translated": 0,
-      "total": "not counted in v1.1.2",
+      "total": "not counted in v1.1.3",
       "coverage_percent": 0,
       "status": "deferred_future_project"
     },
     "preserved_names_and_bitmap_text": {
       "status": "not translated by design"
     },
-    "notes": "Coverage is based on the extracted/packageable PT-BR scope. Pokedex species/fusion descriptions are intentionally excluded from the v1.1.2 payload and planned as future work."
+    "notes": "Coverage is based on the extracted/packageable PT-BR scope. Pokedex species/fusion descriptions are intentionally excluded from the v1.1.3 payload and planned as future work."
   },
   "excluded_from_release": [
     "Game binaries and original game assets",
@@ -107,7 +107,7 @@
   "json_patch_schema": 2,
   "installer_sandbox_test": {
     "status": "static_payload_validation_completed",
-    "note": "Direct invocation of the compiled GUI installer was blocked by the local execution sandbox, so v1.1.2 was validated by package/source checks: embedded payload, manifest, no active Pokedex payload, outfit patch presence, backup-capable installer source, and compiled resource list."
+    "note": "Direct invocation of the compiled GUI installer was blocked by the local execution sandbox, so v1.1.3 was validated by package/source checks: embedded payload, manifest, no active Pokedex payload, outfit patch presence, backup-capable installer source, and compiled resource list."
   },
   "final_package_validation": {
     "manifest_loaded": true,
@@ -121,7 +121,7 @@
   },
   "graphical_installer": {
     "path": "installer/InfiniteFusionPTBRInstaller.exe",
-    "release_asset": "InfiniteFusionPTBRInstaller-v1.1.2.exe",
+    "release_asset": "InfiniteFusionPTBRInstaller-v1.1.3.exe",
     "source": "installer-src/ModernInstaller.cs",
     "core_source": "installer-src/InfiniteFusionPtbrInstaller.cs",
     "compiled_with": "Microsoft .NET Framework C# compiler 4.8 WPF",
@@ -133,7 +133,7 @@
     "game_exe_picker": true,
     "automatic_folder_scan": true,
     "update_existing_install": true,
-    "exe_bytes": 1533440,
+    "exe_bytes": 1559040,
     "sandbox_core_test": {
       "install": "passed",
       "backup": "passed",
@@ -141,18 +141,18 @@
       "json_metadata_preserved": true,
       "created_files_removed_on_restore": true
     },
-    "pokedex_behavior": "skips Pokedex species/fusion descriptions in v1.1.2"
+    "pokedex_behavior": "skips Pokedex species/fusion descriptions in v1.1.3"
   },
   "release_assets": {
     "recommended_exe": {
-      "name": "InfiniteFusionPTBRInstaller-v1.1.2.exe",
+      "name": "InfiniteFusionPTBRInstaller-v1.1.3.exe",
       "bat_files_included": false,
       "embedded_payload": true,
       "backup_required": true,
       "bytes": "see GitHub release asset"
     },
     "bat_powershell_zip": {
-      "name": "PTBR-Translation-BAT-v1.1.2.zip",
+      "name": "PTBR-Translation-BAT-v1.1.3.zip",
       "bat_files_included": true,
       "installer": "installer/Install-PTBR.bat",
       "github_bootstrap_script": "scripts/install-from-github.ps1",
@@ -176,7 +176,7 @@
     "active_pokedex_entry_mappings": 0,
     "outfit_patch_sections": 3,
     "installer_source_calls_pokedex_patch": false,
-    "compiled_exe_bytes": 1533440,
+    "compiled_exe_bytes": 1559040,
     "compiled_exe_resources": [
       "ptbr_payload.zip",
       "installer_icon.png"
@@ -200,10 +200,10 @@
       "title": "Official updater/save compatibility crash",
       "error": "Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass",
       "when": "After running the official game updater .bat or restoring the game to an untranslated/original state before opening a save last used with the PT-BR translation.",
-      "workaround": "Reinstall/update the PT-BR translation with InfiniteFusionPTBRInstaller-v1.1.2.exe before opening the save again. If uninstalling the translation, use the graphical Desinstalar tradução button so the installer backs up saves and resets the saved language to English.",
+      "workaround": "Reinstall/update the PT-BR translation with InfiniteFusionPTBRInstaller-v1.1.3.exe before opening the save again. If uninstalling the translation, use the graphical Desinstalar tradução button so the installer backs up saves, resets the saved language to English, restores the original pre-translation backup, and then recommends running the official game update .bat.",
       "save_folder": "%APPDATA%\\infinitefusion",
       "save_file_editing_v112": "graphical uninstall resets PokemonSystem.language to English after backing up save files",
-      "status": "mitigated_in_v1.1.2_graphical_uninstall"
+      "status": "mitigated_in_v1.1.3_graphical_uninstall"
     }
   ],
   "save_policy": {
@@ -212,6 +212,6 @@
     "save_backup_on_uninstall": "PTBR_BACKUPS/save_backups/save_language_YYYYMMDD_HHMMSS",
     "manual_save_backup_recommended_before_official_updates": true,
     "after_official_update": "Run the PT-BR installer again before opening a save.",
-    "future_work": "Automatic save backup/compatibility helper may be added in a later installer version."
+    "future_work": "More advanced save repair may be added later; v1.1.3 backs up saves, resets language to English, and restores the original pre-translation backup during graphical uninstall."
   }
 }

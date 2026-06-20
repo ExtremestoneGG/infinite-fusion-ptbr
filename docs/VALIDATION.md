@@ -2,16 +2,16 @@
 
 ## English
 
-Release 1.1.2 passed the following checks:
+Release 1.1.3 passed the following checks:
 
 - `Data/portuguese.dat` was generated with `20,581` translated language entries.
 - Direct payload files were synced against the translated game folder: `106`.
 - Packaged script files were synced against the translated game folder: `105`.
 - Translation error list is empty.
 - Post-build text fixes applied: `8`.
-- Pokedex species/fusion descriptions are deferred to a future project and are not counted as complete in v1.1.2.
+- Pokedex species/fusion descriptions are deferred to a future project and are not counted as complete in v1.1.3.
 - Outfit JSON validation confirmed `0` outfit name changes; only descriptions were translated.
-- v1.1.2 fixes `18/18` battle text strings from the current screenshot report set.
+- v1.1.3 fixes `18/18` battle text strings from the current screenshot report set.
 - README showcase includes `8` in-game PT-BR screenshots.
 - Known official updater/save compatibility crash documented with the reinstall workaround.
 - Graphical uninstall now backs up save files and resets `PokemonSystem.language` to English; the save-language patch routine was tested in memory against a real save and detected `oldLanguage=2`.
@@ -25,16 +25,16 @@ The machine-readable report is in `docs/reports/validation_report.json`.
 
 ## Portugues
 
-A versao 1.1.2 passou pelas seguintes checagens:
+A versao 1.1.3 passou pelas seguintes checagens:
 
 - `Data/portuguese.dat` foi gerado com `20.581` entradas traduzidas.
 - Arquivos diretos do payload foram sincronizados com a pasta traduzida do jogo: `106`.
 - Arquivos de script empacotados foram sincronizados com a pasta traduzida do jogo: `105`.
 - A lista de erros de traducao esta vazia.
 - Ajustes de texto pos-build aplicados: `8`.
-- As descricoes de especies/fusoes da Pokedex ficam para um projeto futuro e nao contam como concluidas na v1.1.2.
+- As descricoes de especies/fusoes da Pokedex ficam para um projeto futuro e nao contam como concluidas na v1.1.3.
 - A validacao dos JSONs de roupas confirmou `0` alteracoes em nomes; apenas descricoes foram traduzidas.
-- A v1.1.2 corrige `18/18` textos de batalha do conjunto atual de prints reportados.
+- A v1.1.3 corrige `18/18` textos de batalha do conjunto atual de prints reportados.
 - O README inclui `8` imagens de demonstracao da traducao PT-BR dentro do jogo.
 - Crash conhecido de compatibilidade entre updater oficial/save documentado com a solucao de reinstalar a traducao.
 - A desinstalacao pelo `.exe` agora cria backup dos saves e volta `PokemonSystem.language` para ingles; a rotina de patch do save foi testada em memoria com um save real e detectou `oldLanguage=2`.

@@ -19,7 +19,7 @@ Translated:
 
 Deferred:
 
-- Pokedex species and fusion descriptions. They are future work and are not counted as complete in v1.1.2.
+- Pokedex species and fusion descriptions. They are future work and are not counted as complete in v1.1.3.
 
 Preserved:
 
@@ -55,7 +55,7 @@ Traduzido:
 
 Adiado:
 
-- Descrições de espécies e fusões da Pokédex. Elas ficam para um projeto futuro e não contam como concluídas na v1.1.2.
+- Descrições de espécies e fusões da Pokédex. Elas ficam para um projeto futuro e não contam como concluídas na v1.1.3.
 
 Preservado:
 

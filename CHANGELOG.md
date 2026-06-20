@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.3
+
+### English
+
+- Changed graphical uninstall behavior to prefer the original pre-translation backup instead of the newest backup, so uninstalling returns the game files to English.
+- Updated uninstall messaging to recommend running the official game update `.bat` after uninstalling, allowing the official updater to verify and refresh original game files.
+- Kept save safety from v1.1.2: graphical uninstall still backs up saves and resets the saved language value to English.
+
+### Português
+
+- Ajustado o comportamento de desinstalação pelo `.exe` para preferir o backup original anterior à tradução em vez do backup mais recente, fazendo o jogo voltar para inglês.
+- Atualizadas as mensagens de desinstalação para recomendar rodar o `.bat` oficial de atualização do jogo depois de desinstalar, permitindo que o updater oficial verifique e refresque os arquivos originais.
+- Mantida a segurança de save da v1.1.2: a desinstalação pelo `.exe` ainda cria backup dos saves e volta o idioma salvo para inglês.
+
 ## 1.1.2
 
 ### English

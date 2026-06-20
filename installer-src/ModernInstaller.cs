@@ -172,7 +172,7 @@ namespace InfiniteFusionPtbrInstaller
             });
             identity.Children.Add(new TextBlock
             {
-                Text = "  v1.1.2",
+                Text = "  v1.1.3",
                 Foreground = Cyan,
                 FontSize = 12,
                 FontWeight = FontWeights.Bold,
@@ -284,7 +284,7 @@ namespace InfiniteFusionPtbrInstaller
             });
 
             var badges = new StackPanel { Orientation = Orientation.Horizontal };
-            badges.Children.Add(CreateBadge("v1.1.2", Blue));
+            badges.Children.Add(CreateBadge("v1.1.3", Blue));
             badges.Children.Add(CreateBadge("Backup obrigatório", BrushFromRgb(191, 135, 0)));
             badges.Children.Add(CreateBadge("Fan-made", Purple));
             badges.Children.Add(CreateBadge("Sem download do jogo", BrushFromRgb(218, 54, 51)));
@@ -521,7 +521,10 @@ namespace InfiniteFusionPtbrInstaller
                 return;
             }
 
-            if (MessageBox.Show(this, "Desinstalar a tradução PT-BR restaurando o backup mais recente em:\n\n" + folder + "\n\nContinuar?", "Desinstalar tradução", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+            var message = "Desinstalar a tradução PT-BR e voltar o jogo para inglês?\n\n" +
+                          "O instalador vai restaurar o backup original em PTBR_BACKUPS, remover arquivos criados pela tradução e voltar o idioma salvo para inglês.\n\n" +
+                          "Recomendado depois da desinstalação: rode o .bat oficial de atualização do jogo para verificar e reorganizar os arquivos originais antes de jogar.\n\nContinuar?";
+            if (MessageBox.Show(this, message, "Desinstalar tradução", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
             {
                 return;
             }

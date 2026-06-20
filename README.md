@@ -5,14 +5,14 @@
   <img alt="Pokemon Infinite Fusion PT-BR Mod" src="assets/infinite-fusion-ptbr-mod-logo-github-bg.png">
 </picture>
 
-![Release](https://img.shields.io/badge/release-v1.1.2-blue)
+![Release](https://img.shields.io/badge/release-v1.1.3-blue)
 ![Language](https://img.shields.io/badge/language-PT--BR-green)
 ![Installer](https://img.shields.io/badge/installer-Windows%20EXE-2ea44f)
 ![Backup](https://img.shields.io/badge/backup-required-yellow)
 ![Fan Made](https://img.shields.io/badge/fan--made-unofficial-purple)
 ![Game Download](https://img.shields.io/badge/game%20download-official%20Discord%20only-red)
 
-**Version:** 1.1.2<br>
+**Version:** 1.1.3<br>
 **Language:** Brazilian Portuguese<br>
 **Status:** fan-made release candidate for public testing and feedback<br>
 **Repository:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr<br>
@@ -70,7 +70,7 @@ Example: an item name like **Pokeball** or **Rare Candy** remains in English, bu
 
 ## Coverage Snapshot
 
-These numbers describe the extracted and packaged PT-BR scope for v1.1.2. Hidden hardcoded text may still appear during public testing and should be reported with screenshots. Pokedex species/fusion descriptions are not counted as complete in this release; they are planned as future work.
+These numbers describe the extracted and packaged PT-BR scope for v1.1.3. Hidden hardcoded text may still appear during public testing and should be reported with screenshots. Pokedex species/fusion descriptions are not counted as complete in this release; they are planned as future work.
 
 | Category | Current Status | Remaining Known Work | Coverage |
 | --- | ---: | ---: | ---: |
@@ -78,9 +78,9 @@ These numbers describe the extracted and packaged PT-BR scope for v1.1.2. Hidden
 | Gameplay UI and hardcoded script text | 106 / 106 packaged files synced | Screenshot-driven polish is ongoing | 98% |
 | Item, move, ability effect, Nature, and stat descriptions/labels | Covered in the language/script scope | More in-game spot checks | 98% |
 | Outfit, hat, and hairstyle descriptions | 314 / 314 known descriptions | 0 known descriptions | 100% |
-| Submitted v1.1.2 battle text issues | 18 / 18 known strings | 0 from the current report set | 100% |
+| Submitted v1.1.3 battle text issues | 18 / 18 known strings | 0 from the current report set | 100% |
 | Pokedex UI labels | Included in UI/script scope | Species/fusion entries are future work | 85% |
-| Pokedex species/fusion descriptions | Deferred | Future project, not counted in v1.1.2 | 0% |
+| Pokedex species/fusion descriptions | Deferred | Future project, not counted in v1.1.3 | 0% |
 | Preserved names and drawn/bitmap text | Not translated by design | Not part of PT-BR scope | N/A |
 
 ## What Changed
@@ -89,7 +89,7 @@ This release contains:
 
 - `Data/portuguese.dat`, a new Brazilian Portuguese language data file.
 - 105 script files with translated gameplay UI strings and language support adjustments.
-- A text patch for outfit descriptions. Pokedex species/fusion mappings are excluded from the v1.1.2 installer payload and planned as future work.
+- A text patch for outfit descriptions. Pokedex species/fusion mappings are excluded from the v1.1.3 installer payload and planned as future work.
 - A rebuilt native Windows `.exe` installer with `Game.exe` selection, automatic scan with cancellation, backup, install/update, validation, save-language reset on uninstall, and an explicit uninstall button.
 - A separate BAT/PowerShell package for users who prefer transparent scripts.
 - Validation reports documenting what was checked before release.
@@ -108,48 +108,49 @@ This release does **not** include:
 
 1. Download and install Pokemon Infinite Fusion from the **official Pokemon Infinite Fusion Discord only**.
 2. Open the [Releases page](https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases).
-3. Download `InfiniteFusionPTBRInstaller-v1.1.2.exe`, the recommended graphical installer. Do not use this project as a game download.
-4. Run `InfiniteFusionPTBRInstaller-v1.1.2.exe`.
+3. Download `InfiniteFusionPTBRInstaller-v1.1.3.exe`, the recommended graphical installer. Do not use this project as a game download.
+4. Run `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
 5. Click `Choose Game.exe` and select the game's `Game.exe`, or use `Scan` to look for likely game folders automatically.
 6. Confirm the install message. Backup is required and will be created inside the selected game folder.
 7. Wait while the installer copies the translated files and applies the outfit text patches. Older machines may take a few minutes.
 8. Start the game.
 9. Open the language menu and select `Português`.
 
-To undo the patch, open `InfiniteFusionPTBRInstaller-v1.1.2.exe` again and click `Desinstalar tradução`. The installer backs up your save files and resets the saved language to English before restoring the game files.
+To undo the patch, open `InfiniteFusionPTBRInstaller-v1.1.3.exe` again and click `Desinstalar tradução`. The installer backs up your save files, resets the saved language to English, and restores the original pre-translation game backup so the game returns to English.
 
 ### After Official Game Updates
 
-If you update Pokemon Infinite Fusion with the official updater `.bat`, run `InfiniteFusionPTBRInstaller-v1.1.2.exe` again **before opening your save** and click `Install / Update PT-BR`. Official updates can replace translated scripts with the original English files, so reinstalling the translation keeps the game files and your save in the same expected state.
+If you update Pokemon Infinite Fusion with the official updater `.bat`, run `InfiniteFusionPTBRInstaller-v1.1.3.exe` again **before opening your save** and click `Install / Update PT-BR`. Official updates can replace translated scripts with the original English files, so reinstalling the translation keeps the game files and your save in the same expected state.
 
 If the game crashes after an update, reinstall the PT-BR translation first. If that does not fix it, restore the latest `PTBR_BACKUPS` backup or make a fresh official game install and apply the translation again.
 
 If Windows SmartScreen warns about the file, it is because this is a small unsigned fan tool. The installer source code is included in `installer-src/InfiniteFusionPtbrInstaller.cs`.
 
-If you prefer the script-based method, download the separate `PTBR-Translation-BAT-v1.1.2.zip` package and follow [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
+If you prefer the script-based method, download the separate `PTBR-Translation-BAT-v1.1.3.zip` package and follow [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
 
 ### How The Installer Works
 
-The recommended installer is `InfiniteFusionPTBRInstaller-v1.1.2.exe`. It is a small WPF app with the PT-BR payload embedded inside the executable, so the main download does not need a folder full of files.
+The recommended installer is `InfiniteFusionPTBRInstaller-v1.1.3.exe`. It is a small WPF app with the PT-BR payload embedded inside the executable, so the main download does not need a folder full of files.
 
-The `.bat` installer is not included inside the recommended `.exe` ZIP. It is shipped separately as `PTBR-Translation-BAT-v1.1.2.zip`, which includes `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1`, and `installer/Restore-Latest-Backup.bat`.
+The `.bat` installer is not included inside the recommended `.exe` ZIP. It is shipped separately as `PTBR-Translation-BAT-v1.1.3.zip`, which includes `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1`, and `installer/Restore-Latest-Backup.bat`.
 
 The installer:
 
 - Checks if the selected folder looks like Pokemon Infinite Fusion.
 - Creates a required backup in `PTBR_BACKUPS` inside the selected game folder.
 - Copies the Portuguese language file and translated script files.
-- Applies text-only patches to outfit descriptions. Pokedex species/fusion mappings are not included in the v1.1.2 installer payload.
+- Applies text-only patches to outfit descriptions. Pokedex species/fusion mappings are not included in the v1.1.3 installer payload.
 - Keeps the game's executable, sprites, music, saves, and unrelated files untouched.
 
 ### Restore Tutorial
 
-1. Open `InfiniteFusionPTBRInstaller-v1.1.2.exe`.
+1. Open `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
 2. Select the same Pokemon Infinite Fusion folder used during installation.
 3. Click `Desinstalar tradução`.
 4. The installer backs up saves under `PTBR_BACKUPS/save_backups` and resets the save language to English.
-5. The installer restores the newest backup from `PTBR_BACKUPS`.
+5. The installer restores the original pre-translation backup from `PTBR_BACKUPS`.
 6. Files created by the translation installer are removed, and overwritten files are restored.
+7. After uninstalling, run the official game update `.bat` once so the official updater can verify and refresh the original game files before you play.
 
 Fallback option: if you installed through the BAT package, run `installer/Restore-Latest-Backup.bat` and select the same game folder.
 
@@ -166,7 +167,7 @@ The installer is intentionally simple and transparent:
 - It does not download the game.
 - It validates that the selected folder looks like a Pokemon Infinite Fusion installation.
 - It creates a timestamped backup in `PTBR_BACKUPS` inside the selected game folder before changing files.
-- It can uninstall the translation by restoring the latest backup and resetting the saved language to English.
+- It can uninstall the translation by restoring the original pre-translation backup and resetting the saved language to English.
 
 See [docs/INSTALLER.md](docs/INSTALLER.md) for the `.exe` method and [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md) for the BAT/PowerShell method.
 
@@ -182,16 +183,16 @@ That command downloads the script package from this GitHub release, creates a re
 
 ## Validation Summary
 
-Release 1.1.2 was checked with a final validation sweep:
+Release 1.1.3 was checked with a final validation sweep:
 
 - Base translated language entries: `20,581`
 - Outfit description mappings: `314`
 - Direct payload files synced with the translated game folder: `106`
 - Packaged script files: `105`
-- Pokedex species/fusion descriptions are deferred to a future project and are not counted as complete in v1.1.2.
+- Pokedex species/fusion descriptions are deferred to a future project and are not counted as complete in v1.1.3.
 - Active Pokedex payload entries in installer: `0`.
 - Outfit names were preserved; only descriptions were translated.
-- v1.1.2 battle text issues from the current screenshot report set fixed: `18/18`
+- v1.1.3 battle text issues from the current screenshot report set fixed: `18/18`
 - README showcase screenshots added: `8`
 
 The full machine-readable validation report is available at [docs/reports/validation_report.json](docs/reports/validation_report.json).
@@ -206,7 +207,7 @@ After running the official game updater `.bat`, or after restoring the game to a
 
 This usually means the save and the current game scripts/data are out of sync, not that the save is permanently lost. Close the game, run the PT-BR installer again, select the same `Game.exe`, and click `Install / Update PT-BR`. For extra safety before official updates, manually copy your save folder from `%APPDATA%\infinitefusion`.
 
-v1.1.2 does not edit saves during install/update. During graphical uninstall, it creates a save backup in `PTBR_BACKUPS/save_backups` and resets the saved language to English to avoid the known post-uninstall language crash.
+v1.1.3 does not edit saves during install/update. During graphical uninstall, it creates a save backup in `PTBR_BACKUPS/save_backups` and resets the saved language to English to avoid the known post-uninstall language crash.
 
 ## Feedback
 
@@ -231,7 +232,7 @@ If you are part of the Pokemon Infinite Fusion team and want this project change
 
 # Tradução PT-BR Fanmade de Pokemon Infinite Fusion
 
-**Versão:** 1.1.2<br>
+**Versão:** 1.1.3<br>
 **Idioma:** Português do Brasil<br>
 **Status:** versão fanmade para testes públicos e feedback<br>
 **Repositório:** https://github.com/ExtremestoneGG/infinite-fusion-ptbr<br>
@@ -289,7 +290,7 @@ Exemplo: um item como **Pokeball** ou **Rare Candy** continua com o nome em ingl
 
 ## Resumo De Cobertura
 
-Estes números descrevem o escopo PT-BR extraído e empacotado na v1.1.2. Textos escondidos em scripts/eventos ainda podem aparecer durante os testes públicos e devem ser reportados com prints. As descrições de espécies/fusões da Pokédex não contam como concluídas nesta versão; elas ficam para um projeto futuro.
+Estes números descrevem o escopo PT-BR extraído e empacotado na v1.1.3. Textos escondidos em scripts/eventos ainda podem aparecer durante os testes públicos e devem ser reportados com prints. As descrições de espécies/fusões da Pokédex não contam como concluídas nesta versão; elas ficam para um projeto futuro.
 
 | Categoria | Status atual | Falta conhecida | Cobertura |
 | --- | ---: | ---: | ---: |
@@ -297,9 +298,9 @@ Estes números descrevem o escopo PT-BR extraído e empacotado na v1.1.2. Textos
 | Interface e textos hardcoded em scripts | 106 / 106 arquivos empacotados sincronizados | Polimento por prints continua | 98% |
 | Descrições/labels de itens, golpes, efeitos de habilidades, Natures e stats | Coberto no escopo de idioma/scripts | Mais checagens dentro do jogo | 98% |
 | Descrições de roupas, chapéus e cabelos | 314 / 314 descrições conhecidas | 0 descrições conhecidas | 100% |
-| Problemas de texto de batalha reportados na v1.1.2 | 18 / 18 textos conhecidos | 0 do conjunto atual de reports | 100% |
+| Problemas de texto de batalha reportados na v1.1.3 | 18 / 18 textos conhecidos | 0 do conjunto atual de reports | 100% |
 | Labels da interface da Pokédex | Incluído no escopo de interface/scripts | Entradas de espécies/fusões ficam para depois | 85% |
-| Descrições de espécies/fusões da Pokédex | Adiado | Projeto futuro, fora da contagem da v1.1.2 | 0% |
+| Descrições de espécies/fusões da Pokédex | Adiado | Projeto futuro, fora da contagem da v1.1.3 | 0% |
 | Nomes preservados e textos desenhados/bitmap | Não traduzidos por escolha | Fora do escopo PT-BR | N/A |
 
 ## O Que Foi Alterado
@@ -308,7 +309,7 @@ Esta release contém:
 
 - `Data/portuguese.dat`, um novo arquivo de idioma em Português do Brasil.
 - 105 arquivos de script com textos de interface traduzidos e ajustes de suporte ao idioma.
-- Um patch de texto para descrições de roupas. As descrições da Pokédex não contam como concluídas na v1.1.2.
+- Um patch de texto para descrições de roupas. As descrições da Pokédex não contam como concluídas na v1.1.3.
 - Um instalador `.exe` nativo para Windows com seleção por `Game.exe`, busca automática com cancelamento, backup, instalação/atualização, validação, reset do idioma do save na desinstalação e botão explícito de desinstalar.
 - Um pacote separado em BAT/PowerShell para quem prefere scripts transparentes.
 - Relatórios de validação documentando o que foi checado antes da release.
@@ -327,31 +328,31 @@ Esta release **não** contém:
 
 1. Baixe e instale Pokemon Infinite Fusion **somente pelo Discord oficial de Pokemon Infinite Fusion**.
 2. Abra a [página de Releases](https://github.com/ExtremestoneGG/infinite-fusion-ptbr/releases).
-3. Baixe `InfiniteFusionPTBRInstaller-v1.1.2.exe`, o instalador gráfico recomendado. Não use este projeto como download do jogo.
-4. Execute `InfiniteFusionPTBRInstaller-v1.1.2.exe`.
+3. Baixe `InfiniteFusionPTBRInstaller-v1.1.3.exe`, o instalador gráfico recomendado. Não use este projeto como download do jogo.
+4. Execute `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
 5. Clique em `Escolher Game.exe` e selecione o `Game.exe` do jogo, ou use `Escanear` para procurar possíveis pastas do jogo automaticamente.
 6. Confirme a mensagem de instalação. O backup é obrigatório e será criado dentro da pasta escolhida do jogo.
 7. Aguarde enquanto o instalador copia os arquivos traduzidos e aplica os patches de texto das roupas. Em computadores mais antigos isso pode levar alguns minutos.
 8. Abra o jogo.
 9. Entre no menu de idioma e selecione `Português`.
 
-Para desfazer a instalação, abra `InfiniteFusionPTBRInstaller-v1.1.2.exe` de novo e clique em `Desinstalar tradução`. O instalador cria backup dos saves e volta o idioma salvo para inglês antes de restaurar os arquivos do jogo.
+Para desfazer a instalação, abra `InfiniteFusionPTBRInstaller-v1.1.3.exe` de novo e clique em `Desinstalar tradução`. O instalador cria backup dos saves, volta o idioma salvo para inglês e restaura o backup original anterior à tradução para o jogo voltar a ficar em inglês.
 
 ### Depois De Atualizar O Jogo Oficialmente
 
-Se você atualizar Pokemon Infinite Fusion pelo updater oficial `.bat`, rode `InfiniteFusionPTBRInstaller-v1.1.2.exe` de novo **antes de abrir seu save** e clique em `Instalar / Atualizar PT-BR`. Updates oficiais podem trocar os scripts traduzidos pelos arquivos originais em inglês, então reinstalar a tradução mantém os arquivos do jogo e o save no mesmo estado esperado.
+Se você atualizar Pokemon Infinite Fusion pelo updater oficial `.bat`, rode `InfiniteFusionPTBRInstaller-v1.1.3.exe` de novo **antes de abrir seu save** e clique em `Instalar / Atualizar PT-BR`. Updates oficiais podem trocar os scripts traduzidos pelos arquivos originais em inglês, então reinstalar a tradução mantém os arquivos do jogo e o save no mesmo estado esperado.
 
-Se o jogo crashar depois de um update, reinstale primeiro a tradução PT-BR. Se isso não resolver, restaure o backup mais recente em `PTBR_BACKUPS` ou faça uma instalação oficial limpa do jogo e aplique a tradução novamente.
+Se o jogo crashar depois de um update, reinstale primeiro a tradução PT-BR. Se isso não resolver, use `Desinstalar tradução`, rode o updater oficial `.bat` do jogo para verificar os arquivos originais, ou faça uma instalação oficial limpa e aplique a tradução novamente.
 
 Se o Windows SmartScreen avisar sobre o arquivo, é porque ele é uma ferramenta pequena de fã e não possui assinatura digital. O código-fonte do instalador está incluído em `installer-src/InfiniteFusionPtbrInstaller.cs`.
 
-Se você preferir o método por script, baixe o pacote separado `PTBR-Translation-BAT-v1.1.2.zip` e siga [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
+Se você preferir o método por script, baixe o pacote separado `PTBR-Translation-BAT-v1.1.3.zip` e siga [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md).
 
 ### Como O Instalador Funciona
 
-O instalador recomendado é `InfiniteFusionPTBRInstaller-v1.1.2.exe`. Ele é um pequeno app WPF com o pacote PT-BR embutido dentro do executável, então o download principal não precisa vir como uma pasta cheia de arquivos.
+O instalador recomendado é `InfiniteFusionPTBRInstaller-v1.1.3.exe`. Ele é um pequeno app WPF com o pacote PT-BR embutido dentro do executável, então o download principal não precisa vir como uma pasta cheia de arquivos.
 
-O instalador `.bat` não fica dentro do download principal em `.exe`. Ele é distribuído separadamente como `PTBR-Translation-BAT-v1.1.2.zip`, que inclui `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1` e `installer/Restore-Latest-Backup.bat`.
+O instalador `.bat` não fica dentro do download principal em `.exe`. Ele é distribuído separadamente como `PTBR-Translation-BAT-v1.1.3.zip`, que inclui `installer/Install-PTBR.bat`, `installer/Install-PTBR.ps1` e `installer/Restore-Latest-Backup.bat`.
 
 O instalador:
 
@@ -363,12 +364,13 @@ O instalador:
 
 ### Tutorial De Restauração
 
-1. Abra `InfiniteFusionPTBRInstaller-v1.1.2.exe`.
+1. Abra `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
 2. Selecione a mesma pasta do Pokemon Infinite Fusion usada na instalação.
 3. Clique em `Desinstalar tradução`.
 4. O instalador cria backup dos saves em `PTBR_BACKUPS/save_backups` e volta o idioma salvo para inglês.
-5. O instalador restaura o backup mais recente dentro de `PTBR_BACKUPS`.
-5. Arquivos criados pelo instalador da tradução são removidos, e arquivos sobrescritos são restaurados.
+5. O instalador restaura o backup original anterior à tradução dentro de `PTBR_BACKUPS`.
+6. Arquivos criados pelo instalador da tradução são removidos, e arquivos sobrescritos são restaurados.
+7. Depois de desinstalar, rode uma vez o `.bat` oficial de atualização do jogo para o updater oficial verificar e refrescar os arquivos originais antes de jogar.
 
 Alternativa: se você instalou pelo pacote BAT, execute `installer/Restore-Latest-Backup.bat` e selecione a mesma pasta do jogo.
 
@@ -385,7 +387,7 @@ O instalador foi feito para ser simples e transparente:
 - Não baixa o jogo.
 - Verifica se a pasta selecionada parece uma instalação do Pokemon Infinite Fusion.
 - Cria um backup com data e hora em `PTBR_BACKUPS` dentro da pasta escolhida do jogo antes de alterar arquivos.
-- Consegue desinstalar a tradução restaurando o backup mais recente e voltando o idioma salvo para inglês.
+- Consegue desinstalar a tradução restaurando o backup original anterior à tradução e voltando o idioma salvo para inglês.
 
 Veja [docs/INSTALLER.md](docs/INSTALLER.md) para o método `.exe` e [docs/BAT_INSTALLER.md](docs/BAT_INSTALLER.md) para o método BAT/PowerShell.
 
@@ -401,15 +403,15 @@ Esse comando baixa o pacote de scripts desta release no GitHub, cria backup obri
 
 ## Resumo Da Validação
 
-A versão 1.1.2 passou por uma varredura final:
+A versão 1.1.3 passou por uma varredura final:
 
 - Entradas traduzidas do arquivo base de idioma: `20.581`
 - Mapeamentos de descrições de roupas/chapéus/cabelos: `314`
 - Arquivos diretos do payload sincronizados com a pasta traduzida do jogo: `106`
 - Arquivos de script empacotados: `105`
-- Descrições de espécies/fusões da Pokédex ficam para um projeto futuro e não contam como concluídas na v1.1.2.
+- Descrições de espécies/fusões da Pokédex ficam para um projeto futuro e não contam como concluídas na v1.1.3.
 - Nomes de roupas foram preservados; apenas descrições foram traduzidas.
-- Textos de batalha da v1.1.2 reportados no conjunto atual de prints corrigidos: `18/18`
+- Textos de batalha da v1.1.3 reportados no conjunto atual de prints corrigidos: `18/18`
 - Imagens de demonstração adicionadas ao README: `8`
 
 O relatório completo em formato de máquina está em [docs/reports/validation_report.json](docs/reports/validation_report.json).
@@ -424,7 +426,7 @@ Depois de rodar o updater oficial `.bat` do jogo, ou depois de restaurar o jogo 
 
 Isso normalmente indica que o save e os scripts/dados atuais do jogo estão fora de sincronia, não que o save foi perdido para sempre. Feche o jogo, rode o instalador PT-BR de novo, selecione o mesmo `Game.exe` e clique em `Instalar / Atualizar PT-BR`. Por segurança, antes de updates oficiais, copie manualmente a pasta de saves em `%APPDATA%\infinitefusion`.
 
-A v1.1.2 não edita saves durante instalação/atualização. Durante a desinstalação pelo `.exe`, ela cria backup dos saves em `PTBR_BACKUPS/save_backups` e volta o idioma salvo para inglês para evitar o crash conhecido após remover a tradução.
+A v1.1.3 não edita saves durante instalação/atualização. Durante a desinstalação pelo `.exe`, ela cria backup dos saves em `PTBR_BACKUPS/save_backups` e volta o idioma salvo para inglês para evitar o crash conhecido após remover a tradução.
 
 ## Feedback
 

@@ -108,7 +108,7 @@ namespace InfiniteFusionPtbrInstaller
             var badgePanel = new FlowLayoutPanel();
             badgePanel.AutoSize = true;
             badgePanel.Margin = new Padding(0, 10, 0, 0);
-            badgePanel.Controls.Add(CreateBadge("v1.1.2", Color.FromArgb(9, 105, 218), Color.White));
+            badgePanel.Controls.Add(CreateBadge("v1.1.3", Color.FromArgb(9, 105, 218), Color.White));
             badgePanel.Controls.Add(CreateBadge("Backup required", Color.FromArgb(191, 135, 0), Color.White));
             badgePanel.Controls.Add(CreateBadge("Unofficial fan mod", Color.FromArgb(130, 80, 223), Color.White));
             header.Controls.Add(badgePanel);
@@ -308,15 +308,18 @@ namespace InfiniteFusionPtbrInstaller
                 return;
             }
 
-            if (MessageBox.Show(this, "Restore the latest PT-BR backup for:\n\n" + folder + "\n\nContinue?", "Restore backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            var uninstallMessage = "Uninstall the PT-BR translation and restore the game to English?\n\n" +
+                                   "The installer will restore the original game backup from PTBR_BACKUPS, remove files created by the translation, and reset save language to English.\n\n" +
+                                   "Recommended after uninstall: run the official game update .bat to re-check the original game files before playing.\n\nContinue?";
+            if (MessageBox.Show(this, uninstallMessage, "Uninstall PT-BR Translation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             {
                 return;
             }
 
-            RunBackground("Restoring...", delegate
+            RunBackground("Uninstalling translation...", delegate
             {
                 var result = InstallerCore.RestoreLatest(folder, LogThreadSafe, SetProgressThreadSafe);
-                MessageThreadSafe(result, "Restore complete", MessageBoxIcon.Information);
+                MessageThreadSafe(result, "Uninstall complete", MessageBoxIcon.Information);
             });
         }
 
@@ -470,7 +473,7 @@ namespace InfiniteFusionPtbrInstaller
             var patch = DeserializeDictionary(File.ReadAllText(patchPath, Encoding.UTF8));
             progress(40);
 
-            log("Skipping Pokedex descriptions in v1.1.2. They are planned as future work.");
+            log("Skipping Pokedex descriptions in v1.1.3. They are planned as future work.");
             progress(62);
 
             log("Patching outfit descriptions...");
@@ -487,7 +490,7 @@ namespace InfiniteFusionPtbrInstaller
             {
                 var backupManifest = new BackupManifest
                 {
-                    version = "1.1.2",
+                    version = "1.1.3",
                     created_on = DateTime.Now.ToString("s"),
                     game_dir = gameRoot,
                     entries = backupEntries
@@ -500,7 +503,7 @@ namespace InfiniteFusionPtbrInstaller
 
             return "PT-BR translation installed.\n\n" +
                    "Files copied: " + copied + "\n" +
-                   "Pokedex descriptions: skipped for v1.1.2 future work\n" +
+                   "Pokedex descriptions: skipped for v1.1.3 future work\n" +
                    "Outfit descriptions patched: " + descriptionChanged + "\n" +
                    "Backup: " + backupRoot;
         }
@@ -509,10 +512,8 @@ namespace InfiniteFusionPtbrInstaller
         {
             var backupBase = Path.Combine(gameRoot, "PTBR_BACKUPS");
             if (!Directory.Exists(backupBase)) throw new InvalidOperationException("No PTBR_BACKUPS folder found.");
-            var latest = new DirectoryInfo(backupBase).GetDirectories()
-                .OrderByDescending(d => d.LastWriteTimeUtc)
-                .FirstOrDefault();
-            if (latest == null) throw new InvalidOperationException("No backups found.");
+            var latest = FindBestUninstallBackup(backupBase);
+            if (latest == null) throw new InvalidOperationException("No install backups found. The PTBR_BACKUPS folder exists, but it does not contain a valid translation backup_manifest.json.");
 
             var manifestPath = Path.Combine(latest.FullName, "backup_manifest.json");
             if (!File.Exists(manifestPath)) throw new FileNotFoundException("Backup manifest not found", manifestPath);
@@ -553,15 +554,52 @@ namespace InfiniteFusionPtbrInstaller
                 if (i % 10 == 0) progress(5 + (int)((i + 1) * 95.0 / total));
             }
             progress(100);
-            log("Restored backup: " + latest.FullName);
+            log("Restored original game backup: " + latest.FullName);
 
-            return "Latest PT-BR backup restored.\n\n" +
+            return "PT-BR translation uninstalled.\n\n" +
+                   "The game files were restored from the original backup so the game can return to English.\n\n" +
                    "Backup: " + latest.FullName + "\n" +
                    "Save files found: " + saveReset.savesFound + "\n" +
                    "Save files changed to English: " + saveReset.savesChanged + "\n" +
                    "Save backup: " + (string.IsNullOrEmpty(saveReset.backupDir) ? "not needed" : saveReset.backupDir) + "\n" +
                    "Files restored: " + restored + "\n" +
-                   "Created files removed: " + deleted;
+                   "Created files removed: " + deleted + "\n\n" +
+                   "Recommended next step: run the official game update .bat after uninstalling, so the official updater can verify and refresh the original game files before you play.";
+        }
+
+        private static DirectoryInfo FindBestUninstallBackup(string backupBase)
+        {
+            var backups = new DirectoryInfo(backupBase).GetDirectories()
+                .Where(d => File.Exists(Path.Combine(d.FullName, "backup_manifest.json")))
+                .OrderBy(d => d.CreationTimeUtc)
+                .ThenBy(d => d.LastWriteTimeUtc)
+                .ToList();
+            if (backups.Count == 0) return null;
+
+            foreach (var backup in backups)
+            {
+                try
+                {
+                    var manifest = DeserializeDictionary(File.ReadAllText(Path.Combine(backup.FullName, "backup_manifest.json"), Encoding.UTF8));
+                    var entries = (object[])manifest["entries"];
+                    foreach (Dictionary<string, object> entry in entries)
+                    {
+                        var relative = Convert.ToString(entry["path"]).Replace('\\', '/');
+                        var action = Convert.ToString(entry["action"]);
+                        if (relative.Equals("Data/portuguese.dat", StringComparison.OrdinalIgnoreCase) &&
+                            action.Equals("delete_created", StringComparison.OrdinalIgnoreCase))
+                        {
+                            return backup;
+                        }
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+
+            return backups[0];
         }
 
         private static SaveLanguageResetResult ResetSaveLanguageToEnglish(string gameRoot, Action<string> log)
