@@ -8,11 +8,11 @@ The BAT package does not include the graphical `.exe` installer. The main `.exe`
 
 Download the BAT package from the Releases page:
 
-`PTBR-Translation-BAT-v1.1.0.zip`
+`PTBR-Translation-BAT-v1.1.2.zip`
 
 ### Manual BAT Tutorial
 
-1. Download `PTBR-Translation-BAT-v1.1.0.zip` from the Releases page.
+1. Download `PTBR-Translation-BAT-v1.1.2.zip` from the Releases page.
 2. Extract the ZIP into a folder you trust.
 3. Open the extracted folder.
 4. Run `installer/Install-PTBR.bat`.
@@ -21,7 +21,7 @@ Download the BAT package from the Releases page:
 7. Wait for the install to finish.
 8. Open the game and select `Português`.
 
-To restore, run `installer/Restore-Latest-Backup.bat` and select the same game folder.
+To restore, run `installer/Restore-Latest-Backup.bat` and select the same game folder. For the safest uninstall flow, use the graphical `.exe` and click `Desinstalar tradução`, because the `.exe` also backs up saves and resets the saved language to English.
 
 ### After Official Game Updates
 
@@ -53,11 +53,11 @@ O pacote BAT não inclui o instalador gráfico `.exe`. O download principal `.ex
 
 Baixe o pacote BAT pela página de Releases:
 
-`PTBR-Translation-BAT-v1.1.0.zip`
+`PTBR-Translation-BAT-v1.1.2.zip`
 
 ### Tutorial Manual Pelo BAT
 
-1. Baixe `PTBR-Translation-BAT-v1.1.0.zip` pela página de Releases.
+1. Baixe `PTBR-Translation-BAT-v1.1.2.zip` pela página de Releases.
 2. Extraia o ZIP em uma pasta confiável.
 3. Abra a pasta extraída.
 4. Execute `installer/Install-PTBR.bat`.
@@ -66,7 +66,7 @@ Baixe o pacote BAT pela página de Releases:
 7. Aguarde a instalação terminar.
 8. Abra o jogo e selecione `Português`.
 
-Para restaurar, execute `installer/Restore-Latest-Backup.bat` e selecione a mesma pasta do jogo.
+Para restaurar, execute `installer/Restore-Latest-Backup.bat` e selecione a mesma pasta do jogo. Para a desinstalação mais segura, use o `.exe` gráfico e clique em `Desinstalar tradução`, porque o `.exe` também cria backup dos saves e volta o idioma salvo para inglês.
 
 ### Depois De Updates Oficiais
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.1.2
+
+### English
+
+- Redesigned the graphical Windows installer with a native borderless dark window, custom title bar, improved button styling, installer icon usage, and clearer action hierarchy.
+- Added an explicit `Desinstalar tradução` button.
+- During graphical uninstall, the installer now backs up save files under `PTBR_BACKUPS/save_backups` and resets the saved `PokemonSystem.language` value back to English to avoid the known post-uninstall save crash.
+- Kept the scan cancel flow and `Game.exe` validation flow.
+- Kept Pokedex species/fusion descriptions deferred as future work and outside the active payload.
+
+### Portugues
+
+- Redesenhado o instalador grafico para Windows com janela nativa sem borda, barra superior escura propria, botoes melhores, uso do icone do instalador e hierarquia de acoes mais clara.
+- Adicionado o botao explicito `Desinstalar tradução`.
+- Durante a desinstalacao pelo `.exe`, o instalador agora cria backup dos saves em `PTBR_BACKUPS/save_backups` e volta o valor salvo de `PokemonSystem.language` para ingles, evitando o crash conhecido apos remover a traducao.
+- Mantido o fluxo de cancelar escaneamento e validacao por `Game.exe`.
+- Descricoes de especies/fusoes da Pokedex continuam como trabalho futuro e fora do payload ativo.
+
 ## 1.1.0
 
 ### English

@@ -71,7 +71,7 @@ function Confirm-Install {
     Add-Type -AssemblyName System.Windows.Forms
     $backupText = "A required backup will be created before changes are applied."
     $message = @"
-Pokemon Infinite Fusion PT-BR Fan Translation v1.1.0
+Pokemon Infinite Fusion PT-BR Fan Translation v1.1.2
 
 This is an unofficial fan-made translation patch. It does not include the game and does not download anything.
 
@@ -229,7 +229,7 @@ function Install-Translation {
         Show-Info "Copying translated language and script files..."
         $copied = Copy-DirectFiles $packageRoot $GameRoot $backupRoot $BackupEnabled
 
-        Show-Info "Applying outfit description text patches. Pokedex descriptions are skipped in v1.1.0."
+        Show-Info "Applying outfit description text patches. Pokedex descriptions are skipped in v1.1.2."
         $patch = Read-JsonFile $patchPath
 
         foreach ($section in $patch.outfit_description_translations) {
@@ -240,7 +240,7 @@ function Install-Translation {
     } finally {
         if ($BackupEnabled -and $script:BackupEntries.Count -gt 0) {
             $backupManifest = [pscustomobject]@{
-                version = "1.1.0"
+                version = "1.1.2"
                 created_on = (Get-Date).ToString("s")
                 game_dir = $GameRoot
                 entries = $script:BackupEntries
@@ -254,7 +254,7 @@ function Install-Translation {
 PT-BR translation installed.
 
 Files copied: $copied
-Pokedex descriptions: skipped for v1.1.0 future work
+Pokedex descriptions: skipped for v1.1.2 future work
 Outfit descriptions patched: $descriptionChanged
 Backup: $backupRoot
 "@

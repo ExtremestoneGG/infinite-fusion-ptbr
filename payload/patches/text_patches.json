@@ -1,9 +1,9 @@
 {
   "schema": 2,
-  "version": "1.1.0",
+  "version": "1.1.2",
   "language": "pt-BR",
   "notes": [
-    "v1.1.0 applies outfit/appearance descriptions only.",
+    "v1.1.2 applies outfit/appearance descriptions only.",
     "Pokedex species/fusion descriptions are intentionally deferred to a future project and are not included in the active installer payload."
   ],
   "entry_translations": [],

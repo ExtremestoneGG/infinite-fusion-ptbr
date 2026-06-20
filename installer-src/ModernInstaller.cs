@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
@@ -39,9 +41,12 @@ namespace InfiniteFusionPtbrInstaller
         private TextBox logBox;
         private readonly List<Control> actionControls = new List<Control>();
         private CancellationTokenSource scanCancellation;
+        private Button maximizeButton;
 
         private static readonly Brush PageBackground = BrushFromRgb(13, 17, 23);
+        private static readonly Brush TitleBackground = BrushFromRgb(1, 4, 9);
         private static readonly Brush CardBackground = BrushFromRgb(22, 27, 34);
+        private static readonly Brush ElevatedCard = BrushFromRgb(28, 33, 40);
         private static readonly Brush BorderColor = BrushFromRgb(48, 54, 61);
         private static readonly Brush MutedText = BrushFromRgb(139, 148, 158);
         private static readonly Brush NormalText = BrushFromRgb(230, 237, 243);
@@ -49,28 +54,47 @@ namespace InfiniteFusionPtbrInstaller
         private static readonly Brush Green = BrushFromRgb(35, 134, 54);
         private static readonly Brush Blue = BrushFromRgb(9, 105, 218);
         private static readonly Brush Purple = BrushFromRgb(130, 80, 223);
+        private static readonly Brush Danger = BrushFromRgb(218, 54, 51);
+        private static readonly Brush Cyan = BrushFromRgb(57, 197, 207);
         private static readonly Brush GrayButton = BrushFromRgb(48, 54, 61);
+        private static Style cachedButtonStyle;
 
         public ModernInstallerWindow()
         {
             Title = "Infinite Fusion PT-BR Mod Installer";
-            Width = 980;
-            Height = 700;
-            MinWidth = 880;
-            MinHeight = 620;
+            Width = 1040;
+            Height = 760;
+            MinWidth = 920;
+            MinHeight = 660;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            WindowStyle = WindowStyle.None;
+            ResizeMode = ResizeMode.CanResizeWithGrip;
             Background = PageBackground;
             Foreground = NormalText;
             FontFamily = new FontFamily("Segoe UI");
             Icon = LoadIcon();
+            StateChanged += delegate { UpdateMaximizeButton(); };
+
+            TextOptions.SetTextFormattingMode(this, TextFormattingMode.Display);
+            TextOptions.SetTextRenderingMode(this, TextRenderingMode.ClearType);
+
+            var shell = new Grid();
+            shell.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            shell.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            Content = shell;
+
+            var titleBar = CreateTitleBar();
+            Grid.SetRow(titleBar, 0);
+            shell.Children.Add(titleBar);
 
             var root = new Grid();
-            root.Margin = new Thickness(22);
+            root.Margin = new Thickness(22, 18, 22, 22);
             root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            Content = root;
+            Grid.SetRow(root, 1);
+            shell.Children.Add(root);
 
             var header = CreateHeader();
             Grid.SetRow(header, 0);
@@ -94,6 +118,129 @@ namespace InfiniteFusionPtbrInstaller
 
             SetResult("Pronto para instalar", "Escolha o Game.exe do Pokemon Infinite Fusion ou use a busca automática.");
             Log("Pronto. Escolha o Game.exe ou clique em Escanear.");
+        }
+
+        private UIElement CreateTitleBar()
+        {
+            var bar = new Border
+            {
+                Background = TitleBackground,
+                BorderBrush = BorderColor,
+                BorderThickness = new Thickness(0, 0, 0, 1),
+                Height = 44
+            };
+            bar.MouseLeftButtonDown += delegate(object sender, MouseButtonEventArgs e)
+            {
+                if (e.ChangedButton != MouseButton.Left) return;
+                if (e.ClickCount == 2)
+                {
+                    ToggleMaximize();
+                    return;
+                }
+                DragMove();
+            };
+
+            var grid = new Grid();
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            bar.Child = grid;
+
+            var identity = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(14, 0, 0, 0)
+            };
+            Grid.SetColumn(identity, 0);
+            grid.Children.Add(identity);
+
+            identity.Children.Add(new Image
+            {
+                Source = LoadImage("installer_icon.png"),
+                Width = 24,
+                Height = 24,
+                Margin = new Thickness(0, 0, 9, 0)
+            });
+            identity.Children.Add(new TextBlock
+            {
+                Text = "Infinite Fusion PT-BR Mod",
+                Foreground = NormalText,
+                FontSize = 14,
+                FontWeight = FontWeights.SemiBold,
+                VerticalAlignment = VerticalAlignment.Center
+            });
+            identity.Children.Add(new TextBlock
+            {
+                Text = "  v1.1.2",
+                Foreground = Cyan,
+                FontSize = 12,
+                FontWeight = FontWeights.Bold,
+                VerticalAlignment = VerticalAlignment.Center
+            });
+
+            var titleActions = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            Grid.SetColumn(titleActions, 2);
+            grid.Children.Add(titleActions);
+
+            var minimize = CreateWindowButton("-", GrayButton);
+            minimize.Click += delegate { WindowState = WindowState.Minimized; };
+            titleActions.Children.Add(minimize);
+
+            maximizeButton = CreateWindowButton("□", GrayButton);
+            maximizeButton.Click += delegate { ToggleMaximize(); };
+            titleActions.Children.Add(maximizeButton);
+
+            var close = CreateWindowButton("X", Danger);
+            close.Click += delegate { Close(); };
+            titleActions.Children.Add(close);
+            return bar;
+        }
+
+        private Button CreateWindowButton(string text, Brush hoverBrush)
+        {
+            var button = new Button
+            {
+                Content = text,
+                Width = 46,
+                Height = 34,
+                Background = TitleBackground,
+                Foreground = NormalText,
+                BorderBrush = TitleBackground,
+                FontWeight = FontWeights.SemiBold,
+                Padding = new Thickness(0),
+                Style = GetButtonStyle(),
+                Cursor = Cursors.Hand
+            };
+            button.MouseEnter += delegate
+            {
+                button.Background = hoverBrush;
+                button.BorderBrush = hoverBrush;
+            };
+            button.MouseLeave += delegate
+            {
+                button.Background = TitleBackground;
+                button.BorderBrush = TitleBackground;
+            };
+            return button;
+        }
+
+        private void ToggleMaximize()
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            UpdateMaximizeButton();
+        }
+
+        private void UpdateMaximizeButton()
+        {
+            if (maximizeButton != null)
+            {
+                maximizeButton.Content = WindowState == WindowState.Maximized ? "❐" : "□";
+            }
         }
 
         private UIElement CreateHeader()
@@ -137,7 +284,7 @@ namespace InfiniteFusionPtbrInstaller
             });
 
             var badges = new StackPanel { Orientation = Orientation.Horizontal };
-            badges.Children.Add(CreateBadge("v1.1.0", Blue));
+            badges.Children.Add(CreateBadge("v1.1.2", Blue));
             badges.Children.Add(CreateBadge("Backup obrigatório", BrushFromRgb(191, 135, 0)));
             badges.Children.Add(CreateBadge("Fan-made", Purple));
             badges.Children.Add(CreateBadge("Sem download do jogo", BrushFromRgb(218, 54, 51)));
@@ -212,13 +359,13 @@ namespace InfiniteFusionPtbrInstaller
             Grid.SetColumn(gameDirBox, 0);
             pathGrid.Children.Add(gameDirBox);
 
-            chooseButton = CreateButton("Escolher Game.exe", Blue);
+            chooseButton = CreateButton("Escolher Game.exe", Blue, 0xE8B7);
             chooseButton.Margin = new Thickness(10, 0, 0, 0);
             chooseButton.Click += delegate { ChooseGameExecutable(); };
             Grid.SetColumn(chooseButton, 1);
             pathGrid.Children.Add(chooseButton);
 
-            scanButton = CreateButton("Escanear", GrayButton);
+            scanButton = CreateButton("Escanear", GrayButton, 0xE721);
             scanButton.Margin = new Thickness(8, 0, 0, 0);
             scanButton.Click += async delegate
             {
@@ -232,7 +379,7 @@ namespace InfiniteFusionPtbrInstaller
             Grid.SetColumn(scanButton, 2);
             pathGrid.Children.Add(scanButton);
 
-            validateButton = CreateButton("Validar", GrayButton);
+            validateButton = CreateButton("Validar", GrayButton, 0xE73E);
             validateButton.Margin = new Thickness(8, 0, 0, 0);
             validateButton.Click += delegate { ValidateSelectedFolderWithMessage(); };
             Grid.SetColumn(validateButton, 3);
@@ -245,18 +392,18 @@ namespace InfiniteFusionPtbrInstaller
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             stack.Children.Add(buttonGrid);
 
-            installButton = CreateButton("Instalar / Atualizar PT-BR", Green);
+            installButton = CreateButton("Instalar / Atualizar PT-BR", Green, 0xE896);
             installButton.Click += async delegate { await RunInstall(); };
             Grid.SetColumn(installButton, 0);
             buttonGrid.Children.Add(installButton);
 
-            restoreButton = CreateButton("Restaurar backup", GrayButton);
+            restoreButton = CreateButton("Desinstalar tradução", Danger, 0xE74D);
             restoreButton.Margin = new Thickness(10, 0, 0, 0);
             restoreButton.Click += async delegate { await RunRestore(); };
             Grid.SetColumn(restoreButton, 1);
             buttonGrid.Children.Add(restoreButton);
 
-            backupButton = CreateButton("Abrir backups", GrayButton);
+            backupButton = CreateButton("Abrir backups", GrayButton, 0xE8A7);
             backupButton.Margin = new Thickness(10, 0, 0, 0);
             backupButton.Click += delegate { OpenBackupFolder(); };
             Grid.SetColumn(backupButton, 2);
@@ -370,21 +517,20 @@ namespace InfiniteFusionPtbrInstaller
             }
             catch (Exception ex)
             {
-                ShowWarn("Restauração interrompida", ex.Message);
+                ShowWarn("Desinstalação interrompida", ex.Message);
                 return;
             }
 
-            if (MessageBox.Show(this, "Restaurar o backup PT-BR mais recente em:\n\n" + folder + "\n\nContinuar?", "Restaurar backup", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+            if (MessageBox.Show(this, "Desinstalar a tradução PT-BR restaurando o backup mais recente em:\n\n" + folder + "\n\nContinuar?", "Desinstalar tradução", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
             {
                 return;
             }
 
-            await RunBackground("Restaurando backup...", delegate
+            await RunBackground("Desinstalando tradução...", delegate
             {
                 return InstallerCore.RestoreLatest(folder, LogThreadSafe, SetProgressThreadSafe);
             });
         }
-
         private async Task RunBackground(string title, Func<string> work)
         {
             SetBusy(true);
@@ -715,7 +861,7 @@ namespace InfiniteFusionPtbrInstaller
                 Background = CardBackground,
                 BorderBrush = BorderColor,
                 BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(10)
+                CornerRadius = new CornerRadius(12)
             };
         }
 
@@ -739,16 +885,78 @@ namespace InfiniteFusionPtbrInstaller
 
         private static Button CreateButton(string text, Brush background)
         {
-            return new Button
+            return CreateButton(text, background, 0);
+        }
+
+        private static Button CreateButton(string text, Brush background, int iconCode)
+        {
+            var button = new Button
             {
-                Content = text,
                 Background = background,
                 Foreground = Brushes.White,
                 BorderBrush = background,
                 FontWeight = FontWeights.SemiBold,
-                Padding = new Thickness(14, 8, 14, 8),
-                MinHeight = 38
+                Padding = new Thickness(14, 9, 14, 9),
+                MinHeight = 40,
+                Style = GetButtonStyle(),
+                Cursor = Cursors.Hand
             };
+            button.Content = iconCode > 0 ? (object)CreateButtonContent(text, iconCode) : text;
+            button.MouseEnter += delegate { button.Opacity = 0.92; };
+            button.MouseLeave += delegate { button.Opacity = 1.0; };
+            return button;
+        }
+
+        private static UIElement CreateButtonContent(string text, int iconCode)
+        {
+            var stack = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            stack.Children.Add(new TextBlock
+            {
+                Text = char.ConvertFromUtf32(iconCode),
+                FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                FontSize = 14,
+                Margin = new Thickness(0, 0, 8, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            });
+            stack.Children.Add(new TextBlock
+            {
+                Text = text,
+                FontSize = 13.5,
+                VerticalAlignment = VerticalAlignment.Center
+            });
+            return stack;
+        }
+
+        private static Style GetButtonStyle()
+        {
+            if (cachedButtonStyle != null) return cachedButtonStyle;
+
+            var style = new Style(typeof(Button));
+            var template = new ControlTemplate(typeof(Button));
+            var border = new FrameworkElementFactory(typeof(Border));
+            border.SetValue(Border.CornerRadiusProperty, new CornerRadius(9));
+            border.SetValue(Border.BorderThicknessProperty, new Thickness(1));
+            border.SetBinding(Border.BackgroundProperty, new Binding("Background") { RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent) });
+            border.SetBinding(Border.BorderBrushProperty, new Binding("BorderBrush") { RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent) });
+
+            var presenter = new FrameworkElementFactory(typeof(ContentPresenter));
+            presenter.SetValue(ContentPresenter.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            presenter.SetValue(ContentPresenter.VerticalAlignmentProperty, VerticalAlignment.Center);
+            presenter.SetValue(ContentPresenter.RecognizesAccessKeyProperty, true);
+            presenter.SetBinding(FrameworkElement.MarginProperty, new Binding("Padding") { RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent) });
+            border.AppendChild(presenter);
+
+            template.VisualTree = border;
+            style.Setters.Add(new Setter(Button.TemplateProperty, template));
+            style.Setters.Add(new Setter(Button.FocusVisualStyleProperty, null));
+            style.Setters.Add(new Setter(Button.SnapsToDevicePixelsProperty, true));
+            cachedButtonStyle = style;
+            return cachedButtonStyle;
         }
 
         private static SolidColorBrush BrushFromRgb(byte r, byte g, byte b)

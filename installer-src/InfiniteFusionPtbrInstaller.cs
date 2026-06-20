@@ -27,6 +27,15 @@ namespace InfiniteFusionPtbrInstaller
         public List<BackupEntry> entries { get; set; }
     }
 
+    public class SaveLanguageResetResult
+    {
+        public int savesFound { get; set; }
+        public int savesBackedUp { get; set; }
+        public int savesChanged { get; set; }
+        public int alreadyEnglish { get; set; }
+        public string backupDir { get; set; }
+    }
+
     public class InstallerForm : Form
     {
         private readonly TextBox gameDirBox;
@@ -99,7 +108,7 @@ namespace InfiniteFusionPtbrInstaller
             var badgePanel = new FlowLayoutPanel();
             badgePanel.AutoSize = true;
             badgePanel.Margin = new Padding(0, 10, 0, 0);
-            badgePanel.Controls.Add(CreateBadge("v1.1.0", Color.FromArgb(9, 105, 218), Color.White));
+            badgePanel.Controls.Add(CreateBadge("v1.1.2", Color.FromArgb(9, 105, 218), Color.White));
             badgePanel.Controls.Add(CreateBadge("Backup required", Color.FromArgb(191, 135, 0), Color.White));
             badgePanel.Controls.Add(CreateBadge("Unofficial fan mod", Color.FromArgb(130, 80, 223), Color.White));
             header.Controls.Add(badgePanel);
@@ -170,7 +179,7 @@ namespace InfiniteFusionPtbrInstaller
             buttonPanel.Controls.Add(installButton);
 
             restoreButton = new Button();
-            restoreButton.Text = "Restore Latest Backup";
+            restoreButton.Text = "Uninstall Translation";
             restoreButton.AutoSize = true;
             restoreButton.Padding = new Padding(8, 4, 8, 4);
             restoreButton.BackColor = Color.FromArgb(87, 96, 106);
@@ -461,7 +470,7 @@ namespace InfiniteFusionPtbrInstaller
             var patch = DeserializeDictionary(File.ReadAllText(patchPath, Encoding.UTF8));
             progress(40);
 
-            log("Skipping Pokedex descriptions in v1.1.0. They are planned as future work.");
+            log("Skipping Pokedex descriptions in v1.1.2. They are planned as future work.");
             progress(62);
 
             log("Patching outfit descriptions...");
@@ -478,7 +487,7 @@ namespace InfiniteFusionPtbrInstaller
             {
                 var backupManifest = new BackupManifest
                 {
-                    version = "1.1.0",
+                    version = "1.1.2",
                     created_on = DateTime.Now.ToString("s"),
                     game_dir = gameRoot,
                     entries = backupEntries
@@ -491,7 +500,7 @@ namespace InfiniteFusionPtbrInstaller
 
             return "PT-BR translation installed.\n\n" +
                    "Files copied: " + copied + "\n" +
-                   "Pokedex descriptions: skipped for v1.1.0 future work\n" +
+                   "Pokedex descriptions: skipped for v1.1.2 future work\n" +
                    "Outfit descriptions patched: " + descriptionChanged + "\n" +
                    "Backup: " + backupRoot;
         }
@@ -507,6 +516,10 @@ namespace InfiniteFusionPtbrInstaller
 
             var manifestPath = Path.Combine(latest.FullName, "backup_manifest.json");
             if (!File.Exists(manifestPath)) throw new FileNotFoundException("Backup manifest not found", manifestPath);
+
+            log("Backing up save files and resetting save language to English...");
+            var saveReset = ResetSaveLanguageToEnglish(gameRoot, log);
+            progress(5);
 
             var manifest = DeserializeDictionary(File.ReadAllText(manifestPath, Encoding.UTF8));
             var entries = (object[])manifest["entries"];
@@ -537,15 +550,294 @@ namespace InfiniteFusionPtbrInstaller
                         deleted++;
                     }
                 }
-                if (i % 10 == 0) progress((int)((i + 1) * 100.0 / total));
+                if (i % 10 == 0) progress(5 + (int)((i + 1) * 95.0 / total));
             }
             progress(100);
             log("Restored backup: " + latest.FullName);
 
             return "Latest PT-BR backup restored.\n\n" +
                    "Backup: " + latest.FullName + "\n" +
+                   "Save files found: " + saveReset.savesFound + "\n" +
+                   "Save files changed to English: " + saveReset.savesChanged + "\n" +
+                   "Save backup: " + (string.IsNullOrEmpty(saveReset.backupDir) ? "not needed" : saveReset.backupDir) + "\n" +
                    "Files restored: " + restored + "\n" +
                    "Created files removed: " + deleted;
+        }
+
+        private static SaveLanguageResetResult ResetSaveLanguageToEnglish(string gameRoot, Action<string> log)
+        {
+            var result = new SaveLanguageResetResult();
+            var saveDirs = FindSaveDirectories(gameRoot);
+            var saveFiles = new List<string>();
+            foreach (var dir in saveDirs)
+            {
+                try
+                {
+                    saveFiles.AddRange(Directory.GetFiles(dir, "*.rxdata", SearchOption.TopDirectoryOnly));
+                }
+                catch (Exception ex)
+                {
+                    log("Could not read save folder " + dir + ": " + ex.Message);
+                }
+            }
+
+            saveFiles = saveFiles
+                .Where(IsLikelySaveFile)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(x => x, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            result.savesFound = saveFiles.Count;
+            if (saveFiles.Count == 0)
+            {
+                log("No save files found for language reset.");
+                return result;
+            }
+
+            result.backupDir = Path.Combine(gameRoot, "PTBR_BACKUPS", "save_backups", "save_language_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"));
+            Directory.CreateDirectory(result.backupDir);
+
+            foreach (var saveFile in saveFiles)
+            {
+                var backupPath = MakeUniqueBackupPath(result.backupDir, Path.GetFileName(saveFile));
+                File.Copy(saveFile, backupPath, false);
+                result.savesBackedUp++;
+
+                var bytes = File.ReadAllBytes(saveFile);
+                int oldLanguage;
+                bool detected;
+                var changed = TryPatchPokemonSystemLanguage(bytes, out oldLanguage, out detected);
+                if (changed)
+                {
+                    File.WriteAllBytes(saveFile, bytes);
+                    result.savesChanged++;
+                    log("Save language reset to English: " + Path.GetFileName(saveFile) + " (" + oldLanguage + " -> 0)");
+                }
+                else if (detected)
+                {
+                    result.alreadyEnglish++;
+                    log("Save language already English: " + Path.GetFileName(saveFile));
+                }
+                else
+                {
+                    log("Save language field not detected, backup kept: " + Path.GetFileName(saveFile));
+                }
+            }
+
+            log("Save backup created: " + result.backupDir);
+            return result;
+        }
+
+        private static List<string> FindSaveDirectories(string gameRoot)
+        {
+            var dirs = new List<string>();
+            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            AddDirectoryIfExists(dirs, Path.Combine(appData, "infinitefusion"));
+            AddDirectoryIfExists(dirs, Path.Combine(Environment.GetEnvironmentVariable("APPDATA") ?? "", "infinitefusion"));
+            AddDirectoryIfExists(dirs, gameRoot);
+            AddDirectoryIfExists(dirs, Path.Combine(gameRoot, "Savefile"));
+            AddDirectoryIfExists(dirs, Path.Combine(gameRoot, "savefiles"));
+            return dirs;
+        }
+
+        private static void AddDirectoryIfExists(List<string> dirs, string path)
+        {
+            if (string.IsNullOrWhiteSpace(path)) return;
+            try
+            {
+                var full = Path.GetFullPath(path);
+                if (Directory.Exists(full) && !dirs.Contains(full, StringComparer.OrdinalIgnoreCase))
+                {
+                    dirs.Add(full);
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private static bool IsLikelySaveFile(string path)
+        {
+            var name = Path.GetFileName(path);
+            if (string.IsNullOrEmpty(name)) return false;
+            if (name.Equals("Game.rxdata", StringComparison.OrdinalIgnoreCase)) return true;
+            if (name.StartsWith("File ", StringComparison.OrdinalIgnoreCase) && name.EndsWith(".rxdata", StringComparison.OrdinalIgnoreCase)) return true;
+            return false;
+        }
+
+        private static string MakeUniqueBackupPath(string backupDir, string fileName)
+        {
+            var target = Path.Combine(backupDir, fileName);
+            if (!File.Exists(target)) return target;
+            var stem = Path.GetFileNameWithoutExtension(fileName);
+            var ext = Path.GetExtension(fileName);
+            for (var i = 2; ; i++)
+            {
+                target = Path.Combine(backupDir, stem + "_" + i + ext);
+                if (!File.Exists(target)) return target;
+            }
+        }
+
+        private static bool TryPatchPokemonSystemLanguage(byte[] bytes, out int oldLanguage, out bool detected)
+        {
+            oldLanguage = -1;
+            detected = false;
+            var className = Encoding.ASCII.GetBytes("PokemonSystem");
+            var screensizeName = Encoding.ASCII.GetBytes("@screensize");
+            var searchStart = 0;
+            while (true)
+            {
+                var classOffset = IndexOfBytes(bytes, className, searchStart);
+                if (classOffset < 0) return false;
+                var screenOffset = IndexOfBytes(bytes, screensizeName, classOffset);
+                if (screenOffset < 0 || screenOffset - classOffset > 1024)
+                {
+                    searchStart = classOffset + 1;
+                    continue;
+                }
+
+                var pos = screenOffset + screensizeName.Length;
+                if (pos >= bytes.Length || bytes[pos] != (byte)'i')
+                {
+                    searchStart = classOffset + 1;
+                    continue;
+                }
+                int ignored;
+                int afterScreensize;
+                if (!TryReadMarshalFixnum(bytes, pos + 1, out ignored, out afterScreensize))
+                {
+                    searchStart = classOffset + 1;
+                    continue;
+                }
+
+                pos = afterScreensize;
+                if (pos >= bytes.Length)
+                {
+                    searchStart = classOffset + 1;
+                    continue;
+                }
+                if (bytes[pos] == (byte)':')
+                {
+                    if (!TrySkipMarshalSymbol(bytes, pos + 1, out pos))
+                    {
+                        searchStart = classOffset + 1;
+                        continue;
+                    }
+                }
+                else if (bytes[pos] == (byte)';')
+                {
+                    if (!TryReadMarshalFixnum(bytes, pos + 1, out ignored, out pos))
+                    {
+                        searchStart = classOffset + 1;
+                        continue;
+                    }
+                }
+                else
+                {
+                    searchStart = classOffset + 1;
+                    continue;
+                }
+
+                if (pos >= bytes.Length || bytes[pos] != (byte)'i')
+                {
+                    searchStart = classOffset + 1;
+                    continue;
+                }
+
+                var valueOffset = pos + 1;
+                int afterLanguage;
+                if (!TryReadMarshalFixnum(bytes, valueOffset, out oldLanguage, out afterLanguage))
+                {
+                    searchStart = classOffset + 1;
+                    continue;
+                }
+                detected = true;
+                if (oldLanguage == 0) return false;
+
+                // Language values are small Ruby Marshal fixnums: 0 => 00, 1 => 06, 2 => 07.
+                if (afterLanguage == valueOffset + 1 && oldLanguage >= 0 && oldLanguage <= 2)
+                {
+                    bytes[valueOffset] = 0x00;
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        private static int IndexOfBytes(byte[] source, byte[] needle, int start)
+        {
+            if (source == null || needle == null || needle.Length == 0) return -1;
+            for (var i = Math.Max(0, start); i <= source.Length - needle.Length; i++)
+            {
+                var ok = true;
+                for (var j = 0; j < needle.Length; j++)
+                {
+                    if (source[i + j] != needle[j])
+                    {
+                        ok = false;
+                        break;
+                    }
+                }
+                if (ok) return i;
+            }
+            return -1;
+        }
+
+        private static bool TrySkipMarshalSymbol(byte[] bytes, int offset, out int next)
+        {
+            next = offset;
+            int length;
+            if (!TryReadMarshalFixnum(bytes, offset, out length, out next)) return false;
+            if (length < 0 || next + length > bytes.Length) return false;
+            next += length;
+            return true;
+        }
+
+        private static bool TryReadMarshalFixnum(byte[] bytes, int offset, out int value, out int next)
+        {
+            value = 0;
+            next = offset;
+            if (offset >= bytes.Length) return false;
+            var first = (int)(sbyte)bytes[offset];
+            next = offset + 1;
+            if (first == 0)
+            {
+                value = 0;
+                return true;
+            }
+            if (first > 5)
+            {
+                value = first - 5;
+                return true;
+            }
+            if (first < -4)
+            {
+                value = first + 5;
+                return true;
+            }
+            if (first > 0)
+            {
+                if (next + first > bytes.Length) return false;
+                var raw = 0;
+                for (var i = 0; i < first; i++)
+                {
+                    raw |= bytes[next + i] << (8 * i);
+                }
+                value = raw;
+                next += first;
+                return true;
+            }
+            var count = -first;
+            if (next + count > bytes.Length) return false;
+            var negative = -1;
+            for (var i = 0; i < count; i++)
+            {
+                negative &= ~(0xFF << (8 * i));
+                negative |= bytes[next + i] << (8 * i);
+            }
+            value = negative;
+            next += count;
+            return true;
         }
 
         private static int CopyDirectFiles(string packageRoot, string gameRoot, string backupRoot, bool backupEnabled, List<BackupEntry> backupEntries, HashSet<string> backedUp)
