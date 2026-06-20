@@ -9,8 +9,8 @@ The main `.exe` release asset is a single file with the PT-BR payload embedded i
 ## Installation Tutorial
 
 1. Download the game only from the official Pokemon Infinite Fusion Discord.
-2. Download `InfiniteFusionPTBRInstaller-v1.1.3.exe` from this repository's Releases page.
-3. Run `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
+2. Download `InfiniteFusionPTBRInstaller-v1.1.4.exe` from this repository's Releases page.
+3. Run `InfiniteFusionPTBRInstaller-v1.1.4.exe`.
 4. Click `Choose Game.exe` and select the game's `Game.exe`, or use `Scan` to search common folders automatically.
 5. Confirm the install prompt.
 6. Wait for the copy and patch steps to finish.
@@ -33,20 +33,20 @@ It performs four actions:
 
 The `.exe` installer does not download files, does not contact the internet, does not include the game, and does not require administrator permissions.
 
-The BAT/PowerShell method is shipped separately as `PTBR-Translation-BAT-v1.1.3.zip`. See [BAT_INSTALLER.md](BAT_INSTALLER.md) for that tutorial.
+The BAT/PowerShell method is shipped separately as `PTBR-Translation-BAT-v1.1.4.zip`. See [BAT_INSTALLER.md](BAT_INSTALLER.md) for that tutorial.
 
 ### Files
 
-- `InfiniteFusionPTBRInstaller-v1.1.3.exe`: recommended single-file graphical installer.
+- `InfiniteFusionPTBRInstaller-v1.1.4.exe`: recommended single-file graphical installer.
 - `installer/InfiniteFusionPTBRInstaller.exe`: same graphical installer inside the repository source tree.
 - `installer-src/ModernInstaller.cs`: source code for the modern WPF graphical installer.
 - `installer-src/InfiniteFusionPtbrInstaller.cs`: shared installer core and legacy WinForms UI source.
 - `payload/files`: translated language data and script-level UI files.
-- `payload/patches/text_patches.json`: outfit description text mappings with Pokedex species/fusion mappings excluded from the v1.1.3 active payload.
+- `payload/patches/text_patches.json`: outfit description text mappings with Pokedex species/fusion mappings excluded from the v1.1.4 active payload.
 
 ## Restore Tutorial
 
-1. Open `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
+1. Open `InfiniteFusionPTBRInstaller-v1.1.4.exe`.
 2. Select the same game folder.
 3. Click `Desinstalar tradução`.
 4. The installer backs up your save files under `PTBR_BACKUPS/save_backups` and resets the save language back to English.
@@ -66,12 +66,12 @@ Known crash message:
 Workaround:
 
 1. Close the game.
-2. Open `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
+2. Open `InfiniteFusionPTBRInstaller-v1.1.4.exe`.
 3. Select the same `Game.exe`.
 4. Click `Install / Update PT-BR`.
 5. Open the game again.
 
-For extra safety before official game updates, manually copy `%APPDATA%\infinitefusion` somewhere safe. In the graphical uninstall flow, v1.1.3 automatically backs up save files and resets the saved language to English.
+For extra safety before official game updates, manually copy `%APPDATA%\infinitefusion` somewhere safe. In the graphical uninstall flow, v1.1.4 automatically backs up save files and resets the saved language to English.
 
 ## Português
 
@@ -82,8 +82,8 @@ O arquivo principal `.exe` da release é um arquivo único com o pacote PT-BR em
 ## Tutorial De Instalação
 
 1. Baixe o jogo somente pelo Discord oficial de Pokemon Infinite Fusion.
-2. Baixe `InfiniteFusionPTBRInstaller-v1.1.3.exe` pela página de Releases deste repositório.
-3. Execute `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
+2. Baixe `InfiniteFusionPTBRInstaller-v1.1.4.exe` pela página de Releases deste repositório.
+3. Execute `InfiniteFusionPTBRInstaller-v1.1.4.exe`.
 4. Clique em `Escolher Game.exe` e selecione o `Game.exe` do jogo, ou use `Escanear` para procurar pastas comuns automaticamente.
 5. Confirme a janela de instalação.
 6. Aguarde a cópia e os patches terminarem.
@@ -106,20 +106,20 @@ Ele faz quatro coisas:
 
 O instalador `.exe` não baixa arquivos, não acessa a internet, não inclui o jogo e não precisa de permissões de administrador.
 
-O método BAT/PowerShell é distribuído separadamente como `PTBR-Translation-BAT-v1.1.3.zip`. Veja [BAT_INSTALLER.md](BAT_INSTALLER.md) para esse tutorial.
+O método BAT/PowerShell é distribuído separadamente como `PTBR-Translation-BAT-v1.1.4.zip`. Veja [BAT_INSTALLER.md](BAT_INSTALLER.md) para esse tutorial.
 
 ### Arquivos
 
-- `InfiniteFusionPTBRInstaller-v1.1.3.exe`: instalador gráfico recomendado em arquivo único.
+- `InfiniteFusionPTBRInstaller-v1.1.4.exe`: instalador gráfico recomendado em arquivo único.
 - `installer/InfiniteFusionPTBRInstaller.exe`: o mesmo instalador gráfico dentro da árvore de código do repositório.
 - `installer-src/ModernInstaller.cs`: código-fonte do instalador gráfico WPF moderno.
 - `installer-src/InfiniteFusionPtbrInstaller.cs`: núcleo compartilhado do instalador e código da interface WinForms legada.
 - `payload/files`: dados de idioma e scripts de interface traduzidos.
-- `payload/patches/text_patches.json`: mapeamentos de descrições de roupas. As descrições da Pokédex não contam como concluídas na v1.1.3.
+- `payload/patches/text_patches.json`: mapeamentos de descrições de roupas. As descrições da Pokédex não contam como concluídas na v1.1.4.
 
 ## Tutorial De Restauração
 
-1. Abra `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
+1. Abra `InfiniteFusionPTBRInstaller-v1.1.4.exe`.
 2. Selecione a mesma pasta do jogo.
 3. Clique em `Desinstalar tradução`.
 4. O instalador cria backup dos saves em `PTBR_BACKUPS/save_backups` e volta o idioma salvo para inglês.
@@ -139,9 +139,9 @@ Mensagem conhecida do crash:
 Como resolver:
 
 1. Feche o jogo.
-2. Abra `InfiniteFusionPTBRInstaller-v1.1.3.exe`.
+2. Abra `InfiniteFusionPTBRInstaller-v1.1.4.exe`.
 3. Selecione o mesmo `Game.exe`.
 4. Clique em `Instalar / Atualizar PT-BR`.
 5. Abra o jogo novamente.
 
-Por segurança, antes de updates oficiais do jogo, copie manualmente `%APPDATA%\infinitefusion` para outro lugar. Na desinstalação pelo `.exe`, a v1.1.3 cria backup dos saves e volta o idioma salvo para inglês automaticamente.
+Por segurança, antes de updates oficiais do jogo, copie manualmente `%APPDATA%\infinitefusion` para outro lugar. Na desinstalação pelo `.exe`, a v1.1.4 cria backup dos saves e volta o idioma salvo para inglês automaticamente.

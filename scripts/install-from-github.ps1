@@ -1,12 +1,12 @@
 param(
     [string]$GameDir = (Get-Location).Path,
-    [string]$Version = "v1.1.3"
+    [string]$Version = "v1.1.4"
 )
 
 $ErrorActionPreference = "Stop"
 
 $repo = "ExtremestoneGG/infinite-fusion-ptbr"
-$assetName = "PTBR-Translation-BAT-v1.1.3.zip"
+$assetName = "PTBR-Translation-BAT-v1.1.4.zip"
 $downloadUrl = "https://github.com/$repo/releases/download/$Version/$assetName"
 
 function Assert-GameDir {

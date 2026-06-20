@@ -1,6 +1,6 @@
 {
-  "version": "1.1.3",
-  "generated_on": "2026-06-19T00:00:00",
+  "version": "1.1.4",
+  "generated_on": "2026-06-20T00:00:00",
   "base_report": {
     "target": "D:\\InfiniteFusion - Copia\\Data\\portuguese.dat",
     "translated_maps": 699,
@@ -69,6 +69,16 @@
       "coverage_percent": 98,
       "notes": "Names stay in English; descriptions/effects are translated where extracted or found in scripts."
     },
+    "nature_names": {
+      "status": "preserved_default_english",
+      "coverage_percent": "N/A",
+      "notes": "Nature names are intentionally kept in the original English/default names."
+    },
+    "options_config_screen": {
+      "status": "preserved_default_english",
+      "coverage_percent": "N/A",
+      "notes": "Options/configuration screen text is kept as the game default in v1.1.4 to avoid script identifier/config crashes."
+    },
     "outfit_descriptions": {
       "translated": 314,
       "total": 314,
@@ -87,14 +97,14 @@
     },
     "pokedex_species_and_fusion_descriptions": {
       "translated": 0,
-      "total": "not counted in v1.1.3",
+      "total": "not counted in v1.1.4",
       "coverage_percent": 0,
       "status": "deferred_future_project"
     },
     "preserved_names_and_bitmap_text": {
       "status": "not translated by design"
     },
-    "notes": "Coverage is based on the extracted/packageable PT-BR scope. Pokedex species/fusion descriptions are intentionally excluded from the v1.1.3 payload and planned as future work."
+    "notes": "Coverage is based on the extracted/packageable PT-BR scope. Pokedex species/fusion descriptions are intentionally excluded from the v1.1.4 payload and planned as future work."
   },
   "excluded_from_release": [
     "Game binaries and original game assets",
@@ -107,7 +117,7 @@
   "json_patch_schema": 2,
   "installer_sandbox_test": {
     "status": "static_payload_validation_completed",
-    "note": "Direct invocation of the compiled GUI installer was blocked by the local execution sandbox, so v1.1.3 was validated by package/source checks: embedded payload, manifest, no active Pokedex payload, outfit patch presence, backup-capable installer source, and compiled resource list."
+    "note": "Direct invocation of the compiled GUI installer was blocked by the local execution sandbox, so v1.1.4 was validated by package/source checks: embedded payload, manifest, no active Pokedex payload, outfit patch presence, backup-capable installer source, and compiled resource list."
   },
   "final_package_validation": {
     "manifest_loaded": true,
@@ -117,11 +127,13 @@
     "unofficial_fanmade_warning_present": true,
     "forbidden_game_payload_check": "passed",
     "errors": [],
-    "known_save_update_issue_documented": true
+    "known_save_update_issue_documented": true,
+    "nature_names_preserved_default_english": true,
+    "options_config_preserved_default_english": true
   },
   "graphical_installer": {
     "path": "installer/InfiniteFusionPTBRInstaller.exe",
-    "release_asset": "InfiniteFusionPTBRInstaller-v1.1.3.exe",
+    "release_asset": "InfiniteFusionPTBRInstaller-v1.1.4.exe",
     "source": "installer-src/ModernInstaller.cs",
     "core_source": "installer-src/InfiniteFusionPtbrInstaller.cs",
     "compiled_with": "Microsoft .NET Framework C# compiler 4.8 WPF",
@@ -141,18 +153,18 @@
       "json_metadata_preserved": true,
       "created_files_removed_on_restore": true
     },
-    "pokedex_behavior": "skips Pokedex species/fusion descriptions in v1.1.3"
+    "pokedex_behavior": "skips Pokedex species/fusion descriptions in v1.1.4"
   },
   "release_assets": {
     "recommended_exe": {
-      "name": "InfiniteFusionPTBRInstaller-v1.1.3.exe",
+      "name": "InfiniteFusionPTBRInstaller-v1.1.4.exe",
       "bat_files_included": false,
       "embedded_payload": true,
       "backup_required": true,
       "bytes": "see GitHub release asset"
     },
     "bat_powershell_zip": {
-      "name": "PTBR-Translation-BAT-v1.1.3.zip",
+      "name": "PTBR-Translation-BAT-v1.1.4.zip",
       "bat_files_included": true,
       "installer": "installer/Install-PTBR.bat",
       "github_bootstrap_script": "scripts/install-from-github.ps1",
@@ -200,10 +212,10 @@
       "title": "Official updater/save compatibility crash",
       "error": "Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass",
       "when": "After running the official game updater .bat or restoring the game to an untranslated/original state before opening a save last used with the PT-BR translation.",
-      "workaround": "Reinstall/update the PT-BR translation with InfiniteFusionPTBRInstaller-v1.1.3.exe before opening the save again. If uninstalling the translation, use the graphical Desinstalar tradução button so the installer backs up saves, resets the saved language to English, restores the original pre-translation backup, and then recommends running the official game update .bat.",
+      "workaround": "Reinstall/update the PT-BR translation with InfiniteFusionPTBRInstaller-v1.1.4.exe before opening the save again. If uninstalling the translation, use the graphical Desinstalar tradução button so the installer backs up saves, resets the saved language to English, restores the original pre-translation backup, and then recommends running the official game update .bat.",
       "save_folder": "%APPDATA%\\infinitefusion",
       "save_file_editing_v112": "graphical uninstall resets PokemonSystem.language to English after backing up save files",
-      "status": "mitigated_in_v1.1.3_graphical_uninstall"
+      "status": "mitigated_in_v1.1.4_graphical_uninstall"
     }
   ],
   "save_policy": {
@@ -212,6 +224,6 @@
     "save_backup_on_uninstall": "PTBR_BACKUPS/save_backups/save_language_YYYYMMDD_HHMMSS",
     "manual_save_backup_recommended_before_official_updates": true,
     "after_official_update": "Run the PT-BR installer again before opening a save.",
-    "future_work": "More advanced save repair may be added later; v1.1.3 backs up saves, resets language to English, and restores the original pre-translation backup during graphical uninstall."
+    "future_work": "More advanced save repair may be added later; v1.1.4 backs up saves, resets language to English, and restores the original pre-translation backup during graphical uninstall."
   }
 }

@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.4
+
+### English
+
+- Restored Nature names to the game's original English/default names.
+- Restored the Options/configuration screen text and identifiers to the game default to avoid config-screen crashes.
+- Kept this hotfix translation/data-only: no Ruby gameplay logic patch is included for the reported Nature/ability flow.
+- Updated documentation and coverage notes to mark Nature names and stability-sensitive configuration screens as preserved in English.
+
+### Portugues
+
+- Restaurados os nomes das Natures para os nomes originais/default em inglês do jogo.
+- Restaurados os textos e identificadores da tela de Options/configuração para o padrão do jogo, evitando crashes nessa tela.
+- Mantido este hotfix somente em tradução/dados: nenhum patch de lógica Ruby de gameplay foi incluído para o fluxo reportado de Nature/habilidade.
+- Atualizada a documentação e as notas de cobertura para marcar Natures e telas de configuração sensíveis como preservadas em inglês.
+
 ## 1.1.3
 
 ### English

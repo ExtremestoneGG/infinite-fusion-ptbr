@@ -13,13 +13,12 @@ Translated:
 - Item descriptions, but not item names.
 - Move descriptions, but not move names.
 - Ability effects/descriptions, but not ability names.
-- Nature names.
 - Stat labels when they appear as normal text.
 - Outfit, hat, and hairstyle descriptions.
 
 Deferred:
 
-- Pokedex species and fusion descriptions. They are future work and are not counted as complete in v1.1.3.
+- Pokedex species and fusion descriptions. They are future work and are not counted as complete in v1.1.4.
 
 Preserved:
 
@@ -31,6 +30,8 @@ Preserved:
 - Location names.
 - Organization names.
 - Type/element names.
+- Nature names.
+- Options/configuration screen text that is safer as the game default.
 - Drawn/bitmap text.
 - Sprite credits and author names.
 
@@ -49,13 +50,12 @@ Traduzido:
 - Descrições de itens, mas não os nomes dos itens.
 - Descrições de golpes, mas não os nomes dos golpes.
 - Efeitos/descrições de habilidades, mas não os nomes das habilidades.
-- Nomes das Natures.
 - Status quando aparecem como texto comum.
 - Descrições de roupas, chapéus e cabelos.
 
 Adiado:
 
-- Descrições de espécies e fusões da Pokédex. Elas ficam para um projeto futuro e não contam como concluídas na v1.1.3.
+- Descrições de espécies e fusões da Pokédex. Elas ficam para um projeto futuro e não contam como concluídas na v1.1.4.
 
 Preservado:
 
@@ -67,6 +67,8 @@ Preservado:
 - Nomes de lugares.
 - Nomes de organizações.
 - Tipos/elementos.
+- Nomes das Natures.
+- Textos das telas de Options/configuração que são mais seguros no padrão original do jogo.
 - Texto desenhado/bitmap.
 - Créditos de sprites e nomes de autores.
 

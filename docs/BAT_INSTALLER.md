@@ -8,11 +8,11 @@ The BAT package does not include the graphical `.exe` installer. The main `.exe`
 
 Download the BAT package from the Releases page:
 
-`PTBR-Translation-BAT-v1.1.3.zip`
+`PTBR-Translation-BAT-v1.1.4.zip`
 
 ### Manual BAT Tutorial
 
-1. Download `PTBR-Translation-BAT-v1.1.3.zip` from the Releases page.
+1. Download `PTBR-Translation-BAT-v1.1.4.zip` from the Releases page.
 2. Extract the ZIP into a folder you trust.
 3. Open the extracted folder.
 4. Run `installer/Install-PTBR.bat`.
@@ -53,11 +53,11 @@ O pacote BAT não inclui o instalador gráfico `.exe`. O download principal `.ex
 
 Baixe o pacote BAT pela página de Releases:
 
-`PTBR-Translation-BAT-v1.1.3.zip`
+`PTBR-Translation-BAT-v1.1.4.zip`
 
 ### Tutorial Manual Pelo BAT
 
-1. Baixe `PTBR-Translation-BAT-v1.1.3.zip` pela página de Releases.
+1. Baixe `PTBR-Translation-BAT-v1.1.4.zip` pela página de Releases.
 2. Extraia o ZIP em uma pasta confiável.
 3. Abra a pasta extraída.
 4. Execute `installer/Install-PTBR.bat`.
