@@ -1,6 +1,6 @@
 {
   "name": "Pokemon Infinite Fusion PT-BR Fan Translation",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "language": "pt-BR",
   "release_type": "fan_translation_patch",
   "created_on": "2026-06-18",
@@ -167,15 +167,15 @@
       "drawn/bitmap text"
     ],
     "deferred": [
-      "Pokedex species and fusion descriptions are future work; experimental patch assets may exist but are not counted as complete in v1.1.5"
+      "Pokedex species and fusion descriptions are future work; experimental patch assets may exist but are not counted as complete in v1.1.6"
     ]
   },
   "json_patch_schema": 2,
   "release_assets": {
-    "recommended_exe": "InfiniteFusionPTBRInstaller-v1.1.5.exe",
-    "bat_powershell_zip": "PTBR-Translation-BAT-v1.1.5.zip"
+    "recommended_exe": "InfiniteFusionPTBRInstaller-v1.1.6.exe",
+    "bat_powershell_zip": "PTBR-Translation-BAT-v1.1.6.zip"
   },
-  "recommended_installer": "InfiniteFusionPTBRInstaller-v1.1.5.exe",
+  "recommended_installer": "InfiniteFusionPTBRInstaller-v1.1.6.exe",
   "repository_installer_path": "installer/InfiniteFusionPTBRInstaller.exe",
   "installer_source": "installer-src/ModernInstaller.cs",
   "installer_core_source": "installer-src/InfiniteFusionPtbrInstaller.cs",
@@ -208,7 +208,7 @@
     "options_config_screen": {
       "status": "translated_visible_labels_with_original_internal_identifiers",
       "coverage_percent": "N/A",
-      "notes": "Visible Options/configuration labels are translated again in v1.1.5; internal Ruby identifiers remain in the game's original English form to avoid crashes."
+      "notes": "Visible Options/configuration labels are translated again in v1.1.6; internal Ruby identifiers remain in the game's original English form to avoid crashes."
     },
     "outfit_descriptions": {
       "translated": 314,
@@ -228,7 +228,7 @@
     },
     "pokedex_species_and_fusion_descriptions": {
       "translated": 0,
-      "total": "not counted in v1.1.5",
+      "total": "not counted in v1.1.6",
       "coverage_percent": 0,
       "status": "deferred_future_project"
     },
@@ -245,10 +245,10 @@
   ],
   "pokedex_policy": {
     "status": "deferred_future_project",
-    "installer_behavior": "v1.1.5 does not include or apply Pokedex species/fusion description patching",
+    "installer_behavior": "v1.1.6 does not include or apply Pokedex species/fusion description patching",
     "reason": "Pokedex descriptions need a separate review pass and are not counted in the public completion percentage.",
     "active_payload_entries": 0,
-    "release_note": "Pokedex species/fusion descriptions are not shipped or applied in v1.1.5."
+    "release_note": "Pokedex species/fusion descriptions are not shipped or applied in v1.1.6."
   },
   "known_issues": [
     {
@@ -256,10 +256,10 @@
       "title": "Official updater/save compatibility crash",
       "error": "Script 'MultiSaves.rb' line 786: NoMethodError occurred. undefined method '[]' for nil:NilClass",
       "when": "After running the official game updater .bat or restoring the game to an untranslated/original state before opening a save last used with the PT-BR translation.",
-      "workaround": "Reinstall/update the PT-BR translation with InfiniteFusionPTBRInstaller-v1.1.5.exe before opening the save again. If uninstalling the translation, use the graphical Desinstalar tradução button so the installer backs up saves, resets the saved language to English, restores the original pre-translation backup, and then recommends running the official game update .bat.",
+      "workaround": "Reinstall/update the PT-BR translation with InfiniteFusionPTBRInstaller-v1.1.6.exe before opening the save again. If uninstalling the translation, use the graphical Desinstalar tradução button so the installer backs up saves, resets the saved language to English, restores the original pre-translation backup, and then recommends running the official game update .bat.",
       "save_folder": "%APPDATA%\\infinitefusion",
       "save_file_editing_v112": "graphical uninstall resets PokemonSystem.language to English after backing up save files",
-      "status": "mitigated_in_v1.1.5_graphical_uninstall"
+      "status": "mitigated_in_v1.1.6_graphical_uninstall"
     }
   ],
   "save_policy": {
@@ -268,6 +268,6 @@
     "save_backup_on_uninstall": "PTBR_BACKUPS/save_backups/save_language_YYYYMMDD_HHMMSS",
     "manual_save_backup_recommended_before_official_updates": true,
     "after_official_update": "Run the PT-BR installer again before opening a save.",
-    "future_work": "More advanced save repair remains future work; v1.1.5 resets the saved language index and restores the original pre-translation backup when uninstalling."
+    "future_work": "More advanced save repair remains future work; v1.1.6 resets the saved language index and restores the original pre-translation backup when uninstalling."
   }
 }

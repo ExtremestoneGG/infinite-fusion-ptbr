@@ -2,18 +2,19 @@
 
 ## English
 
-Release 1.1.5 passed the following checks:
+Release 1.1.6 passed the following checks:
 
 - `Data/portuguese.dat` was generated with `20,581` translated language entries.
 - Direct payload files were synced against the translated game folder: `106`.
 - Packaged script files were synced against the translated game folder: `105`.
 - Translation error list is empty.
 - Post-build text fixes applied: `8`.
-- Pokedex species/fusion descriptions are deferred to a future project and are not counted as complete in v1.1.5.
+- Pokedex species/fusion descriptions are deferred to a future project and are not counted as complete in v1.1.6.
 - Nature names are preserved as default English text, and Options/configuration visible labels are translated with original English internal identifiers for stability.
 - Nature-name scan confirmed `0` translated PT-BR Nature names in the active payload after the hotfix.
+- Item identifier scan confirmed `0` active `blackFluteUsard`, `whiteFluteUsard`, or `flashUsard` references after the v1.1.6 hotfix.
 - Outfit JSON validation confirmed `0` outfit name changes; only descriptions were translated.
-- v1.1.5 fixes `18/18` battle text strings from the current screenshot report set.
+- v1.1.6 fixes `18/18` battle text strings from the current screenshot report set.
 - README showcase and language-selection tutorial include `10` in-game PT-BR screenshots.
 - Known official updater/save compatibility crash documented with the reinstall workaround.
 - Graphical uninstall now backs up save files and resets `PokemonSystem.language` to English; the save-language patch routine was tested in memory against a real save and detected `oldLanguage=2`.
@@ -27,18 +28,19 @@ The machine-readable report is in `docs/reports/validation_report.json`.
 
 ## Portugues
 
-A versao 1.1.5 passou pelas seguintes checagens:
+A versao 1.1.6 passou pelas seguintes checagens:
 
 - `Data/portuguese.dat` foi gerado com `20.581` entradas traduzidas.
 - Arquivos diretos do payload foram sincronizados com a pasta traduzida do jogo: `106`.
 - Arquivos de script empacotados foram sincronizados com a pasta traduzida do jogo: `105`.
 - A lista de erros de traducao esta vazia.
 - Ajustes de texto pos-build aplicados: `8`.
-- As descricoes de especies/fusoes da Pokedex ficam para um projeto futuro e nao contam como concluidas na v1.1.5.
+- As descricoes de especies/fusoes da Pokedex ficam para um projeto futuro e nao contam como concluidas na v1.1.6.
 - Nomes das Natures ficam preservados em ingles/default, e as labels visiveis de Options/configuracao ficam traduzidas com identificadores internos originais em ingles por estabilidade.
 - A varredura de nomes de Nature confirmou `0` nomes PT-BR de Nature no payload ativo apos o hotfix.
+- A varredura de identificadores de itens confirmou `0` referencias ativas a `blackFluteUsard`, `whiteFluteUsard` ou `flashUsard` apos o hotfix v1.1.6.
 - A validacao dos JSONs de roupas confirmou `0` alteracoes em nomes; apenas descricoes foram traduzidas.
-- A v1.1.5 corrige `18/18` textos de batalha do conjunto atual de prints reportados.
+- A v1.1.6 corrige `18/18` textos de batalha do conjunto atual de prints reportados.
 - O README inclui `10` imagens de demonstracao da traducao PT-BR e do tutorial de idioma dentro do jogo.
 - Crash conhecido de compatibilidade entre updater oficial/save documentado com a solucao de reinstalar a traducao.
 - A desinstalacao pelo `.exe` agora cria backup dos saves e volta `PokemonSystem.language` para ingles; a rotina de patch do save foi testada em memoria com um save real e detectou `oldLanguage=2`.

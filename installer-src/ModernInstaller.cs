@@ -172,7 +172,7 @@ namespace InfiniteFusionPtbrInstaller
             });
             identity.Children.Add(new TextBlock
             {
-                Text = "  v1.1.5",
+                Text = "  v1.1.6",
                 Foreground = Cyan,
                 FontSize = 12,
                 FontWeight = FontWeights.Bold,
@@ -284,7 +284,7 @@ namespace InfiniteFusionPtbrInstaller
             });
 
             var badges = new StackPanel { Orientation = Orientation.Horizontal };
-            badges.Children.Add(CreateBadge("v1.1.5", Blue));
+            badges.Children.Add(CreateBadge("v1.1.6", Blue));
             badges.Children.Add(CreateBadge("Backup obrigatório", BrushFromRgb(191, 135, 0)));
             badges.Children.Add(CreateBadge("Fan-made", Purple));
             badges.Children.Add(CreateBadge("Sem download do jogo", BrushFromRgb(218, 54, 51)));

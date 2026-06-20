@@ -22,13 +22,13 @@ ItemHandlers::UseInField.add(:LANTERN, proc { |item|
 
 def useLantern()
   darkness = $PokemonTemp.darknessSprite
-  if !darkness || darkness.disposed? || $PokemonGlobal.flashUsard
+  if !darkness || darkness.disposed? || $PokemonGlobal.flashUsed
     Kernel.pbMessage(_INTL("A área já está iluminada..."))
     return false
   end
   Kernel.pbMessage(_INTL("A Lantern iluminou a área!"))
   darkness.radius += 176
-  $PokemonGlobal.flashUsard = true
+  $PokemonGlobal.flashUsed = true
   while darkness.radius < 176
     Graphics.update
     Input.update
@@ -103,7 +103,7 @@ ItemHandlers::UseFromBag.add(:LANTERN, proc { |item|
     next false
   end
   Kernel.pbMessage(_INTL("A Lantern iluminou a área!"))
-  $PokemonGlobal.flashUsard = true
+        $PokemonGlobal.flashUsed = true
   darkness.radius += 176
   while darkness.radius < 176
     Graphics.update

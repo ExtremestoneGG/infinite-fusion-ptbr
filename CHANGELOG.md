@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.6
+
+### English
+
+- Fixed a crash when using Black Flute/White Flute caused by accidentally translated internal identifiers (`blackFluteUsed`/`whiteFluteUsed`).
+- Fixed the same identifier issue for Flash usage (`flashUsed`) in Infinite Fusion item effects.
+- Translated the visible Black Flute/White Flute effect messages while keeping item names and internal method names unchanged.
+
+### Portugues
+
+- Corrigido um crash ao usar Black Flute/White Flute causado por identificadores internos traduzidos sem querer (`blackFluteUsed`/`whiteFluteUsed`).
+- Corrigido o mesmo tipo de problema no uso de Flash (`flashUsed`) nos efeitos de itens do Infinite Fusion.
+- Traduzidas as mensagens visíveis de efeito da Black Flute/White Flute, mantendo nomes de itens e nomes internos de método sem tradução.
+
 ## 1.1.5
 
 ### English

@@ -108,7 +108,7 @@ namespace InfiniteFusionPtbrInstaller
             var badgePanel = new FlowLayoutPanel();
             badgePanel.AutoSize = true;
             badgePanel.Margin = new Padding(0, 10, 0, 0);
-            badgePanel.Controls.Add(CreateBadge("v1.1.5", Color.FromArgb(9, 105, 218), Color.White));
+            badgePanel.Controls.Add(CreateBadge("v1.1.6", Color.FromArgb(9, 105, 218), Color.White));
             badgePanel.Controls.Add(CreateBadge("Backup required", Color.FromArgb(191, 135, 0), Color.White));
             badgePanel.Controls.Add(CreateBadge("Unofficial fan mod", Color.FromArgb(130, 80, 223), Color.White));
             header.Controls.Add(badgePanel);
@@ -473,7 +473,7 @@ namespace InfiniteFusionPtbrInstaller
             var patch = DeserializeDictionary(File.ReadAllText(patchPath, Encoding.UTF8));
             progress(40);
 
-            log("Skipping Pokedex descriptions in v1.1.5. They are planned as future work.");
+            log("Skipping Pokedex descriptions in v1.1.6. They are planned as future work.");
             progress(62);
 
             log("Patching outfit descriptions...");
@@ -490,7 +490,7 @@ namespace InfiniteFusionPtbrInstaller
             {
                 var backupManifest = new BackupManifest
                 {
-                    version = "1.1.5",
+                    version = "1.1.6",
                     created_on = DateTime.Now.ToString("s"),
                     game_dir = gameRoot,
                     entries = backupEntries
@@ -503,7 +503,7 @@ namespace InfiniteFusionPtbrInstaller
 
             return "PT-BR translation installed.\n\n" +
                    "Files copied: " + copied + "\n" +
-                   "Pokedex descriptions: skipped for v1.1.5 future work\n" +
+                   "Pokedex descriptions: skipped for v1.1.6 future work\n" +
                    "Outfit descriptions patched: " + descriptionChanged + "\n" +
                    "Backup: " + backupRoot;
         }
