@@ -18,7 +18,7 @@ Translated:
 
 Deferred:
 
-- Pokedex species and fusion descriptions. They are future work and are not counted as complete in v1.1.4.
+- Pokedex species and fusion descriptions. They are future work and are not counted as complete in v1.1.5.
 
 Preserved:
 
@@ -31,7 +31,7 @@ Preserved:
 - Organization names.
 - Type/element names.
 - Nature names.
-- Options/configuration screen text that is safer as the game default.
+- Internal script identifiers for Options/configuration screens.
 - Drawn/bitmap text.
 - Sprite credits and author names.
 
@@ -55,7 +55,7 @@ Traduzido:
 
 Adiado:
 
-- Descrições de espécies e fusões da Pokédex. Elas ficam para um projeto futuro e não contam como concluídas na v1.1.4.
+- Descrições de espécies e fusões da Pokédex. Elas ficam para um projeto futuro e não contam como concluídas na v1.1.5.
 
 Preservado:
 
@@ -68,7 +68,7 @@ Preservado:
 - Nomes de organizações.
 - Tipos/elementos.
 - Nomes das Natures.
-- Textos das telas de Options/configuração que são mais seguros no padrão original do jogo.
+- Identificadores internos de script das telas de Options/configuração.
 - Texto desenhado/bitmap.
 - Créditos de sprites e nomes de autores.
 

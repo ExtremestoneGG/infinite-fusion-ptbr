@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.5
+
+### English
+
+- Restored the translated visible labels on the Options/configuration screen after v1.1.4 preserved too much of that screen in English.
+- Kept the internal Ruby identifiers in their original English form, fixing the Options crash without throwing away translated UI labels.
+- Kept Nature names in the original English/default names.
+- Rebuilt the installer and BAT package with the corrected Options file.
+
+### Portugues
+
+- Restauradas as labels visíveis traduzidas da tela de Options/configuração depois da v1.1.4 preservar coisa demais em inglês.
+- Mantidos os identificadores internos Ruby no inglês original, corrigindo o crash de Options sem jogar fora as labels traduzidas da interface.
+- Mantidos os nomes das Natures no inglês/default original.
+- Refeito o instalador e o pacote BAT com o arquivo de Options corrigido.
+
 ## 1.1.4
 
 ### English

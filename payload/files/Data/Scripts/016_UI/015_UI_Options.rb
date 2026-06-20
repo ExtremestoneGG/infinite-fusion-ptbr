@@ -265,7 +265,7 @@ class Window_PokemonOption < Window_DrawableCommand
   def drawItem(index, _count, rect)
     return if dont_draw_item(index)
     rect = drawCursor(index, rect)
-    optionname = (index == @options.length) ? _INTL("Confirm") : @options[index].name
+    optionname = (index == @options.length) ? _INTL("Confirmar") : @options[index].name
     optionwidth = rect.width * 9 / 20
     pbDrawShadowText(self.contents, rect.x, rect.y, optionwidth, rect.height, optionname,
                      @nameBaseColor, @nameShadowColor)
@@ -366,7 +366,7 @@ class Window_PokemonOption < Window_DrawableCommand
 end
 
 #===============================================================================
-# Options main screen
+# Opções main screen
 #===============================================================================
 class PokemonOption_Scene
   def getDefaultDescription
@@ -388,7 +388,7 @@ class PokemonOption_Scene
 
   def initUIElements
     @sprites["title"] = Window_UnformattedTextPokemon.newWithSize(
-      _INTL("Options"), 0, 0, Graphics.width, 64, @viewport)
+      _INTL("Opções"), 0, 0, Graphics.width, 64, @viewport)
     @sprites["textbox"] = pbCreateMessageWindow
     @sprites["textbox"].text = _INTL("Speech frame {1}.", 1 + $PokemonSystem.textskin)
     @sprites["textbox"].letterbyletter = false
@@ -459,7 +459,7 @@ class PokemonOption_Scene
   def openAutosaveMenu()
     return if !@autosave_menu
     pbFadeOutIn {
-      scene = AutosaveOptionsScene.new
+      scene = AutosaveOpçõesScene.new
       screen = PokemonOptionScreen.new(scene)
       screen.pbStartScreen
     }
